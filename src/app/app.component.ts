@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MyleasingService } from '../app/services/myleasing.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'MyleasingUI';
+  title: string;
+
+  constructor(public _myleasing: MyleasingService ) {
+    this.title = 'MyleasingUI';
+  }
 }
