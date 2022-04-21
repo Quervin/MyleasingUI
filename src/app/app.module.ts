@@ -13,12 +13,16 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    LoadingComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
