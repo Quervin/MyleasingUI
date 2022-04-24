@@ -15,6 +15,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { IndexComponent } from './components/index/index.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     LoginComponent,
     LoadingComponent,
     NavbarComponent,
+    IndexComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

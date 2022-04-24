@@ -1,60 +1,28 @@
-<div class="row">
-    <div class="col-md-8 col-sm-12">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<section class="section bg-default section-md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-12"></div>
+            <div class="col-md-4 col-sm-12">
+                <h2>Login</h2>
+                <br/>
+                <form autocomplete="off" (ngSubmit)="login( forma )" #forma="ngForm">
+                    <div class="form-group mb-3">
+                        <label>Usuario</label>
+                        <input type="text" [ngModel]="tokenRequest.Username" name="user" placeholder="Usuario" class="form-control" required #Username="ngModel" />
+                        <small *ngIf="Username.invalid && Username.touched" class="form-text text-danger">El campo Usuario es Obligatorio</small>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Contraseña</label>
+                        <input type="password" [ngModel]="tokenRequest.Password" name="password" placeholder="contraseña" class="form-control" required #Password="ngModel" />
+                        <small *ngIf="Password.invalid && Password.touched" class="form-text text-danger">El campo Contraseña es Obligatorio</small>
+                    </div>
+                    <div class="form-group d-grid gap-2">
+                        <a (click)="login(forma)" class="btn btn-success">Login</a>
+                        <a class="btn btn-link">Forgot your password?</a>
+                    </div>
+                </form>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="assets/img/v1.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/img/v2.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="assets/img/v3.jpg" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
+            <div class="col-md-4 col-sm-12"></div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-12">
-        <h2>Login</h2>
-        <form autocomplete="off" (ngSubmit)="login( forma )" #forma="ngForm">
-            <div class="form-group">
-                <label>Usuario</label>
-                <input type="text" [ngModel]="tokenRequest.Username" name="user" placeholder="Usuario" class="form-control" required #Username="ngModel" />
-                <small *ngIf="Username.invalid && Username.touched" class="form-text text-danger">El campo Usuario es Obligatorio</small>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" [ngModel]="tokenRequest.Password" name="password" placeholder="contraseña" class="form-control" required #Password="ngModel" />
-                <small *ngIf="Password.invalid && Password.touched" class="form-text text-danger">El campo Contraseña es Obligatorio</small>
-            </div>
-            <div class="form-group">
-                <a (click)="login(forma)" class="btn btn-success m-2">Login</a>
-                <a class="btn btn-primary">Register New User</a>
-                <a class="btn btn-link">Forgot your password?</a>
-            </div>
-        </form>
-    </div>
-    <hr>
-    <div class="col-12">
-        <h3>Datos del Programador</h3>
-        <div>
-            <p><strong>Nombre</strong> Quervin Hidalgo Moya</p>
-            <p><strong>Profesión</strong> Desarrollador Web</p>
-            <p><strong>Correo</strong> quervinhidalgo@gmail.com</p>
-            <p><strong>Teléfono</strong> 87987290</p>
-        </div>
-    </div>
-</div>
+</section>

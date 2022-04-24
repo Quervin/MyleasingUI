@@ -1,12 +1,12 @@
-<app-navbar>
-</app-navbar>
+<header>
+    <app-navbar>
+    </app-navbar>
+</header>
 
-<div class="container m-5" *ngIf="!_myleasing.updateShowPages()">
-    <app-login></app-login>
-</div>
-
-<div class="container m-5" *ngIf="_myleasing.updateShowPages()">
+<div>
     <router-outlet></router-outlet>
 </div>
+
+<app-footer></app-footer>
 
 <app-loading *ngIf="_myleasing.getLoading()"></app-loading>
