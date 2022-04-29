@@ -1,44 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  url: string;
   constructor( private _http: HttpClient ) { 
+    this.url = environment.urlBase;
   }
 
   getQuery( query: string) {
 
-    const url = `https://myleasinghidalgo.azurewebsites.net/api/${ query }`;
-
     const token = localStorage.getItem('token');
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${ token }`
     });
 
-    return this._http.get( url, { headers });
+    return this._http.get(`${ this.url }api/${ query }`, { headers });
   }
 
   postToken<T>(query: string, object: T) {
-
-    const url = `https://myleasinghidalgo.azurewebsites.net/${ query }`;
-
-    return this._http.post( url, object);
+    return this._http.post(`${ this.url }${ query }`, object);
   }
 
   postQuery<T>(query: string, object: T) {
 
-    const url = `https://myleasinghidalgo.azurewebsites.net/api/${ query }`;
-
     const token = localStorage.getItem('token');
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${ token }`
     });
 
-    return this._http.post( url, object, { headers });
+    return this._http.post(`${ this.url }api/${ query }`, object, { headers });
   }
 
   isAutenticated() {
