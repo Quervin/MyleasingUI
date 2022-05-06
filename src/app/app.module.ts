@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Import Htpp
 import { HttpClientModule } from '@angular/common/http';
@@ -17,6 +17,8 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { IndexComponent } from './components/index/index.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +29,14 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     NavbarComponent,
     IndexComponent,
     FooterComponent,
+    RegisterComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [],

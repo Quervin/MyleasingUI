@@ -37,6 +37,116 @@
 }
 
 
+/* about */
+
+.text-opacity-20 {
+    opacity: 0.1;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.text-slate-500 {
+    --tw-text-opacity: 1;
+    color: rgb(100 116 139/rgb(216, 212, 212));
+}
+
+.text-slate-800 {
+    --tw-text-opacity: 1;
+    color: rgb(30 41 59/var(--tw-text-opacity));
+}
+
+.pt-32 {
+    padding-top: 1rem;
+}
+
+.p-5 {
+    padding: 1.25rem;
+}
+
+.p-7 {
+    padding: 1.75rem;
+}
+
+.p-11 {
+    padding: 2.75rem;
+}
+
+.-my-2 {
+    margin-bottom: -0.5rem;
+    margin-top: -0.5rem;
+}
+
+.titulo {
+    margin: 0;
+}
+
+
+/* about */
+
+
+/* footer */
+
+.text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+.p-9 {
+    padding: 2.25rem;
+}
+
+.pb-2 {
+    padding-bottom: 0.5rem;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.h-px {
+    height: 1px;
+}
+
+.mt-12 {
+    margin-top: 3rem;
+    width: 50%;
+}
+
+
+/* footer */
+
+@media (min-width: 768px) {
+    .imagen {
+        height: 60%;
+        width: 40%;
+    }
+}
+
+
 /**
  * [Table of contents]
  *   1 Reset Styles
@@ -4630,11 +4740,6 @@ blockquote cite {
     padding: 8px 0;
     color: #82929c;
     background: #2e3844;
-    z-index: 900;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
 }
 
 .footer-classic a {

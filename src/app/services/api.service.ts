@@ -37,6 +37,10 @@ export class ApiService {
     return this._http.post(`${ this.url }api/${ query }`, object, { headers });
   }
 
+  postLogin<T>(query: string, object: T) {
+    return this._http.post(`${ this.url }api/${ query }`, object);
+  }
+
   isAutenticated() {
     if (localStorage.getItem('token') != null) {
       return true;
