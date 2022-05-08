@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { ResponseRequest } from '../models/responseRequest';
+import { TokenResponse } from '../models/tokenResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +21,15 @@ export class ApiService {
       'Authorization': `Bearer ${ token }`
     });
 
-    return this._http.get(`${ this.url }api/${ query }`, { headers });
+    return this._http.get<ResponseRequest>(`${ this.url }api/${ query }`, { headers });
+  }
+
+  getLogin( query: string) {
+    return this._http.get<ResponseRequest>(`${ this.url }api/${ query }`);
   }
 
   postToken<T>(query: string, object: T) {
-    return this._http.post(`${ this.url }${ query }`, object);
+    return this._http.post<TokenResponse>(`${ this.url }${ query }`, object);
   }
 
   postQuery<T>(query: string, object: T) {
@@ -34,11 +40,11 @@ export class ApiService {
       'Authorization': `Bearer ${ token }`
     });
 
-    return this._http.post(`${ this.url }api/${ query }`, object, { headers });
+    return this._http.post<ResponseRequest>(`${ this.url }api/${ query }`, object, { headers });
   }
 
   postLogin<T>(query: string, object: T) {
-    return this._http.post(`${ this.url }api/${ query }`, object);
+    return this._http.post<ResponseRequest>(`${ this.url }api/${ query }`, object).pipe();
   }
 
   isAutenticated() {

@@ -1,5 +1,65 @@
 <section class="section bg-default section-md">
     <div class="container">
-
+        <div>
+            <form autocomplete="off" [formGroup]="formRegister" (ngSubmit)="register()">
+                <h2>Registrarse</h2>
+                <br/>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <label>Correo Electónico</label>
+                            <input type="text" formControlName="email" placeholder="correo electrónico" class="form-control" />
+                            <small *ngIf="emailInvalid" class="form-text text-danger">El campo correo electrónico es Obligatorio</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Documento</label>
+                            <input type="text" formControlName="document" placeholder="documento" class="form-control" />
+                            <small *ngIf="documentoInvalid" class="form-text text-danger">El campo documento es Obligatorio</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Nombre</label>
+                            <input type="text" formControlName="firstName" placeholder="primer nombre" class="form-control" />
+                            <small *ngIf="firstNameInvalid" class="form-text text-danger">El campo nombre es Obligatorio</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Apellidos</label>
+                            <input type="text" formControlName="lastName" placeholder="segúndo nombre" class="form-control" />
+                            <small *ngIf="lastNameInvalid" class="form-text text-danger">El campo apellidos es Obligatorio</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Dirrección</label>
+                            <input type="text" formControlName="address" placeholder="dirrección" class="form-control" />
+                            <small *ngIf="addressInvalid" class="form-text text-danger">El campo dirrección es Obligatorio</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <label>Teléfono</label>
+                            <input type="text" formControlName="phone" placeholder="teléfono" class="form-control" />
+                            <small *ngIf="phoneInvalid" class="form-text text-danger">El campo teléfono es Obligatorio</small>
+                        </div>
+                        <!-- Pendiente Resgistrar como-->
+                        <div class="form-group mb-3">
+                            <label>Registrar como</label>
+                            <input type="text" formControlName="address" placeholder="registrar como" class="form-control" />
+                            <small *ngIf="addressInvalid" class="form-text text-danger">El campo Resgistrar como es Obligatorio</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Contraseña</label>
+                            <input type="text" formControlName="password" placeholder="contraseña" class="form-control" />
+                            <small *ngIf="passwordInvalid" class="form-text text-danger">El campo contraseña es Obligatorio</small>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label>Confirmación de Contraseña</label>
+                            <input type="text" formControlName="confirmpassword" placeholder="confirmación de contraseña" class="form-control" />
+                            <small *ngIf="confirmpasswordInvalid" class="form-text text-danger">El campo confirmación de contraseña es Obligatorio</small>
+                        </div>
+                    </div>
+                    <div class="form-group d-grid gap-2 offset-md-6 col-6">
+                        <button type="submit" class="btn btn-primary">Resgistrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </section>
