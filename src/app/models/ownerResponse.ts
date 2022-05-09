@@ -4,11 +4,12 @@ import { ContractResponse } from './contractResponse';
 
 export class OwnerResponse {
     constructor(public id  : number,
+        public contracts : ContractResponse[],
         public user : UserResponse,
-        public properties : PropertyResponse,
-        public contracts : ContractResponse[] ) {
+        public properties : PropertyResponse, ) {
             this.id = id;
             this.user = user;
+            this.properties = properties;
             this.contracts = contracts;
         }
 }

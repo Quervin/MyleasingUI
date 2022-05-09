@@ -19,6 +19,8 @@ import { IndexComponent } from './components/index/index.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
+import { ImagenPipe } from './pipes/imagen.pipe';
+import { DetailsPropertyComponent } from './components/details-property/details-property.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { AboutComponent } from './components/about/about.component';
     FooterComponent,
     RegisterComponent,
     AboutComponent,
+    ImagenPipe,
+    DetailsPropertyComponent,
   ],
   imports: [
     BrowserModule,

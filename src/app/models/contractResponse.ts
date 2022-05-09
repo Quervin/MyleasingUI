@@ -9,7 +9,7 @@ export class ContractResponse {
         public startDate : string,
         public endDate : string,
         public IsActive : boolean,
-        private owner: OwnerResponse,
+        public owner: OwnerResponse,
         public lessee : LesseeResponse,
         public property : PropertyResponse) {
             this.id = id;

@@ -17,9 +17,10 @@ export class PropertyResponse {
         public remarks : string,
         public latitude : number,
         public longitude : number,
+        public firstImage : string,
         public propertyType : PropertyTypeResponse ,
-        public owner : OwnerResponse ,
-        public propertyImages : PropertyImageResponse[] ,
+        public owner : OwnerResponse,
+        public propertyImages : PropertyImageResponse[],
         public contracts : ContractResponse[]) {
             this.id = id;
             this.neighborhood = neighborhood;
@@ -33,6 +34,7 @@ export class PropertyResponse {
             this.remarks = remarks;
             this.latitude = latitude;
             this.longitude = longitude;
+            this.firstImage = firstImage;
             this.propertyType = propertyType;
             this.owner = owner;
             this.propertyImages = propertyImages;

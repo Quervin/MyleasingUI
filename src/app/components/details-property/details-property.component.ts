@@ -1,30 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { OwnerResponse } from 'src/app/models/ownerResponse';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 import { PropertyResponse } from '../../models/propertyResponse';
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
+  selector: 'app-details-property',
+  templateUrl: './details-property.component.html',
   styles: [
   ]
 })
-export class IndexComponent implements OnInit {
+export class DetailsPropertyComponent implements OnInit {
 
-  listProperties: PropertyResponse[];
+  //property = <PropertyResponse>{};
+  property = {} as PropertyResponse;
 
-  constructor(private _apiService: ApiService,
-    private _router: Router) { 
-    this.listProperties = [];
+  constructor(private _activated: ActivatedRoute,
+    private _apiService: ApiService) { 
+      this._activated.params.subscribe( params => {
+
+        this.getProperty(params['id']);
+  
+      });
   }
 
   ngOnInit(): void {
-    this._apiService.getLogin("Properties/GetListPropertiesWeb").
+  }
+
+  getProperty(id: string) {
+    this._apiService.getLogin(`Properties/GetPropertyWeb/${id}`).
     subscribe((res : ResponseRequest) => {
       if ( res.isSuccess == true) {
-        this.listProperties = res.result;
+        this.property = res.result;
       } else {
         Swal.fire({
           icon: 'info',
@@ -39,10 +48,6 @@ export class IndexComponent implements OnInit {
         text: error
       })
     });
-  }
-
-  verPropiedad(id: number) {
-    this._router.navigate([ '/detailProperty', id ]);
   }
 
 }
