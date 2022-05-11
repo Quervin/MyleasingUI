@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+//import Paginate
+import { NgxPaginationModule } from 'ngx-pagination';
+
 //Import Htpp
 import { HttpClientModule } from '@angular/common/http';
 
@@ -38,10 +41,11 @@ import { DetailsPropertyComponent } from './components/details-property/details-
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES, { useHash: true })
+    RouterModule.forRoot(ROUTES, { useHash: true }),
   ],
   providers: [],
   bootstrap: [AppComponent]

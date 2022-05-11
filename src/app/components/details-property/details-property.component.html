@@ -2,10 +2,36 @@
     <div class="container">
         <div>
             <div>
-                <h2>Detalles de la Propiedad</h2>
+                <h2>Detalles de la Propiedad: {{property.id}}</h2>
                 <br/>
 
                 <div class="row">
+                    <div class="col-6">
+                        <p><strong>Tipo de Propiedad:</strong> {{property.propertyType.name }}</p>
+                        <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
+                        <p><strong>Dirección:</strong> {{property.address}}</p>
+                        <p><strong>Precio:</strong> {{property.price}}</p>
+                        <p><strong>Metros Cuadrados:</strong> {{property.squareMeters}}</p>
+                        <p><strong>Cuartos:</strong> {{property.rooms}}</p>
+                        <p><strong>Tiene Parqueo:</strong> {{property.hasParkingLot == true ? 'Si' : 'No'}}</p>
+                    </div>
+                    <div class="col-6">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" *ngFor="let imagen of property.propertyImages; index as i;">
+                                    <img [src]="imagen.imageUrl | imagen" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                              </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                              </button>
+                        </div>
+                    </div>
                     {{property | json}}
                 </div>
             </div>
