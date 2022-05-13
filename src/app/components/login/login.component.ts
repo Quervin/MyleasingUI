@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit {
     this._apiService.postToken('Account/CreateToken' , this.tokenRequest).
     subscribe((res : TokenResponse) => {
       localStorage.setItem('token', res.token);
-      this._router.navigateByUrl('/home');
+      this._router.navigateByUrl('/home/dashboard');
       this._myleasing.setLoading(false);
     }, error => {
       this._myleasing.setLoading(false);
