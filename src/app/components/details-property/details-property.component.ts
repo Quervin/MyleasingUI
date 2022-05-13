@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OwnerResponse } from 'src/app/models/ownerResponse';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
@@ -15,12 +14,13 @@ import { PropertyResponse } from '../../models/propertyResponse';
 export class DetailsPropertyComponent implements OnInit {
 
   //property = <PropertyResponse>{};
+  showDetail: boolean;
   property = {} as PropertyResponse;
 
   constructor(private _activated: ActivatedRoute,
     private _apiService: ApiService) { 
+      this.showDetail = false;
       this._activated.params.subscribe( params => {
-
         this.getProperty(params['id']);
   
       });
@@ -34,6 +34,7 @@ export class DetailsPropertyComponent implements OnInit {
     subscribe((res : ResponseRequest) => {
       if ( res.isSuccess == true) {
         this.property = res.result;
+        this.showDetail = true;
       } else {
         Swal.fire({
           icon: 'info',

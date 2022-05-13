@@ -7,15 +7,15 @@ export class MyleasingService {
   showLoading: boolean;
   showPages: boolean;
   constructor() { 
-    this.showPages = false;
+    this.showPages = true;
     this.showLoading = false;
   }
 
   updateShowPages() {
     if (localStorage.getItem('token') != null) {
-      this.showPages = true;
-    } else {
       this.showPages = false;
+    } else {
+      this.showPages = true;
     }
     return this.showPages;
   }

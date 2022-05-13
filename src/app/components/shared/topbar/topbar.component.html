@@ -1,0 +1,21 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo">
+        <img src="assets/img/Logo.ico" alt="logo">
+        <span>Myleasing</span>
+    </a>
+
+    <a class="p-link layout-menu-button layout-topbar-button" href="#" (click)="home.toggleMenu($event)">
+        <i class="pi pi-bars"></i>
+    </a>
+
+    <a class="p-link layout-topbar-menu-button layout-topbar-button" href="#" (click)="home.toggleTopMenu($event)">
+        <i class="pi pi-ellipsis-v"></i>
+    </a>
+
+    <div class="layout-topbar-menu" title="Cerrar Sesión" [ngClass]="{'layout-topbar-menu-mobile-active':home.topMenuActive}">
+        <a class="p-link layout-topbar-button" (click)="home.logOut()">
+            <i class="pi pi-fw pi-sign-in"></i>
+            <span>Cerrar Sesión</span>
+        </a>
+    </div>
+</div>

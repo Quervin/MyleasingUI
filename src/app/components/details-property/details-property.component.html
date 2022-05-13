@@ -5,7 +5,7 @@
                 <h2>Detalles de la Propiedad: {{property.id}}</h2>
                 <br/>
 
-                <div class="row">
+                <div class="row" *ngIf="showDetail">
                     <div class="col-6">
                         <p><strong>Tipo de Propiedad:</strong> {{property.propertyType.name }}</p>
                         <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
@@ -18,7 +18,7 @@
                     <div class="col-6">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active" *ngFor="let imagen of property.propertyImages; index as i;">
+                                <div class="carousel-item" [ngClass]="{ 'active': i == 0}" *ngFor="let imagen of property.propertyImages; index as i;">
                                     <img [src]="imagen.imageUrl | imagen" class="d-block w-100" alt="...">
                                 </div>
                             </div>
@@ -32,7 +32,6 @@
                               </button>
                         </div>
                     </div>
-                    {{property | json}}
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 import { MyleasingService } from './services/myleasing.service';
 
 @Component({
@@ -8,8 +9,12 @@ import { MyleasingService } from './services/myleasing.service';
 })
 export class AppComponent {
   title: string;
+  menuMode = 'static';
 
-  constructor(public _myleasing: MyleasingService ) {
+  constructor(private primengConfig: PrimeNGConfig,
+    public _myleasing: MyleasingService ) {
     this.title = 'MyleasingUI';
+    this.primengConfig.ripple = true;
+    document.documentElement.style.fontSize = '14px';
   }
 }

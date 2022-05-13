@@ -9,7 +9,11 @@ import { DetailsPropertyComponent } from './components/details-property/details-
 
 
 export const ROUTES: Routes = [
-    { path: 'home', component: HomeComponent, canActivate: [ AuthGuard ] },
+    { path: 'home', component: HomeComponent,
+    children: [
+        {path: 'dashboard', component: IndexComponent},
+        {path: 'cuentas', component: AboutComponent},
+    ], canActivate: [ AuthGuard ] },
     { path: 'index', component: IndexComponent},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },

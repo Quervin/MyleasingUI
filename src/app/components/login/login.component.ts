@@ -106,7 +106,6 @@ export class LoginComponent implements OnInit {
     subscribe((res : TokenResponse) => {
       localStorage.setItem('token', res.token);
       this._router.navigateByUrl('/home');
-      this._myleasing.updateShowPages();
       this._myleasing.setLoading(false);
     }, error => {
       this._myleasing.setLoading(false);

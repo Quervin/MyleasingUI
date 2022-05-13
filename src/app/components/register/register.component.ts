@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SelectItem } from 'primeng/api';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { UserRequest } from 'src/app/models/userRequest';
 import { ApiService } from 'src/app/services/api.service';
@@ -16,6 +17,10 @@ export class RegisterComponent implements OnInit {
 
   formRegister: FormGroup;
 
+  count_month: SelectItem[];
+
+  selectedCount_month= {} as SelectItem;
+
   userRequest : UserRequest = {
     Id : 0,
     Email: "",
@@ -31,6 +36,12 @@ export class RegisterComponent implements OnInit {
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private fb: FormBuilder) { 
+
+      this.count_month = [
+        {label: 'Lessee', value: "1"},
+        {label: 'Owner 2', value: "2"}
+      ];
+
       this.formRegister = this.fb.group({
         email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
         document: ['', [Validators.required] ],
@@ -38,6 +49,7 @@ export class RegisterComponent implements OnInit {
         lastName: ['', [Validators.required] ],
         address: ['', [Validators.required] ],
         phone: ['', [Validators.required] ],
+        roleId: ['', [Validators.required] ],
         password: ['', [Validators.required] ],
         confirmpassword: ['', [Validators.required] ],
       });
@@ -68,6 +80,10 @@ export class RegisterComponent implements OnInit {
 
   get phoneInvalid() {
     return this.formRegister.get('phone')?.invalid && this.formRegister.get('phone')?.touched;
+  }
+
+  get roleIdValido() {
+    return this.formRegister.get('roleId')?.invalid && this.formRegister.get('roleId')?.touched;
   }
 
   get passwordInvalid() {
@@ -106,8 +122,7 @@ export class RegisterComponent implements OnInit {
     this.userRequest.Address = this.formRegister.value.address;
     this.userRequest.Phone = this.formRegister.value.phone;
     this.userRequest.Password = this.formRegister.value.password;
-    // this.userRequest.RoleId = this.formRegister.value.roleId;
-    this.userRequest.RoleId = 1;
+     this.userRequest.RoleId = this.formRegister.value.roleId;
 
     this._myleasing.setLoading(true);
 

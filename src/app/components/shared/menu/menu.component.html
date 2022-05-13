@@ -1,0 +1,14 @@
+<div class="layout-menu-container">
+    <div class="text-center mb-5">
+        <img src="assets/img/avatar.png" alt="Image" height="50" class="mb-3">
+        <div class="text-900 text-3xl font-medium mb-3"></div>
+        <span class="text-600 font-medium">{{name}}</span> <i class="pi pi-cog"></i>
+    </div>
+    <ul class="layout-menu" role="menu">
+        <li app-menu class="layout-menuitem-category" *ngFor="let item of model; let i = index;" role="none">
+            <ul role="menu">
+                <li app-menuitem *ngFor="let child of item.items" [item]="child" [index]="i" role="none"></li>
+            </ul>
+        </li>
+    </ul>
+</div>
