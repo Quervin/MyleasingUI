@@ -115,6 +115,7 @@ import { TopbarComponent } from './components/shared/topbar/topbar.component';
 import { MenuComponent } from './components/shared/menu/menu.component';
 import { MenuitemComponent } from './components/shared/menuitem/menuitem.component';
 import { MenuService } from './services/app.menu.service';
+import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { MenuService } from './services/app.menu.service';
     TopbarComponent,
     MenuComponent,
     MenuitemComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

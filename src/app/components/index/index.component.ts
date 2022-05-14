@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { ApiService } from 'src/app/services/api.service';
+import { MyleasingService } from 'src/app/services/myleasing.service';
 import Swal from 'sweetalert2';
 import { PropertyResponse } from '../../models/propertyResponse';
 
@@ -20,7 +21,8 @@ export class IndexComponent implements OnInit {
   page: number;
 
   constructor(private _apiService: ApiService,
-    private _router: Router) { 
+    private _router: Router,
+    private _myleasing: MyleasingService) { 
     this.listProperties = [];
     this.index = 0;
     this.total = 0;
@@ -29,6 +31,10 @@ export class IndexComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this._myleasing.goToHome()) {
+      this._router.navigateByUrl('/dashboard');
+    } 
+
     this.getPropiedades();
   }
 

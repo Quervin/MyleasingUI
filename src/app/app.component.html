@@ -1,4 +1,4 @@
-<header *ngIf="_myleasing.updateShowPages()">
+<header *ngIf="_myleasing.updateShowComponents()">
     <app-navbar>
     </app-navbar>
 </header>
@@ -7,6 +7,6 @@
     <router-outlet></router-outlet>
 </div>
 
-<app-footer *ngIf="_myleasing.updateShowPages()"></app-footer>
+<app-footer *ngIf="_myleasing.updateShowComponents()"></app-footer>
 
 <app-loading *ngIf="_myleasing.getLoading()"></app-loading>

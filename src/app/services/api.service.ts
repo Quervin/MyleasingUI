@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   postToken<T>(query: string, object: T) {
-    return this._http.post<TokenResponse>(`${ this.url }${ query }`, object);
+    return this._http.post<TokenResponse>(`${ this.url }api/${ query }`, object);
   }
 
   postQuery<T>(query: string, object: T) {

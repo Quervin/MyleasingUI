@@ -57,29 +57,34 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
 
   subscription = {} as Subscription;
   
-  constructor(public renderer: Renderer2, public app: AppComponent, public configService: ConfigService,
-    private _router: Router,public _myleasing: MyleasingService ) {
-      this.menuInactiveDesktop = false;
-      this.menuActiveMobile = false;
-      this.overlayMenuActive = false;
-      this.profileActive = false;
-      this.topMenuActive = false;
-      this.topMenuLeaving = false;
-      this.menuClick = false;
-      this.configActive = false;
-      this.configClick = false;
-      this.topMenuButtonClick = false;
-      this.theme = "";
+  constructor(public renderer: Renderer2, 
+    public app: AppComponent, 
+    public configService: ConfigService,
+    private _router: Router,
+    private _myleasing: MyleasingService ) {
+          this.menuInactiveDesktop = false;
+          this.menuActiveMobile = false;
+          this.overlayMenuActive = false;
+          this.profileActive = false;
+          this.topMenuActive = false;
+          this.topMenuLeaving = false;
+          this.menuClick = false;
+          this.configActive = false;
+          this.configClick = false;
+          this.topMenuButtonClick = false;
+          this.theme = "";
      }
 
   ngOnInit(): void {
     this.config = this.configService.config;
     this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
+    if (this._myleasing.validateToken()) {
+        this.logOut();
+      }
   }
 
   ngAfterViewInit() {
-    // hides the overlay menu and top menu if outside is clicked
-    this.documentClickListener = this.renderer.listen('body', 'click', (event) => {
+      this.documentClickListener = this.renderer.listen('body', 'click', (event) => {
         if (!this.isDesktop()) {
             if (!this.menuClick) {
                 this.menuActiveMobile = false;
@@ -106,21 +111,20 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
         this.menuClick = false;
         this.topMenuButtonClick = false;
     });
-}
+  }
 
-toggleMenu(event: Event) {
-    this.menuClick = true;
-
-    if (this.isDesktop()) {
-        if (this.app.menuMode === 'overlay') {
-            if(this.menuActiveMobile === true) {
-                this.overlayMenuActive = true;
+  toggleMenu(event: Event) {
+      this.menuClick = true;
+      if (this.isDesktop()) {
+          if (this.app.menuMode === 'overlay') {
+              if(this.menuActiveMobile === true) {
+                  this.overlayMenuActive = true;
+                }
+                
+                this.overlayMenuActive = !this.overlayMenuActive;
+                this.menuActiveMobile = false;
             }
-
-            this.overlayMenuActive = !this.overlayMenuActive;
-            this.menuActiveMobile = false;
-        }
-        else if (this.app.menuMode === 'static') {
+            else if (this.app.menuMode === 'static') {
             this.staticMenuInactive = !this.staticMenuInactive;
         }
     }
@@ -130,75 +134,74 @@ toggleMenu(event: Event) {
     }
 
     event.preventDefault();
+  }
+
+  toggleProfile(event: Event) {
+      this.profileActive = !this.profileActive;
+      event.preventDefault();
+  }
+
+  toggleTopMenu(event: Event) {
+      this.topMenuButtonClick = true;
+      this.menuActiveMobile = false;
+      
+      if (this.topMenuActive) {
+          this.hideTopMenu();
+        } else {
+            this.topMenuActive = true;
+        }
+        event.preventDefault();
+  }
+
+  hideTopMenu() {
+      this.topMenuLeaving = true;
+      setTimeout(() => {
+          this.topMenuActive = false;
+          this.topMenuLeaving = false;
+        }, 1);
+  }
+
+  onMenuClick() {
+      this.menuClick = true;
 }
 
-toggleProfile(event: Event) {
-    this.profileActive = !this.profileActive;
-    event.preventDefault();
-}
+  onConfigClick(event : any) {
+      this.configClick = true;
+  }
 
-toggleTopMenu(event: Event) {
-    this.topMenuButtonClick = true;
-    this.menuActiveMobile = false;
+  isStatic() {
+      return this.app.menuMode === 'static';
+  }
 
-    if (this.topMenuActive) {
-        this.hideTopMenu();
-    } else {
-        this.topMenuActive = true;
-    }
-    event.preventDefault();
-}
+  isOverlay() {
+      return this.app.menuMode === 'overlay';
+  }
 
-hideTopMenu() {
-    this.topMenuLeaving = true;
-    setTimeout(() => {
-        this.topMenuActive = false;
-        this.topMenuLeaving = false;
-    }, 1);
-}
+  isDesktop() {
+      return window.innerWidth > 992;
+  }
 
-onMenuClick() {
-    this.menuClick = true;
-}
+  isMobile(){
+      return window.innerWidth < 1024;
+  }
 
-onConfigClick(event : any) {
-    this.configClick = true;
-}
+  onSearchClick() {
+      this.topMenuButtonClick = true;
+  }
 
-isStatic() {
-    return this.app.menuMode === 'static';
-}
-
-isOverlay() {
-    return this.app.menuMode === 'overlay';
-}
-
-isDesktop() {
-    return window.innerWidth > 992;
-}
-
-isMobile(){
-    return window.innerWidth < 1024;
-}
-
-onSearchClick() {
-    this.topMenuButtonClick = true;
-}
-
-ngOnDestroy() {
-    if (this.documentClickListener) {
+  ngOnDestroy() {
+      if (this.documentClickListener) {
         this.documentClickListener();
     }
-
-
+    
     if (this.subscription) {
         this.subscription.unsubscribe();
     }
-}
+  }
 
-logOut() {
+  logOut() {
     localStorage.clear();
     this._router.navigateByUrl('/index');
-}
+  }
 
 }

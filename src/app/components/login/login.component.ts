@@ -102,17 +102,27 @@ export class LoginComponent implements OnInit {
 
     this._myleasing.setLoading(true);
 
-    this._apiService.postToken('Account/CreateToken' , this.tokenRequest).
+    this._apiService.postToken('Account/CreateTokenWeb' , this.tokenRequest).
     subscribe((res : TokenResponse) => {
-      localStorage.setItem('token', res.token);
-      this._router.navigateByUrl('/home/dashboard');
-      this._myleasing.setLoading(false);
+      if (res.isSuccess == true) {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('expiration', res.expiration.toString());
+        this._myleasing.setLoading(false);
+        this._router.navigateByUrl('/dashboard');
+      } else {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "Usuario o contraseña no valido"
+        })
+      }
     }, error => {
       this._myleasing.setLoading(false);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error
+        text: error + "Usuario o contraseña no valido"
       })
     });
   }

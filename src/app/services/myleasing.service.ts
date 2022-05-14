@@ -5,19 +5,45 @@ import { Injectable } from '@angular/core';
 })
 export class MyleasingService {
   showLoading: boolean;
-  showPages: boolean;
+  showComponents: boolean;
+  goto: boolean;
+  expirationDate: number;
+  validate: boolean;
+
   constructor() { 
-    this.showPages = true;
+    this.showComponents = true;
     this.showLoading = false;
+    this.goto = false;
+    this.validate = false;
+    this.expirationDate = 0;
   }
 
-  updateShowPages() {
+  updateShowComponents()  {
     if (localStorage.getItem('token') != null) {
-      this.showPages = false;
+      this.showComponents = false;
     } else {
-      this.showPages = true;
+      this.showComponents = true;
     }
-    return this.showPages;
+    return this.showComponents;
+  }
+
+  goToHome(){
+    if (localStorage.getItem('token') != null) {
+      this.goto = true;
+    }
+    return this.goto;
+  }
+
+  validateToken() {
+
+    let expiration = localStorage.getItem('expiration');
+    this.expirationDate = Date.parse(expiration != null ? expiration : "");
+    if (Date.now() > this.expirationDate) {
+      this.validate = true;
+    } else {
+      this.validate = false;
+    }
+    return this.validate;
   }
 
   getLoading() {

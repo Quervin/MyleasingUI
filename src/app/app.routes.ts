@@ -6,13 +6,14 @@ import { IndexComponent } from './components/index/index.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
 import { DetailsPropertyComponent } from './components/details-property/details-property.component';
+import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
 
 
 export const ROUTES: Routes = [
-    { path: 'home', component: HomeComponent,
+    { path: '', component: HomeComponent,
     children: [
-        {path: 'dashboard', component: IndexComponent},
-        {path: 'cuentas', component: AboutComponent},
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'cuentas', component: AboutComponent },
     ], canActivate: [ AuthGuard ] },
     { path: 'index', component: IndexComponent},
     { path: 'login', component: LoginComponent },
