@@ -77,9 +77,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
           this.config = this.configService.config;
           this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
           this._myleasing.showComponets(false);
-          if (this._myleasing.validateToken()) {
-            this.logOut();
-          }
      }
 
   ngOnInit(): void {
@@ -204,9 +201,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
   logOut() {
     localStorage.clear();
     this._myleasing.showComponets(true);
-    this._router.navigateByUrl('/login');
+    this._router.navigateByUrl('/index');
   }
-
-  
 
 }
