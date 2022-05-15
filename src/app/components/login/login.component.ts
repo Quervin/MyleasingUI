@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { MyleasingService } from '../../services/myleasing.service';
+import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import { TokenRequest } from 'src/app/models/tokenRequest';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import { NgForm } from '@angular/forms';
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   
   formLogin: FormGroup;
   formPassword: FormGroup;
-
   showPassword: boolean;
   title: string;
   type: string;
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit {
     private _myleasing: MyleasingService,
     private _router: Router,
     private fb: FormBuilder) { 
-
       this.title = "Mostrar contraseña";
       this.showPassword = false;
       this.type = "password";
@@ -107,6 +105,8 @@ export class LoginComponent implements OnInit {
       if (res.isSuccess == true) {
         localStorage.setItem('token', res.token);
         localStorage.setItem('expiration', res.expiration.toString());
+        localStorage.setItem('userId', res.userId);
+        localStorage.setItem('rolId',  res.rolId);
         this._myleasing.setLoading(false);
         this._router.navigateByUrl('/dashboard');
       } else {
@@ -122,7 +122,7 @@ export class LoginComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error + "Usuario o contraseña no valido"
+        text: "Ha ocurrido un error"
       })
     });
   }
@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit {
           icon: 'success',
           title: 'Resultado con Exitó',
           showConfirmButton: false,
-          timer: 2000,
+          timer: 2500,
           text: res.message
         }
         )
@@ -167,7 +167,7 @@ export class LoginComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error
+        text: "Ha ocurrido un error"
       })
     });
   }

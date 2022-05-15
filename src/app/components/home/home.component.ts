@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 import { AppConfig } from 'src/app/models/appConfig';
 import { ConfigService } from 'src/app/services/app.config.service';
-import { MyleasingService } from 'src/app/services/myleasing.service';
+import { MyleasingService } from 'src/app/services/app.myleasing.service';
 
 @Component({
   selector: 'app-home',
@@ -53,15 +53,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
 
   configClick: boolean;
 
-  config = {} as  AppConfig;
+  config : AppConfig;
 
-  subscription = {} as Subscription;
+  subscription : Subscription;
   
   constructor(public renderer: Renderer2, 
     public app: AppComponent, 
     public configService: ConfigService,
     private _router: Router,
-    private _myleasing: MyleasingService ) {
+    public _myleasing: MyleasingService ) {
           this.menuInactiveDesktop = false;
           this.menuActiveMobile = false;
           this.overlayMenuActive = false;
@@ -73,14 +73,16 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
           this.configClick = false;
           this.topMenuButtonClick = false;
           this.theme = "";
+
+          this.config = this.configService.config;
+          this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
+          this._myleasing.showComponets(false);
+          if (this._myleasing.validateToken()) {
+            this.logOut();
+          }
      }
 
   ngOnInit(): void {
-    this.config = this.configService.config;
-    this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
-    if (this._myleasing.validateToken()) {
-        this.logOut();
-      }
   }
 
   ngAfterViewInit() {
@@ -201,7 +203,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy, OnInit {
 
   logOut() {
     localStorage.clear();
-    this._router.navigateByUrl('/index');
+    this._myleasing.showComponets(true);
+    this._router.navigateByUrl('/login');
   }
+
+  
 
 }

@@ -1,6 +1,6 @@
 import { UserResponse } from './userResponse';
 
-export class ManegerResponse {
+export class ManagerResponse {
     constructor(public id  : number,
         public user : UserResponse) {
             this.id = id;

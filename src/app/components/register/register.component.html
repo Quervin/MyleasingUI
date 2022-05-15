@@ -38,7 +38,6 @@
                             <input type="text" formControlName="phone" placeholder="teléfono" class="p-inputtext" />
                             <small *ngIf="phoneInvalid" class="form-text text-danger">El campo teléfono es Obligatorio</small>
                         </div>
-                        <!-- Pendiente Resgistrar como-->
                         <div class="form-group mb-3">
                             <label>Registrar como</label>
                             <div>
@@ -48,12 +47,14 @@
                         </div>
                         <div class="form-group mb-3">
                             <label>Contraseña</label>
-                            <input type="text" formControlName="password" placeholder="contraseña" class="p-inputtext" />
+                            <input [type]="type1" formControlName="password" placeholder="contraseña" class="p-inputtext" />
+                            <i [title]="title1" [ngClass]="iconClass1" class="field-icon" (click)="mostrarPassword(1)"></i>
                             <small *ngIf="passwordInvalid" class="form-text text-danger">El campo contraseña es Obligatorio</small>
                         </div>
                         <div class="form-group mb-3">
                             <label>Confirmación de Contraseña</label>
-                            <input type="text" formControlName="confirmpassword" placeholder="confirmación de contraseña" class="p-inputtext" />
+                            <input [type]="type2" formControlName="confirmpassword" placeholder="confirmación de contraseña" class="p-inputtext" />
+                            <i [title]="title2" [ngClass]="iconClass2" class="field-icon" (click)="mostrarPassword(2)"></i>
                             <small *ngIf="confirmpasswordInvalid" class="form-text text-danger">El campo confirmación de contraseña es Obligatorio</small>
                         </div>
                     </div>

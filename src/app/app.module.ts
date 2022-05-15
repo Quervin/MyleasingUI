@@ -116,6 +116,14 @@ import { MenuComponent } from './components/shared/menu/menu.component';
 import { MenuitemComponent } from './components/shared/menuitem/menuitem.component';
 import { MenuService } from './services/app.menu.service';
 import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
+import { ManagersComponent } from './components/managers/managers.component';
+import { OwnersComponent } from './components/owners/owners.component';
+import { LesseesComponent } from './components/lessees/lessees.component';
+import { PropertiesComponent } from './components/properties/properties.component';
+import { PropertyTypesComponent } from './components/property-types/property-types.component';
+import { SeachPropertiesComponent } from './components/seach-properties/seach-properties.component';
+import { ContractsComponent } from './components/contracts/contracts.component';
+import { UserComponent } from './components/shared/user/user.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +142,14 @@ import { DashboardComponent } from './components/shared/dashboard/dashboard.comp
     MenuComponent,
     MenuitemComponent,
     DashboardComponent,
+    ManagersComponent,
+    OwnersComponent,
+    LesseesComponent,
+    PropertiesComponent,
+    PropertyTypesComponent,
+    SeachPropertiesComponent,
+    ContractsComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

@@ -46,7 +46,7 @@ export class DetailsPropertyComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error
+        text: "Ha ocurrido un error"
       })
     });
   }

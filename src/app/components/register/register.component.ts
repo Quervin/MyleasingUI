@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
+import { AddUserRequest } from 'src/app/models/addUserRequest';
 import { ResponseRequest } from 'src/app/models/responseRequest';
-import { UserRequest } from 'src/app/models/userRequest';
 import { ApiService } from 'src/app/services/api.service';
-import { MyleasingService } from 'src/app/services/myleasing.service';
+import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,17 +15,22 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent implements OnInit {
 
+  showPassword1: boolean;
+  title1: string;
+  type1: string;
+  iconClass1: string;
+  showPassword2: boolean;
+  title2: string;
+  type2: string;
+  iconClass2: string;
   formRegister: FormGroup;
-
   count_month: SelectItem[];
-
   selectedCount_month= {} as SelectItem;
 
-  userRequest : UserRequest = {
-    Id : 0,
+  userRequest : AddUserRequest = {
     Email: "",
     Document: "",
-    FirsName: "",
+    FirstName: "",
     LastName: "",
     Address: "",
     Password: "",
@@ -36,7 +41,14 @@ export class RegisterComponent implements OnInit {
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private fb: FormBuilder) { 
-
+      this.showPassword1 = false;
+      this.title1 = "Mostrar contraseña";
+      this.type1 = "password";
+      this.iconClass1 = "fa fa-eye-slash";
+      this.showPassword2 = false;
+      this.title2 = "Mostrar contraseña";
+      this.type2 = "password";
+      this.iconClass2 = "fa fa-eye-slash";
       this.count_month = [
         {label: 'Lessee', value: "1"},
         {label: 'Owner 2', value: "2"}
@@ -94,6 +106,34 @@ export class RegisterComponent implements OnInit {
     return this.formRegister.get('confirmpassword')?.invalid && this.formRegister.get('confirmpassword')?.touched;
   }
 
+  mostrarPassword ( id : number ) {
+    if(id == 1) {
+      if (this.showPassword1 == false) {
+        this.title1 = "Ocultar contraseña";
+        this.showPassword1 = true;
+        this.type1 = "text";
+        this.iconClass1 = "fa fa-eye";
+      } else {
+        this.title1 = "Mostrar contraseña";
+        this.showPassword1 = false;
+        this.type1 = "password";
+        this.iconClass1 = "fa fa-eye-slash";
+      }
+    } else {
+      if (this.showPassword2 == false) {
+        this.title2 = "Ocultar contraseña";
+        this.showPassword2 = true;
+        this.type2 = "text";
+        this.iconClass2 = "fa fa-eye";
+      } else {
+        this.title2 = "Mostrar contraseña";
+        this.showPassword2 = false;
+        this.type2 = "password";
+        this.iconClass2 = "fa fa-eye-slash";
+      }
+    }
+  }
+
   register() {
     if ( this.formRegister.invalid ) {
       
@@ -117,7 +157,7 @@ export class RegisterComponent implements OnInit {
 
     this.userRequest.Email = this.formRegister.value.email;
     this.userRequest.Document = this.formRegister.value.document;
-    this.userRequest.FirsName = this.formRegister.value.firstName;
+    this.userRequest.FirstName = this.formRegister.value.firstName;
     this.userRequest.LastName = this.formRegister.value.lastName;
     this.userRequest.Address = this.formRegister.value.address;
     this.userRequest.Phone = this.formRegister.value.phone;
@@ -150,7 +190,7 @@ export class RegisterComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error
+        text: "Ha ocurrido un error"
       })
     });
 
