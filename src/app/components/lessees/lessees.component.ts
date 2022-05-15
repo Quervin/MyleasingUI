@@ -27,8 +27,12 @@ export class LesseesComponent implements OnInit {
     this.total = 0;
     this.pageItems = 5;
     this.page = 1;
-    this._myleasing.setLoading(true);
-    this.getLessees();
+    if (this._myleasing.validateToken()) {
+      this.logOut();
+    } else {
+      this._myleasing.setLoading(true);
+      this.getLessees();
+    }
   }
 
   ngOnInit(): void {
@@ -73,6 +77,12 @@ export class LesseesComponent implements OnInit {
     }
 
     this.getLessees();
+  }
+
+  logOut() {
+    localStorage.clear();
+    this._myleasing.showComponets(true);
+    this._router.navigateByUrl('/index');
   }
 
 }
