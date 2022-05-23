@@ -5,8 +5,8 @@
                 <h2>Detalles de la Propiedad: {{property.id}}</h2>
                 <br/>
 
-                <div class="row" *ngIf="showDetail">
-                    <div class="col-6">
+                <div class="grid p-fluid" *ngIf="showDetail">
+                    <div class="col-12 md:col-6">
                         <p><strong>Tipo de Propiedad:</strong> {{property.propertyType.name }}</p>
                         <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
                         <p><strong>Dirección:</strong> {{property.address}}</p>
@@ -15,7 +15,7 @@
                         <p><strong>Cuartos:</strong> {{property.rooms}}</p>
                         <p><strong>Tiene Parqueo:</strong> {{property.hasParkingLot == true ? 'Si' : 'No'}}</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 md:col-6">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item" [ngClass]="{ 'active': i == 0}" *ngFor="let imagen of property.propertyImages; index as i;">

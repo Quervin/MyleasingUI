@@ -4,7 +4,7 @@
             <h2>Cambiar Datos Usario</h2>
             <br/>
             <div class="grid p-fluid">
-                <div class="col-6">
+                <div class="col-12 md:col-6">
                     <div class="form-group mb-3">
                         <label>Documento</label>
                         <input type="text" formControlName="document" placeholder="documento" class="p-inputtext" />
@@ -26,7 +26,7 @@
                         <small *ngIf="addressInvalid" class="form-text text-danger">El campo dirrección es Obligatorio</small>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 md:col-6">
                     <div class="form-group mb-3">
                         <label>Teléfono</label>
                         <input type="text" formControlName="phone" placeholder="teléfono" class="p-inputtext" />
@@ -46,12 +46,12 @@
                     </div>
                     <div class="form-group mb-3">
                         <label>Confirmación de Contraseña</label>
-                        <input [type]="type3" formControlName="confirmpassword" placeholder="confirmación de contraseña" class="p-inputtext" />
+                        <input [type]="type3" formControlName="confirmpassword" placeholder="confirmación" class="p-inputtext" />
                         <i [title]="title3" [ngClass]="iconClass3" class="field-icon" (click)="mostrarPassword(2)"></i>
                         <small *ngIf="confirmpasswordInvalid" class="form-text text-danger">El campo confirmación de contraseña es Obligatorio</small>
                     </div>
                 </div>
-                <div class="form-group d-grid gap-2 offset-md-6 col-6">
+                <div class="form-group d-grid gap-2 offset-md-6 col-md-6">
                     <button type="submit" class="btn btn-primary p-button-label w-full p-3 text-xl">Guardar Cambios</button>
                 </div>
             </div>
