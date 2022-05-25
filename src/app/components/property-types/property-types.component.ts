@@ -19,6 +19,8 @@ export class PropertyTypesComponent implements OnInit {
   pageItems: number;
   total: number;
   page: number;
+  propertyTypeId: number;
+
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) {
@@ -27,6 +29,7 @@ export class PropertyTypesComponent implements OnInit {
     this.total = 0;
     this.pageItems = 5;
     this.page = 1;
+    this.propertyTypeId = 0;
     if (this._myleasing.validateToken()) {
       this.logOut();
     } else {
@@ -63,8 +66,12 @@ export class PropertyTypesComponent implements OnInit {
     });
   }
 
-  editarPropertyType(id: number) {
-    this._router.navigate([ '/detailProperty', id ]);
+  gotoCreatePropertyType() {
+    this._router.navigateByUrl('propertyTypes/createPropertyTypes');
+  }
+
+  gotoEditPropertyType(id: number) {
+    this._router.navigate([ 'propertyTypes/editPropertyTypes', id ]);
   }
 
   getPage(pageNum : number){
@@ -77,6 +84,43 @@ export class PropertyTypesComponent implements OnInit {
     }
 
     this.getPropertyTypes();
+  }
+
+  showModal(id: number) {
+    this.propertyTypeId = id;
+  }
+
+  delete() {
+    this._myleasing.setLoading(true);
+    this._apiService.getQuery(`PropertyTypes/DeleteWeb/${this.propertyTypeId}`).
+    subscribe((res : ResponseRequest) => {
+      if ( res.isSuccess == true) {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'success',
+          title: 'Resultado con Exitó',
+          showConfirmButton: false,
+          timer: 2000,
+          text: res.message
+        }
+        )
+        this.getPage(1);
+      } else {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: res.message
+        })
+      }
+    }, error => {
+      this._myleasing.setLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Ha ocurrido un error"
+      })
+    });
   }
 
   logOut() {

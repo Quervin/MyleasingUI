@@ -15,6 +15,8 @@ import { PropertiesComponent } from './components/properties/properties.componen
 import { PropertyTypesComponent } from './components/property-types/property-types.component';
 import { SeachPropertiesComponent } from './components/seach-properties/seach-properties.component';
 import { ContractsComponent } from './components/contracts/contracts.component';
+import { CreatepropertyTypesComponent } from './components/createproperty-types/createproperty-types.component';
+import { CreatemanagersComponent } from './components/createmanagers/createmanagers.component';
 
 
 export const ROUTES: Routes = [
@@ -22,11 +24,14 @@ export const ROUTES: Routes = [
     children: [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'user', component: UserComponent },
-        { path: 'managers', component: ManagersComponent },
+        { path: 'managers', component: ManagersComponent, },
+        { path: 'managers/createManagers', component: CreatemanagersComponent },
         { path: 'owners', component: OwnersComponent },
         { path: 'lessees', component: LesseesComponent },
         { path: 'properties', component: PropertiesComponent },
         { path: 'propertyTypes', component: PropertyTypesComponent },
+        { path: 'propertyTypes/createPropertyTypes', component: CreatepropertyTypesComponent },
+        { path: 'propertyTypes/editPropertyTypes/:id', component: CreatepropertyTypesComponent },
         { path: 'seachProperties', component: SeachPropertiesComponent },
         { path: 'contracts', component: ContractsComponent },
     ], canActivate: [ AuthGuard ] },

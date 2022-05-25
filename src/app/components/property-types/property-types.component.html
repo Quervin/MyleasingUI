@@ -3,7 +3,7 @@
         <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>Tipo de Propiedades</span>
         </h2>
         <p>
-            <a class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
+            <a (click)="gotoCreatePropertyType()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
         </p>
         <br/>
         <table class="table" *ngIf="listPropertyType.length != 0">
@@ -21,15 +21,34 @@
                     <td>{{propertyType.name}}</td>
                     <td>{{propertyType.properties.length}}</td>
                     <td>
-                        <a class="btn btn-primary" (click)="editarPropertyType(propertyType.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default" (click)="editarPropertyType(propertyType.id)"><i class="fas fa-list"></i></a>
-                        <a class="btn btn-danger" (click)="editarPropertyType(propertyType.id)"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-primary" (click)="gotoEditPropertyType(propertyType.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-default"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(propertyType.id)"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="text-center" *ngIf="listPropertyType.length != 0">
             <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDeleteLabel">Mensaje de Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Realmente quiere eliminar esta propiedad?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Eliminar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

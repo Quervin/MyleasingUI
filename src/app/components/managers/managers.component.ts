@@ -38,6 +38,10 @@ export class ManagersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  gotoCreateManager() {
+    this._router.navigateByUrl('managers/createManagers');
+  }
+
   getManagers(){
     this._apiService.getQuery(`Managers/GetManagersWeb/${this.index}/${this.pageItems}`).
     subscribe((res : ResponseRequest) => {

@@ -162,7 +162,7 @@ export class RegisterComponent implements OnInit {
     this.userRequest.Address = this.formRegister.value.address;
     this.userRequest.Phone = this.formRegister.value.phone;
     this.userRequest.Password = this.formRegister.value.password;
-     this.userRequest.RoleId = this.formRegister.value.roleId;
+    this.userRequest.RoleId = this.formRegister.value.roleId;
 
     this._myleasing.setLoading(true);
 

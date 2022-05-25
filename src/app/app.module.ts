@@ -123,6 +123,8 @@ import { PropertyTypesComponent } from './components/property-types/property-typ
 import { SeachPropertiesComponent } from './components/seach-properties/seach-properties.component';
 import { ContractsComponent } from './components/contracts/contracts.component';
 import { UserComponent } from './components/shared/user/user.component';
+import { CreatepropertyTypesComponent } from './components/createproperty-types/createproperty-types.component';
+import { CreatemanagersComponent } from './components/createmanagers/createmanagers.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +150,8 @@ import { UserComponent } from './components/shared/user/user.component';
     SeachPropertiesComponent,
     ContractsComponent,
     UserComponent,
+    CreatepropertyTypesComponent,
+    CreatemanagersComponent,
   ],
   imports: [
     BrowserModule,
