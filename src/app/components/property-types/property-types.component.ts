@@ -74,6 +74,10 @@ export class PropertyTypesComponent implements OnInit {
     this._router.navigate([ 'propertyTypes/editPropertyTypes', id ]);
   }
 
+  gotoDetailsPropertyType(id: number) {
+    this._router.navigate([ 'propertyTypes/detailsPropertyTypes', id ]);
+  }
+
   getPage(pageNum : number){
     this.page = pageNum;
 

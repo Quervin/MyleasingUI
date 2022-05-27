@@ -125,6 +125,7 @@ import { ContractsComponent } from './components/contracts/contracts.component';
 import { UserComponent } from './components/shared/user/user.component';
 import { CreatepropertyTypesComponent } from './components/createproperty-types/createproperty-types.component';
 import { CreatemanagersComponent } from './components/createmanagers/createmanagers.component';
+import { DetailspropertytypesComponent } from './components/detailspropertytypes/detailspropertytypes.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +153,7 @@ import { CreatemanagersComponent } from './components/createmanagers/createmanag
     UserComponent,
     CreatepropertyTypesComponent,
     CreatemanagersComponent,
+    DetailspropertytypesComponent,
   ],
   imports: [
     BrowserModule,

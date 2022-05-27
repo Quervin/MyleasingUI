@@ -63,8 +63,8 @@ export class PropertiesComponent implements OnInit {
     });
   }
 
-  editarproperty(id: number) {
-    this._router.navigate([ '/detailProperty', id ]);
+  detailsProperty(id: number) {
+    this._router.navigate([ 'properties/detailsProperty', id ]);
   }
 
   getPage(pageNum : number){

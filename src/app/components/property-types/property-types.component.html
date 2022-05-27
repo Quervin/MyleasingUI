@@ -22,7 +22,7 @@
                     <td>{{propertyType.properties.length}}</td>
                     <td>
                         <a class="btn btn-primary" (click)="gotoEditPropertyType(propertyType.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-default" (click)="gotoDetailsPropertyType(propertyType.id)"><i class="fas fa-list"></i></a>
                         <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(propertyType.id)"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>

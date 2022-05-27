@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { MyleasingService } from 'src/app/services/app.myleasing.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +17,12 @@ export class DashboardComponent implements OnInit {
 
   chartOptions: any;
   
-  constructor() { 
-    this.items = [];
+  constructor(private _myleasing: MyleasingService,
+    private _router: Router) { 
+    if (this._myleasing.validateToken()) {
+        this.logOut();
+    } 
+    this.items = [];   
   }
 
   ngOnInit(): void {
@@ -78,6 +84,12 @@ export class DashboardComponent implements OnInit {
           },
       }
   };
+  }
+
+  logOut() {
+    localStorage.clear();
+    this._myleasing.showComponets(true);
+    this._router.navigateByUrl('/index');
   }
 
 }

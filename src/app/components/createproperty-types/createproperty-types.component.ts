@@ -29,7 +29,6 @@ export class CreatepropertyTypesComponent implements OnInit {
     properties: []
   }
 
-
   editMode: boolean;
   id: string;
   button: string;
@@ -39,21 +38,24 @@ export class CreatepropertyTypesComponent implements OnInit {
     private _myleasing: MyleasingService,
     private _router: Router,
     private fb: FormBuilder) {
-      this.formPropertyType = this.fb.group({
-        name: ['', [Validators.required] ],
-      });
       this.editMode = false;
       this.id = "";
       this.button = "Crear"
-      this._activated.params.subscribe( params => {
-        this.id = params['id'] != null ? params['id'] : "";
-        if (this.id != "") {
-          this.editMode = true;
-          this.button = "Editar";
-          this.getPropertyType(this.id);
-        }
+      this.formPropertyType = this.fb.group({
+        name: ['', [Validators.required] ],
       });
-
+      if (this._myleasing.validateToken()) {
+        this.logOut();
+      } else {
+        this._activated.params.subscribe( params => {
+          this.id = params['id'] != null ? params['id'] : "";
+          if (this.id != "") {
+            this.editMode = true;
+            this.button = "Editar";
+            this.getPropertyType();
+          }
+        });
+      }
      }
 
   ngOnInit(): void {
@@ -63,9 +65,9 @@ export class CreatepropertyTypesComponent implements OnInit {
     return this.formPropertyType.get('name')?.invalid && this.formPropertyType.get('name')?.touched;
   }
 
-  getPropertyType ( id: string ) {
+  getPropertyType () {
     this._myleasing.setLoading(true);
-    this._apiService.getQuery(`PropertyTypes/GetPropertyTypeWeb/${id}`).
+    this._apiService.getQuery(`PropertyTypes/GetPropertyTypeWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
         this.propertyTypeResponse = res.result;
@@ -189,6 +191,12 @@ export class CreatepropertyTypesComponent implements OnInit {
         text: "Ha ocurrido un error"
       })
     });
+  }
+
+  logOut() {
+    localStorage.clear();
+    this._myleasing.showComponets(true);
+    this._router.navigateByUrl('/index');
   }
 
 }

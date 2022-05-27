@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="card">
+        <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>Detalle de la Tipo de Propiedad: {{propertyTypeResponse.id}}</span>
+        </h2>
+        <br/>
+        <div>
+            <p><strong>Nombre:</strong> {{propertyTypeResponse.name}}</p>
+            <hr/>
+            <br>
+            <div class="grid p-fluid" *ngFor="let property of propertyTypeResponse.properties">
+                <div class="col-12 md:col-6">
+                    <p><strong>Id:</strong> {{property.id}}</p>
+                    <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
+                    <p><strong>Dirección:</strong> {{property.address}}</p>
+                    <p><strong>Precio:</strong> {{property.price}}</p>
+                    <p><strong>Metros Cuadrados:</strong> {{property.squareMeters}}</p>
+                    <p><strong>Cuartos:</strong> {{property.rooms}}</p>
+                    <p><strong>Tiene Parqueo:</strong> {{property.hasParkingLot == true ? 'Si' : 'No'}}</p>
+                </div>
+                <div class="col-12 md:col-6">
+                    <img [src]="property.firstImage | imagen" class="d-block w-100" alt="...">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
