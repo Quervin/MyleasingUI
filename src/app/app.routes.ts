@@ -18,6 +18,7 @@ import { PropertyTypesComponent } from './components/property-types/property-typ
 import { CreatepropertyTypesComponent } from './components/createproperty-types/createproperty-types.component';
 import { DetailspropertytypesComponent } from './components/detailspropertytypes/detailspropertytypes.component';
 import { SeachPropertiesComponent } from './components/seach-properties/seach-properties.component';
+import { CreatelessesComponent } from './components/createlesses/createlesses.component';
 
 
 export const ROUTES: Routes = [
@@ -29,6 +30,7 @@ export const ROUTES: Routes = [
         { path: 'managers/createManagers', component: CreatemanagersComponent },
         { path: 'owners', component: OwnersComponent },
         { path: 'lessees', component: LesseesComponent },
+        { path: 'lessees/editLessee/:id', component: CreatelessesComponent },
         { path: 'properties', component: PropertiesComponent },
         { path: 'properties/detailsProperty/:id', component: DetailsPropertyComponent },
         { path: 'propertyTypes', component: PropertyTypesComponent },

@@ -63,8 +63,16 @@ export class LesseesComponent implements OnInit {
     });
   }
 
-  editarLessee(id: number) {
-    this._router.navigate([ '/detailProperty', id ]);
+  gotoCreateLessee() {
+    this._router.navigateByUrl('lessees/createLessees');
+  }
+
+  gotoEditLessee(id: number) {
+    this._router.navigate([ 'lessees/editLessee', id ]);
+  }
+
+  gotoDetailsLessee(id: number) {
+    this._router.navigate([ 'lessees/detailsLessees', id ]);
   }
 
   getPage(pageNum : number){

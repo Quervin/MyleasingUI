@@ -17,30 +17,31 @@ export class DetailsPropertyComponent implements OnInit {
   //property = <PropertyResponse>{};
   showDetail: boolean;
   property = {} as PropertyResponse;
-  showDetails: boolean = false;
+  showProperties: boolean;
   id: string = "";
+  currentPage: number;
 
   constructor(private _activated: ActivatedRoute,
     private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) { 
-      
+      this.currentPage = 1;
       this.showDetail = false;
-      this.showDetails = false;
+      this.showProperties = false;
       this._activated.params.subscribe( params => {
         this.id = params['id'];
       });
-      if (localStorage.getItem('token') == null) {
-        this._myleasing.setLoading(true);
-        this.getProperty();
-      } else {
+      if (localStorage.getItem('token') != null) {
         if (this._myleasing.validateToken()) {
           this.logOut();
         } else {
-          this.showDetails = true;
+          this.showProperties = true;
           this._myleasing.setLoading(true);
           this.getPropertyDetails();
         }
+      } else {
+        this._myleasing.setLoading(true);
+        this.getProperty();
       }
   }
 

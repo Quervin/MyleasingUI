@@ -31,9 +31,9 @@
                     <td>{{lessee.user.phone}}</td>
                     <td>{{lessee.contracts.length}}</td>
                     <td>
-                        <a class="btn btn-primary" (click)="editarLessee(lessee.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default" (click)="editarLessee(lessee.id)"><i class="fas fa-list"></i></a>
-                        <a class="btn btn-danger" (click)="editarLessee(lessee.id)"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-primary" (click)="gotoEditLessee(lessee.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-default" (click)="gotoDetailsLessee(lessee.id)"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>

@@ -25,6 +25,7 @@ export class MenuComponent implements OnInit {
     firstName: "",
     address: "",
     fullName: "",
+    fullNameWithDocument: "",
     lastName: "",
     email: "",
     phone: ""

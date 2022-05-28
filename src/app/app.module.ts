@@ -126,6 +126,7 @@ import { UserComponent } from './components/shared/user/user.component';
 import { CreatepropertyTypesComponent } from './components/createproperty-types/createproperty-types.component';
 import { CreatemanagersComponent } from './components/createmanagers/createmanagers.component';
 import { DetailspropertytypesComponent } from './components/detailspropertytypes/detailspropertytypes.component';
+import { CreatelessesComponent } from './components/createlesses/createlesses.component';
 
 @NgModule({
   declarations: [
@@ -154,6 +155,7 @@ import { DetailspropertytypesComponent } from './components/detailspropertytypes
     CreatepropertyTypesComponent,
     CreatemanagersComponent,
     DetailspropertytypesComponent,
+    CreatelessesComponent,
   ],
   imports: [
     BrowserModule,

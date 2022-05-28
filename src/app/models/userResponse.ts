@@ -4,6 +4,7 @@ export class UserResponse {
         public firstName : string,
         public lastName : string,
         public fullName : string,
+        public fullNameWithDocument : string,
         public email : string,
         public phone : string,
         public address : string) {
@@ -12,6 +13,7 @@ export class UserResponse {
             this.firstName = firstName;
             this.lastName = lastName;
             this.fullName = fullName;
+            this.fullNameWithDocument = fullNameWithDocument;
             this.email = email;
             this.phone = phone;
             this.address = address;

@@ -8,7 +8,7 @@ export class ContractResponse {
         public price : number,
         public startDate : string,
         public endDate : string,
-        public IsActive : boolean,
+        public isActive : boolean,
         public owner: OwnerResponse,
         public lessee : LesseeResponse,
         public property : PropertyResponse) {
@@ -16,7 +16,7 @@ export class ContractResponse {
             this.price = price;
             this.startDate = startDate;
             this.endDate = endDate;
-            this.IsActive = IsActive;
+            this.isActive = isActive;
             this.owner = owner;
             this.lessee = lessee;
             this.property = property;

@@ -36,6 +36,7 @@ export class UserComponent implements OnInit {
     firstName: "",
     address: "",
     fullName: "",
+    fullNameWithDocument: "",
     lastName: "",
     email: "",
     phone: ""
