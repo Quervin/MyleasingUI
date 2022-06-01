@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card">
+        <h2>Detalles del Lessee: {{lesseeResponse.id}}</h2>
+        <br/>
+        <div>
+            <p><strong>Docuemnto:</strong> {{lesseeResponse.user.document}}</p>
+            <p><strong>Nombre:</strong> {{lesseeResponse.user.firstName}}</p>
+            <p><strong>Apellido:</strong> {{lesseeResponse.user.lastName}}</p>
+            <p><strong>Correo Electrónico:</strong> {{lesseeResponse.user.email}}</p>
+            <p><strong>Teléfono:</strong> {{lesseeResponse.user.phone}}</p>
+        </div>
+        <hr>
+        <br>
+        <div class="col-12" *ngIf="lesseeResponse.contracts.length != 0">
+            <h5><strong>Contratos:</strong></h5>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Lessee</th>
+                        <th scope="col">Comentarios</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Final</th>
+                        <th scope="col">Esta Activo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let contract of lesseeResponse.contracts | paginate: { id: 'server', itemsPerPage: 5, currentPage: currentPage, totalItems: lesseeResponse.contracts.length }; index as i; ">
+                        <th>{{i + 1}}</th>
+                        <td>{{contract.lessee.user.fullNameWithDocument}}</td>
+                        <td>{{contract.remarks}}</td>
+                        <td>{{contract.price}}</td>
+                        <td>{{contract.startDate}}</td>
+                        <td>{{contract.endDate}}</td>
+                        <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
+                        <td>
+                            <a class="btn btn-warning mb-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-primary mb-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>
+                            <a class="btn btn-danger mb-1"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <pagination-controls (pageChange)="currentPage = $event" id="server"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

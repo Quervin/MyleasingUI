@@ -1,5 +1,6 @@
 export class AddUserRequest {
-    constructor(public Email : string,
+    constructor(public Id  : number,
+        public Email : string,
         public Document : string,
         public FirstName : string,
         public LastName : string,
@@ -7,6 +8,7 @@ export class AddUserRequest {
         public Phone : string,
         public Password : string,
         public RoleId : number) {
+            this.Id = Id;
             this.Email = Email;
             this.Document = Document;
             this.FirstName = FirstName;

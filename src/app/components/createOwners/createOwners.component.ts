@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AddUserRequest } from 'src/app/models/addUserRequest';
-import { LesseeResponse } from 'src/app/models/lesseeResponse';
+import { OwnerResponse } from 'src/app/models/ownerResponse';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { UserResponse } from 'src/app/models/userResponse';
 import { ApiService } from 'src/app/services/api.service';
@@ -10,12 +10,12 @@ import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-createlesses',
-  templateUrl: './createLesses.component.html',
+  selector: 'app-createowners',
+  templateUrl: './createOwners.component.html',
   styles: [
   ]
 })
-export class CreatelessesComponent implements OnInit {
+export class CreateownersComponent implements OnInit {
 
   showPassword1: boolean;
   title1: string;
@@ -25,7 +25,7 @@ export class CreatelessesComponent implements OnInit {
   title2: string;
   type2: string;
   iconClass2: string;
-  formLessee: FormGroup;
+  formOwner: FormGroup;
 
   addUserRequest: AddUserRequest = {
     Id: 0,
@@ -36,7 +36,7 @@ export class CreatelessesComponent implements OnInit {
     LastName: "",
     Password: "",
     Phone: "",
-    RoleId: 1
+    RoleId: 3
   }
 
   user : UserResponse = {
@@ -51,10 +51,11 @@ export class CreatelessesComponent implements OnInit {
     phone: ""
   }
 
-  lesseeResponse: LesseeResponse = {
+  ownerResponse: OwnerResponse = {
     id: 0,
     user : this.user,
-    contracts: []
+    contracts: [],
+    properties: []
   }
 
   editMode: boolean;
@@ -70,7 +71,7 @@ export class CreatelessesComponent implements OnInit {
       this.editMode = false;
       this.id = "";
       this.button = "Crear";
-      this.titulo = "Crear Lessee";
+      this.titulo = "Crear Owner";
       this.showPassword1 = false;
       this.title1 = "Mostrar contraseña";
       this.type1 = "password";
@@ -87,13 +88,13 @@ export class CreatelessesComponent implements OnInit {
           if (this.id != "") {
             this.editMode = true;
             this.button = "Editar";
-            this.titulo = "Editar Lessee";
-            this.getLessee();
+            this.titulo = "Editar Owner";
+            this.getOwner();
           }
         });
       }
       if (!this.editMode) {
-        this.formLessee = this.fb.group({
+        this.formOwner = this.fb.group({
           email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
           document: ['', [Validators.required] ],
           firstName: ['', [Validators.required] ],
@@ -104,7 +105,7 @@ export class CreatelessesComponent implements OnInit {
           confirmpassword: ['', [Validators.required] ]
         });
       } else {
-        this.formLessee = this.fb.group({
+        this.formOwner = this.fb.group({
           document: ['', [Validators.required] ],
           firstName: ['', [Validators.required] ],
           lastName: ['', [Validators.required] ],
@@ -112,42 +113,41 @@ export class CreatelessesComponent implements OnInit {
           phone: ['', [Validators.required] ],
         });
       }
-      
     }
 
   ngOnInit(): void {
   }
 
   get emailInvalid() {
-    return this.formLessee.get('email')?.invalid && this.formLessee.get('email')?.touched;
+    return this.formOwner.get('email')?.invalid && this.formOwner.get('email')?.touched;
   }
 
   get documentInvalid() {
-    return this.formLessee.get('document')?.invalid && this.formLessee.get('document')?.touched;
+    return this.formOwner.get('document')?.invalid && this.formOwner.get('document')?.touched;
   }
 
   get firstNameInvalid() {
-    return this.formLessee.get('firstName')?.invalid && this.formLessee.get('firstName')?.touched;
+    return this.formOwner.get('firstName')?.invalid && this.formOwner.get('firstName')?.touched;
   }
 
   get lastNameInvalid() {
-    return this.formLessee.get('lastName')?.invalid && this.formLessee.get('lastName')?.touched;
+    return this.formOwner.get('lastName')?.invalid && this.formOwner.get('lastName')?.touched;
   }
 
   get addressInvalid() {
-    return this.formLessee.get('address')?.invalid && this.formLessee.get('address')?.touched;
+    return this.formOwner.get('address')?.invalid && this.formOwner.get('address')?.touched;
   }
 
   get phoneInvalid() {
-    return this.formLessee.get('phone')?.invalid && this.formLessee.get('phone')?.touched;
+    return this.formOwner.get('phone')?.invalid && this.formOwner.get('phone')?.touched;
   }
 
   get passwordInvalid() {
-    return this.formLessee.get('password')?.invalid && this.formLessee.get('password')?.touched;
+    return this.formOwner.get('password')?.invalid && this.formOwner.get('password')?.touched;
   }
   
   get confirmpasswordInvalid() {
-    return this.formLessee.get('confirmpassword')?.invalid && this.formLessee.get('confirmpassword')?.touched;
+    return this.formOwner.get('confirmpassword')?.invalid && this.formOwner.get('confirmpassword')?.touched;
   }
 
   mostrarPassword ( id : number ) {
@@ -178,12 +178,12 @@ export class CreatelessesComponent implements OnInit {
     }
   }
 
-  getLessee() {
+  getOwner() {
     this._myleasing.setLoading(true);
-    this._apiService.getQuery(`Lessees/GetLesseeWeb/${this.id}`).
+    this._apiService.getQuery(`Owners/GetOwnerWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
-        this.lesseeResponse = res.result;
+        this.ownerResponse = res.result;
         this.setDataFormLessee();
       } else {
         this._myleasing.setLoading(false);
@@ -204,20 +204,20 @@ export class CreatelessesComponent implements OnInit {
   }
 
   setDataFormLessee() {
-    this.formLessee.reset({
-      document: this.lesseeResponse.user.document,
-      firstName: this.lesseeResponse.user.firstName,
-      lastName: this.lesseeResponse.user.lastName,
-      address: this.lesseeResponse.user.address,
-      phone: this.lesseeResponse.user.phone
+    this.formOwner.reset({
+      document: this.ownerResponse.user.document,
+      firstName: this.ownerResponse.user.firstName,
+      lastName: this.ownerResponse.user.lastName,
+      address: this.ownerResponse.user.address,
+      phone: this.ownerResponse.user.phone
     });
     this._myleasing.setLoading(false);
   }
 
   create() {
-    if ( this.formLessee.invalid ) {
+    if ( this.formOwner.invalid ) {
       
-      return Object.values( this.formLessee.controls ).forEach( control => {
+      return Object.values( this.formOwner.controls ).forEach( control => {
         if ( control instanceof FormGroup ) {
           Object.values( control.controls ).forEach( control => control.markAsTouched() );
         } else {
@@ -226,7 +226,7 @@ export class CreatelessesComponent implements OnInit {
       });
     }
 
-    if (this.formLessee.value.password != this.formLessee.value.confirmpassword) {
+    if (this.formOwner.value.password != this.formOwner.value.confirmpassword) {
       Swal.fire({
         icon: 'info',
         title: 'Oops...',
@@ -235,21 +235,21 @@ export class CreatelessesComponent implements OnInit {
       return;
     }
 
-    this.addUserRequest.Email = this.formLessee.value.email;
-    this.addUserRequest.Document = this.formLessee.value.document;
-    this.addUserRequest.FirstName = this.formLessee.value.firstName;
-    this.addUserRequest.LastName = this.formLessee.value.lastName;
-    this.addUserRequest.Address = this.formLessee.value.address;
-    this.addUserRequest.Phone = this.formLessee.value.phone;
-    this.addUserRequest.Password = this.formLessee.value.password;
+    this.addUserRequest.Email = this.formOwner.value.email;
+    this.addUserRequest.Document = this.formOwner.value.document;
+    this.addUserRequest.FirstName = this.formOwner.value.firstName;
+    this.addUserRequest.LastName = this.formOwner.value.lastName;
+    this.addUserRequest.Address = this.formOwner.value.address;
+    this.addUserRequest.Phone = this.formOwner.value.phone;
+    this.addUserRequest.Password = this.formOwner.value.password;
 
     this._myleasing.setLoading(true);
 
-    this._apiService.postQuery('Lessees/CreateWeb', this.addUserRequest).
+    this._apiService.postQuery('Owners/CreateWeb', this.addUserRequest).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this.formLessee.reset({
+        this.formOwner.reset({
           document: '',
           firstName: '',
           lastName: '',
@@ -283,9 +283,9 @@ export class CreatelessesComponent implements OnInit {
   }
 
   edit() {
-    if ( this.formLessee.invalid ) {
+    if ( this.formOwner.invalid ) {
       
-      return Object.values( this.formLessee.controls ).forEach( control => {
+      return Object.values( this.formOwner.controls ).forEach( control => {
         if ( control instanceof FormGroup ) {
           Object.values( control.controls ).forEach( control => control.markAsTouched() );
         } else {
@@ -294,21 +294,21 @@ export class CreatelessesComponent implements OnInit {
       });
     }
 
-    this.addUserRequest.Id = this.lesseeResponse.id;
-    this.addUserRequest.Email = this.lesseeResponse.user.email;
-    this.addUserRequest.Document = this.formLessee.value.document;
-    this.addUserRequest.FirstName = this.formLessee.value.firstName;
-    this.addUserRequest.LastName = this.formLessee.value.lastName;
-    this.addUserRequest.Address = this.formLessee.value.address;
-    this.addUserRequest.Phone = this.formLessee.value.phone;
+    this.addUserRequest.Id = this.ownerResponse.id;
+    this.addUserRequest.Email = this.ownerResponse.user.email;
+    this.addUserRequest.Document = this.formOwner.value.document;
+    this.addUserRequest.FirstName = this.formOwner.value.firstName;
+    this.addUserRequest.LastName = this.formOwner.value.lastName;
+    this.addUserRequest.Address = this.formOwner.value.address;
+    this.addUserRequest.Phone = this.formOwner.value.phone;
 
     this._myleasing.setLoading(true);
 
-    this._apiService.postQuery('Lessees/EditWeb' , this.addUserRequest).
+    this._apiService.postQuery('Owners/EditWeb' , this.addUserRequest).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._router.navigateByUrl('lessees');
+        this._router.navigateByUrl('owners');
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',

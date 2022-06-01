@@ -1,52 +1,66 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PropertyResponse } from 'src/app/models/propertyResponse';
-import { PropertyTypeResponse } from 'src/app/models/propertyTypeResponse';
+import { LesseeResponse } from 'src/app/models/lesseeResponse';
 import { ResponseRequest } from 'src/app/models/responseRequest';
+import { UserResponse } from 'src/app/models/userResponse';
 import { ApiService } from 'src/app/services/api.service';
 import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-detailspropertytypes',
-  templateUrl: './detailsPropertytypes.component.html',
+  selector: 'app-detailslesses',
+  templateUrl: './detailsLesses.component.html',
   styles: [
   ]
 })
-export class DetailspropertytypesComponent implements OnInit {
+export class DetailslessesComponent implements OnInit {
 
-  propertyTypeResponse: PropertyTypeResponse = {
+  user : UserResponse = {
+    id: "",
+    document: "",
+    address: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    fullName: "",
+    fullNameWithDocument: "",
+    phone: ""
+  }
+
+  lesseeResponse: LesseeResponse = {
     id: 0,
-    name: "",
-    properties: []
-  };
-
+    user : this.user,
+    contracts: []
+  }
+  
   id: string;
+  currentPage: number;
 
   constructor(private _activated: ActivatedRoute,
     private _apiService: ApiService,
     private _myleasing: MyleasingService,
-    private _router: Router) {
+    private _router: Router) { 
       this.id = "";
+      this.currentPage = 1;
       if (this._myleasing.validateToken()) {
         this.logOut();
       } else {
         this._activated.params.subscribe( params => {
           this.id = params['id'];
-          this.getDetailsPropertyType();
+          this.getDetailsLessee();
         });
       }
-     }
+    }
 
   ngOnInit(): void {
   }
 
-  getDetailsPropertyType () {
+  getDetailsLessee() {
     this._myleasing.setLoading(true);
-    this._apiService.getQuery(`PropertyTypes/DetailsPropertiesTypeWeb/${this.id}`).
+    this._apiService.getQuery(`Lessees/DetailsLesseeWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
-        this.propertyTypeResponse = res.result;
+        this.lesseeResponse = res.result;
         this._myleasing.setLoading(false);
       } else {
         this._myleasing.setLoading(false);
@@ -64,6 +78,14 @@ export class DetailspropertytypesComponent implements OnInit {
         text: "Ha ocurrido un error"
       })
     });
+  }
+
+  gotoEditContract(id: number) {
+    this._router.navigate([ 'lessees/editContract', id ]);
+  }
+
+  gotoDetailsContract(id: number) {
+    this._router.navigate([ 'lessees/detailsContract', id ]);
   }
 
   logOut() {

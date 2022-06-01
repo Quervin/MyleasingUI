@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-createproperty-types',
-  templateUrl: './createproperty-types.component.html',
+  templateUrl: './createPropertytypes.component.html',
   styles: [
   ]
 })
@@ -32,6 +32,7 @@ export class CreatepropertyTypesComponent implements OnInit {
   editMode: boolean;
   id: string;
   button: string;
+  titulo: string;
 
   constructor(private _activated: ActivatedRoute,
     private _apiService: ApiService,
@@ -40,7 +41,8 @@ export class CreatepropertyTypesComponent implements OnInit {
     private fb: FormBuilder) {
       this.editMode = false;
       this.id = "";
-      this.button = "Crear"
+      this.button = "Crear";
+      this.titulo = "Crear Tipo de Propiedad";
       this.formPropertyType = this.fb.group({
         name: ['', [Validators.required] ],
       });
@@ -52,6 +54,7 @@ export class CreatepropertyTypesComponent implements OnInit {
           if (this.id != "") {
             this.editMode = true;
             this.button = "Editar";
+            this.titulo = "Editar Tipo de Propiedad";
             this.getPropertyType();
           }
         });

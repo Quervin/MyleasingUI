@@ -5,18 +5,66 @@ import { ApiService } from 'src/app/services/api.service';
 import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import Swal from 'sweetalert2';
 import { PropertyResponse } from '../../models/propertyResponse';
+import { OwnerResponse } from '../../models/ownerResponse';
+import { UserResponse } from 'src/app/models/userResponse';
+import { PropertyTypeResponse } from '../../models/propertyTypeResponse';
 
 @Component({
   selector: 'app-details-property',
-  templateUrl: './details-property.component.html',
+  templateUrl: './detailsProperties.component.html',
   styles: [
   ]
 })
 export class DetailsPropertyComponent implements OnInit {
 
   //property = <PropertyResponse>{};
-  showDetail: boolean;
-  property = {} as PropertyResponse;
+  //property = {} as PropertyResponse;
+
+  user : UserResponse = {
+    id: "",
+    document: "",
+    address: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    fullName: "",
+    fullNameWithDocument: "",
+    phone: ""
+  };
+  
+  owner: OwnerResponse = {
+    id: 0,
+    user: this.user,
+    properties: [],
+    contracts: []
+  }
+
+  propertyType: PropertyTypeResponse = {
+    id: 0,
+    name: "",
+    properties: []
+  }
+
+  property: PropertyResponse = {
+    id: 0,
+    neighborhood: "",
+    isAvailable: false,
+    latitude: 0,
+    longitude: 0,
+    price: 0,
+    address : "",
+    firstImage: "",
+    remarks: "",
+    stratum: 0,
+    rooms: 0,
+    hasParkingLot: false,
+    squareMeters: 0,
+    owner: this.owner,
+    propertyType: this.propertyType,
+    contracts: [],
+    propertyImages: [],
+  };
+
   showProperties: boolean;
   id: string = "";
   currentPage: number;
@@ -26,7 +74,6 @@ export class DetailsPropertyComponent implements OnInit {
     private _myleasing: MyleasingService,
     private _router: Router) { 
       this.currentPage = 1;
-      this.showDetail = false;
       this.showProperties = false;
       this._activated.params.subscribe( params => {
         this.id = params['id'];
@@ -53,7 +100,6 @@ export class DetailsPropertyComponent implements OnInit {
     subscribe((res : ResponseRequest) => {
       if ( res.isSuccess == true) {
         this.property = res.result;
-        this.showDetail = true;
         this._myleasing.setLoading(false);
       } else {
         this._myleasing.setLoading(false);
@@ -78,8 +124,6 @@ export class DetailsPropertyComponent implements OnInit {
     subscribe((res : ResponseRequest) => {
       if ( res.isSuccess == true) {
         this.property = res.result;
-        this.showDetail = true;
-        console.log(this.property);
         this._myleasing.setLoading(false);
       } else {
         this._myleasing.setLoading(false);

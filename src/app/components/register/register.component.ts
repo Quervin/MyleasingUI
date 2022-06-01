@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   selectedCount_month= {} as SelectItem;
 
   userRequest : AddUserRequest = {
+    Id: 0,
     Email: "",
     Document: "",
     FirstName: "",
@@ -150,7 +151,7 @@ export class RegisterComponent implements OnInit {
       Swal.fire({
         icon: 'info',
         title: 'Oops...',
-        text: "La contraseña y el confirmar contraseña deben de ser iguales"
+        text: "La contraseña y el confirmar contraseña deben de ser iguales."
       })
       return;
     }

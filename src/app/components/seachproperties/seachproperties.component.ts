@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seach-properties',
-  templateUrl: './seach-properties.component.html',
+  templateUrl: './seachproperties.component.html',
   styles: [
   ]
 })

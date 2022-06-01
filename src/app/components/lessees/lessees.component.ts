@@ -19,6 +19,8 @@ export class LesseesComponent implements OnInit {
   pageItems: number;
   total: number;
   page: number;
+  lesseeId: number;
+
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) { 
@@ -27,6 +29,7 @@ export class LesseesComponent implements OnInit {
     this.total = 0;
     this.pageItems = 5;
     this.page = 1;
+    this.lesseeId = 0;
     if (this._myleasing.validateToken()) {
       this.logOut();
     } else {
@@ -64,7 +67,7 @@ export class LesseesComponent implements OnInit {
   }
 
   gotoCreateLessee() {
-    this._router.navigateByUrl('lessees/createLessees');
+    this._router.navigateByUrl('lessees/createLessee');
   }
 
   gotoEditLessee(id: number) {
@@ -72,7 +75,7 @@ export class LesseesComponent implements OnInit {
   }
 
   gotoDetailsLessee(id: number) {
-    this._router.navigate([ 'lessees/detailsLessees', id ]);
+    this._router.navigate([ 'lessees/detailsLessee', id ]);
   }
 
   getPage(pageNum : number){
@@ -85,6 +88,43 @@ export class LesseesComponent implements OnInit {
     }
 
     this.getLessees();
+  }
+
+  showModal(id: number) {
+    this.lesseeId = id;
+  }
+
+  delete() {
+    this._myleasing.setLoading(true);
+    this._apiService.getQuery(`Lessees/DeleteWeb/${this.lesseeId}`).
+    subscribe((res : ResponseRequest) => {
+      if ( res.isSuccess == true) {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'success',
+          title: 'Resultado con Exitó',
+          showConfirmButton: false,
+          timer: 2000,
+          text: res.message
+        }
+        )
+        this.getPage(1);
+      } else {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: res.message
+        })
+      }
+    }, error => {
+      this._myleasing.setLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Ha ocurrido un error"
+      })
+    });
   }
 
   logOut() {

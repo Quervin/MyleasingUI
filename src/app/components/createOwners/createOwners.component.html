@@ -5,7 +5,7 @@
             </h2>
             <br/>
             <div>
-                <form autocomplete="off" [formGroup]="formLessee" (ngSubmit)=" editMode == true ? edit() : create()">
+                <form autocomplete="off" [formGroup]="formOwner" (ngSubmit)=" editMode == true ? edit() : create()">
                     <div class="grid p-fluid">
                         <div class="col-12 md:col-6">
                             <div class="form-group mb-3" *ngIf="editMode == false">

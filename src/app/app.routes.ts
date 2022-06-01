@@ -7,18 +7,22 @@ import { RegisterComponent } from './components/register/register.component';
 import { AboutComponent } from './components/about/about.component';
 import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
 import { ManagersComponent } from './components/managers/managers.component';
-import { CreatemanagersComponent } from './components/createmanagers/createmanagers.component';
+import { CreatemanagersComponent } from './components/createManagers/createManagers.component';
 import { UserComponent } from './components/shared/user/user.component';
 import { OwnersComponent } from './components/owners/owners.component';
 import { LesseesComponent } from './components/lessees/lessees.component';
 import { ContractsComponent } from './components/contracts/contracts.component';
 import { PropertiesComponent } from './components/properties/properties.component';
-import { DetailsPropertyComponent } from './components/details-property/details-property.component';
-import { PropertyTypesComponent } from './components/property-types/property-types.component';
-import { CreatepropertyTypesComponent } from './components/createproperty-types/createproperty-types.component';
-import { DetailspropertytypesComponent } from './components/detailspropertytypes/detailspropertytypes.component';
-import { SeachPropertiesComponent } from './components/seach-properties/seach-properties.component';
-import { CreatelessesComponent } from './components/createlesses/createlesses.component';
+import { DetailsPropertyComponent } from './components/detailsProperties/detailsProperties.component';
+import { PropertyTypesComponent } from './components/propertytypes/propertytypes.component';
+import { CreatepropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
+import { DetailspropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
+import { SeachPropertiesComponent } from './components/seachproperties/seachproperties.component';
+import { CreatelessesComponent } from './components/createLesses/createLesses.component';
+import { DetailslessesComponent } from './components/detailsLesses/detailsLesses.component';
+import { DetailsmanagerComponent } from './components/detailsManagers/detailsManagers.component';
+import { CreateownersComponent } from './components/createOwners/createOwners.component';
+import { DetailsownersComponent } from './components/detailsOwners/detailsOwners.component';
 
 
 export const ROUTES: Routes = [
@@ -27,10 +31,17 @@ export const ROUTES: Routes = [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'user', component: UserComponent },
         { path: 'managers', component: ManagersComponent, },
-        { path: 'managers/createManagers', component: CreatemanagersComponent },
+        { path: 'managers/createManager', component: CreatemanagersComponent },
+        { path: 'managers/editManager/:id', component: CreatemanagersComponent },
+        { path: 'managers/detailsManager/:id', component: DetailsmanagerComponent },
         { path: 'owners', component: OwnersComponent },
+        { path: 'owners/createOwner', component: CreateownersComponent },
+        { path: 'owners/editOwner/:id', component: CreateownersComponent },
+        { path: 'owners/detailsOwner/:id', component: DetailsownersComponent },
         { path: 'lessees', component: LesseesComponent },
+        { path: 'lessees/createLessee', component: CreatelessesComponent },
         { path: 'lessees/editLessee/:id', component: CreatelessesComponent },
+        { path: 'lessees/detailsLessee/:id', component: DetailslessesComponent },
         { path: 'properties', component: PropertiesComponent },
         { path: 'properties/detailsProperty/:id', component: DetailsPropertyComponent },
         { path: 'propertyTypes', component: PropertyTypesComponent },

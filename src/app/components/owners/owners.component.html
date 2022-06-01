@@ -3,7 +3,7 @@
         <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>Owners</span>
         </h2>
         <p>
-            <a class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
+            <a (click)="gotoCreateOwner()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
         </p>
         <br/>
         <table class="table" *ngIf="listOwners.length != 0">
@@ -31,9 +31,9 @@
                     <td>{{owner.properties.length}}</td>
                     <td>{{owner.contracts.length}}</td>
                     <td>
-                        <a class="btn btn-primary" (click)="editarOwner(owner.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default" (click)="editarOwner(owner.id)"><i class="fas fa-list"></i></a>
-                        <a class="btn btn-danger" (click)="editarOwner(owner.id)"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-primary mb-1" (click)="gotoEditOwner(owner.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-default mb-1" (click)="gotoDetailsOwner(owner.id)"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-danger mb-1"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>

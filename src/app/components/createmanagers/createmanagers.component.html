@@ -1,14 +1,64 @@
 <div class="container">
     <div class="card">
-        <form autocomplete="off" [formGroup]="formPropertyType" (ngSubmit)="create()">
-            <div class="form-group mb-3">
-                <label>Nombre TIpo de Propiedad</label>
-                <input type="text" formControlName="name" placeholder="nombre tipo de propiedad" class="p-inputtext" />
-                <small *ngIf="nameInvalid" class="form-text text-danger">El campo nombre TIpo de Propiedad es Obligatorio</small>
+        <div>
+            <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>{{titulo}}</span>
+            </h2>
+            <br/>
+            <div>
+                <form autocomplete="off" [formGroup]="formManager" (ngSubmit)=" editMode == true ? edit() : create()">
+                    <div class="grid p-fluid">
+                        <div class="col-12 md:col-6">
+                            <div class="form-group mb-3" *ngIf="editMode == false">
+                                <label>Correo Electónico</label>
+                                <input type="text" formControlName="email" placeholder="correo electrónico" class="p-inputtext" />
+                                <small *ngIf="emailInvalid" class="form-text text-danger">El campo correo electrónico es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Documento</label>
+                                <input type="text" formControlName="document" placeholder="documento" class="p-inputtext" />
+                                <small *ngIf="documentInvalid" class="form-text text-danger">El campo documento es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Nombre</label>
+                                <input type="text" formControlName="firstName" placeholder="primer nombre" class="p-inputtext" />
+                                <small *ngIf="firstNameInvalid" class="form-text text-danger">El campo nombre es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Apellidos</label>
+                                <input type="text" formControlName="lastName" placeholder="segúndo nombre" class="p-inputtext" />
+                                <small *ngIf="lastNameInvalid" class="form-text text-danger">El campo apellidos es Obligatorio</small>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="form-group mb-3">
+                                <label>Dirrección</label>
+                                <input type="text" formControlName="address" placeholder="dirrección" class="p-inputtext" />
+                                <small *ngIf="addressInvalid" class="form-text text-danger">El campo dirrección es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Teléfono</label>
+                                <input type="text" formControlName="phone" placeholder="teléfono" class="p-inputtext" />
+                                <small *ngIf="phoneInvalid" class="form-text text-danger">El campo teléfono es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3" *ngIf="editMode == false">
+                                <label>Contraseña</label>
+                                <input [type]="type1" formControlName="password" placeholder="contraseña" class="p-inputtext" />
+                                <i [title]="title1" [ngClass]="iconClass1" class="field-icon" (click)="mostrarPassword(1)"></i>
+                                <small *ngIf="passwordInvalid" class="form-text text-danger">El campo contraseña es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3" *ngIf="editMode == false">
+                                <label>Confirmación de Contraseña</label>
+                                <input [type]="type2" formControlName="confirmpassword" placeholder="confirmación de contraseña" class="p-inputtext" />
+                                <i [title]="title2" [ngClass]="iconClass2" class="field-icon" (click)="mostrarPassword(2)"></i>
+                                <small *ngIf="confirmpasswordInvalid" class="form-text text-danger">El campo confirmación de contraseña es Obligatorio</small>
+                            </div>
+                        </div>
+                        <div class="form-group d-grid gap-2 offset-md-6 col-6">
+                            <button type="submit" class="btn btn-primary p-button-label w-full p-3 text-xl">{{button}}</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group d-grid gap-2">
-                <button type="submit" class="btn btn-primary p-button-label w-full p-3 text-xl">Crear</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>

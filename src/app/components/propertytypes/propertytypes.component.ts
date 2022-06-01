@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-property-types',
-  templateUrl: './property-types.component.html',
+  templateUrl: './propertytypes.component.html',
   styles: [
   ]
 })

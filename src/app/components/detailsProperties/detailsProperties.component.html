@@ -3,7 +3,7 @@
         <div>
             <h2>Detalles de la Propiedad: {{property.id}}</h2>
             <br/>
-            <div class="grid p-fluid" *ngIf="showDetail">
+            <div class="grid p-fluid">
                 <div class="col-12 md:col-6">
                     <p><strong>Tipo de Propiedad:</strong> {{property.propertyType.name }}</p>
                     <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
@@ -39,7 +39,7 @@
     <div class="card">
         <h2>Detalles de la Propiedad: {{property.id}}</h2>
         <br/>
-        <div class="grid p-fluid" *ngIf="showDetail">
+        <div class="grid p-fluid">
             <div class="col-12 md:col-6">
                 <h5><strong>Ownwer:</strong></h5>
                 <p><strong>Docuemnto:</strong> {{property.owner.user.document}}</p>
@@ -60,7 +60,7 @@
         </div>
         <hr>
         <br>
-        <div class="grid p-fluid" *ngIf="showDetail">
+        <div class="grid p-fluid">
             <div class="col-12" *ngIf="property.contracts.length != 0">
                 <h5><strong>Contratos:</strong></h5>
                 <table class="table">

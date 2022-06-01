@@ -21,9 +21,9 @@
                     <td>{{propertyType.name}}</td>
                     <td>{{propertyType.properties.length}}</td>
                     <td>
-                        <a class="btn btn-primary" (click)="gotoEditPropertyType(propertyType.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default" (click)="gotoDetailsPropertyType(propertyType.id)"><i class="fas fa-list"></i></a>
-                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(propertyType.id)"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-primary mb-1" (click)="gotoEditPropertyType(propertyType.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-default mb-1" (click)="gotoDetailsPropertyType(propertyType.id)"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(propertyType.id)"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -42,7 +42,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>¿Realmente quiere eliminar esta propiedad?</p>
+                    <p>¿Realmente quiere eliminar este tipo de propiedad?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

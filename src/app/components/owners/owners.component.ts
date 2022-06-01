@@ -63,8 +63,16 @@ export class OwnersComponent implements OnInit {
     });
   }
 
-  editarOwner(id: number) {
-    this._router.navigate([ '/detailProperty', id ]);
+  gotoCreateOwner() {
+    this._router.navigateByUrl('owners/createOwner');
+  }
+
+  gotoEditOwner(id: number) {
+    this._router.navigate([ 'owners/editOwner/', id ]);
+  }
+
+  gotoDetailsOwner(id: number) {
+    this._router.navigate([ 'owners/detailsOwner', id ]);
   }
 
   getPage(pageNum : number){

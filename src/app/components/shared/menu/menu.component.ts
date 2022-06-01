@@ -6,7 +6,6 @@ import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import Swal from 'sweetalert2';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { UserRequest } from '../../../models/userRequest';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
@@ -39,12 +38,10 @@ export class MenuComponent implements OnInit {
   
   constructor(public home: HomeComponent,
     private _apiService: ApiService,
-    private _myleasing: MyleasingService,
-    private fb: FormBuilder) { 
+    private _myleasing: MyleasingService) { 
     this.model = [];
     this.items = this.setMenu();
     this.getUser();
-    
   }
 
   ngOnInit(): void {
