@@ -63,7 +63,7 @@ export class PropertiesComponent implements OnInit {
     });
   }
 
-  detailsProperty(id: number) {
+  gotoDetailsProperty(id: number) {
     this._router.navigate([ 'properties/detailsProperty', id ]);
   }
 

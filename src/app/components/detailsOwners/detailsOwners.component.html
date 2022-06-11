@@ -1,1 +1,75 @@
-<p>detailsowners works!</p>
+<div class="container">
+    <div class="card table-responsive">
+        <h2>Detalle del Owner: {{ownerResponse.id}}</h2>
+        <a (click)="gotoOwner()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+        <br/>
+        <div>
+            <p><strong>Docuemnto:</strong> {{ownerResponse.user.document}}</p>
+            <p><strong>Nombre:</strong> {{ownerResponse.user.firstName}}</p>
+            <p><strong>Apellido:</strong> {{ownerResponse.user.lastName}}</p>
+            <p><strong>Correo Electrónico:</strong> {{ownerResponse.user.email}}</p>
+            <p><strong>Correo Electrónico:</strong> {{ownerResponse.user.address}}</p>
+            <p><strong>Teléfono:</strong> {{ownerResponse.user.phone}}</p>
+        </div>
+        <hr>
+        <br>
+        <div *ngIf="ownerResponse.properties.length == 0">
+            <h5>No hay propiedades agregadas todavía.</h5>
+        </div>
+        <div *ngIf="ownerResponse.properties.length != 0">
+            <h5><strong>Propiedades:</strong></h5>
+            <table class="table">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">#</th>
+                        <th scope="col">Vecindario</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Metros Cuadrados</th>
+                        <th scope="col">Cuartos</th>
+                        <th scope="col">Esta Disponible</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center" *ngFor="let property of ownerResponse.properties | paginate: { id: 'server', itemsPerPage: 5, currentPage: currentPage, totalItems: ownerResponse.properties.length }; index as i; ">
+                        <th>{{i + 1}}</th>
+                        <td>{{property.neighborhood}}</td>
+                        <td>{{property.address}}</td>
+                        <td>{{property.price}}</td>
+                        <td>{{property.squareMeters}}</td>
+                        <td>{{property.rooms}}</td>
+                        <td>{{property.isAvailable == true ? 'Si' : 'No'}}</td>
+                        <td>
+                            <a class="btn btn-success mb-1 mr-1" (click)="gotoEditProperty(property.id)"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-primary mb-1 mr-1" (click)="gotoDetailsProperty(property.id)"><i class="fas fa-list"></i></a>
+                            <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(property.id)"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <pagination-controls (pageChange)="currentPage = $event" id="server"></pagination-controls>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteLabel">Mensaje de Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Realmente quiere eliminar este owner?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class CreatemanagersComponent implements OnInit {
+export class CreateManagersComponent implements OnInit {
 
   showPassword1: boolean;
   title1: string;
@@ -115,6 +115,10 @@ export class CreatemanagersComponent implements OnInit {
     }
 
   ngOnInit(): void {
+  }
+
+  gotoManager() {
+    this._router.navigateByUrl('managers');
   }
 
   get emailInvalid() {

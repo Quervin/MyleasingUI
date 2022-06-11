@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class CreateownersComponent implements OnInit {
+export class CreateOwnersComponent implements OnInit {
 
   showPassword1: boolean;
   title1: string;
@@ -116,6 +116,10 @@ export class CreateownersComponent implements OnInit {
     }
 
   ngOnInit(): void {
+  }
+
+  gotoOwner() {
+    this._router.navigateByUrl('owners');
   }
 
   get emailInvalid() {

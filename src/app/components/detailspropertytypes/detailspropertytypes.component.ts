@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class DetailspropertytypesComponent implements OnInit {
+export class DetailsPropertytypesComponent implements OnInit {
 
   propertyTypeResponse: PropertyTypeResponse = {
     id: 0,
@@ -41,6 +41,10 @@ export class DetailspropertytypesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  gotoPropertyType() {
+    this._router.navigateByUrl('propertyTypes');
+  }
+  
   getDetailsPropertyType () {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`PropertyTypes/DetailsPropertiesTypeWeb/${this.id}`).

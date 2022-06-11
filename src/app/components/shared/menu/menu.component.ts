@@ -78,29 +78,29 @@ export class MenuComponent implements OnInit {
   setMenu() {
     if (this._myleasing.getRol() == "Manager") {
       this.items =  [
-        {label: 'Dashboard',icon: 'pi pi-fw pi-home', routerLink: ['/dashboard']},
-        {label: 'Managers', icon: 'pi pi-fw pi-id-card', routerLink: ['/managers']},
-        {label: 'Owners', icon: 'pi pi-fw pi-id-card', routerLink: ['/owners']},
-        {label: 'Lessees', icon: 'pi pi-fw pi-id-card', routerLink: ['/lessees']},
-        {label: 'Properties', icon: 'pi pi-fw pi-id-card', routerLink: ['/properties']},
-        {label: 'PropertyTypes', icon: 'pi pi-fw pi-id-card', routerLink: ['/propertyTypes']},
+        {label: 'Dashboard',icon: 'pi pi_back pi-fw pi-home', routerLink: ['/dashboard']},
+        {label: 'Managers', icon: 'pi pi_back pi-fw pi-users', routerLink: ['/managers']},
+        {label: 'Owners', icon: 'pi pi_back pi-fw pi-users', routerLink: ['/owners']},
+        {label: 'Lessees', icon: 'pi pi_back pi-fw pi-users', routerLink: ['/lessees']},
+        {label: 'Properties', icon: 'pi pi_back pi-fw pi-box', routerLink: ['/properties']},
+        {label: 'PropertyTypes', icon: 'pi pi_back pi-fw pi-briefcase', routerLink: ['/propertyTypes']},
       ]
     }
 
     if (this._myleasing.getRol() == "Owner") {
       this.items =  [
-        {label: 'Dashboard',icon: 'pi pi-fw pi-home', routerLink: ['/dashboard']},
-        {label: 'SeachProperties', icon: 'pi pi-fw pi-id-card', routerLink: ['/seachProperties']},
-        {label: 'MyProperties', icon: 'pi pi-fw pi-id-card', routerLink: ['/properties']},
-        {label: 'MyContracts', icon: 'pi pi-fw pi-id-card', routerLink: ['/contracts']},
+        {label: 'Dashboard',icon: 'pi pi_back pi-fw pi-home', routerLink: ['/dashboard']},
+        {label: 'SeachProperties', icon: 'pi pi_back pi-fw pi-search', routerLink: ['/seachProperties']},
+        {label: 'MyProperties', icon: 'pi pi_back pi-fw pi-box', routerLink: ['/properties']},
+        {label: 'MyContracts', icon: 'pi pi_back pi-fw pi-building', routerLink: ['/contracts']},
       ]
     }
 
     if (this._myleasing.getRol() == "Lessee") {
       this.items =  [
-        {label: 'Dashboard',icon: 'pi pi-fw pi-home', routerLink: ['/dashboard']},
-        {label: 'SeachProperties', icon: 'pi pi-fw pi-id-card', routerLink: ['/seachProperties']},
-        {label: 'MyContracts', icon: 'pi pi-fw pi-id-card', routerLink: ['/contracts']},
+        {label: 'Dashboard',icon: 'pi pi_back pi-fw pi-home', routerLink: ['/dashboard']},
+        {label: 'SeachProperties', icon: 'pi pi_back pi-fw pi-search', routerLink: ['/seachProperties']},
+        {label: 'MyContracts', icon: 'pi pi_back pi-fw pi-building', routerLink: ['/contracts']},
       ]
     }
 

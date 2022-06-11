@@ -1,12 +1,14 @@
 <div class="container">
-    <div class="card">
-        <h2>Detalles del Manager: {{managerResponse.id}}</h2>
+    <div class="card table-responsive">
+        <h2>Detalle del Manager: {{managerResponse.id}}</h2>
+        <a (click)="gotoManager()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
         <br/>
         <div>
             <p><strong>Docuemnto:</strong> {{managerResponse.user.document}}</p>
             <p><strong>Nombre:</strong> {{managerResponse.user.firstName}}</p>
             <p><strong>Apellido:</strong> {{managerResponse.user.lastName}}</p>
             <p><strong>Correo Electrónico:</strong> {{managerResponse.user.email}}</p>
+            <p><strong>Correo Electrónico:</strong> {{managerResponse.user.address}}</p>
             <p><strong>Teléfono:</strong> {{managerResponse.user.phone}}</p>
         </div>
     </div>

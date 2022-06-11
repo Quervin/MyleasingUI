@@ -31,15 +31,34 @@
                     <td>{{owner.properties.length}}</td>
                     <td>{{owner.contracts.length}}</td>
                     <td>
-                        <a class="btn btn-primary mb-1" (click)="gotoEditOwner(owner.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default mb-1" (click)="gotoDetailsOwner(owner.id)"><i class="fas fa-list"></i></a>
-                        <a class="btn btn-danger mb-1"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-success mb-1 mr-1" (click)="gotoEditOwner(owner.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-primary mb-1 mr-1" (click)="gotoDetailsOwner(owner.id)"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(owner.id)"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="text-center" *ngIf="listOwners.length != 0">
             <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDeleteLabel">Mensaje de Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Realmente quiere eliminar este owner?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Eliminar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

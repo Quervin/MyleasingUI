@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBase: 'https://myleasinghidalgo.azurewebsites.net/'
+  urlBase: 'https://localhost:44353/'
 };
 
 /*

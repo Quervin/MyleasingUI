@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class CreatepropertyTypesComponent implements OnInit {
+export class CreatePropertyTypesComponent implements OnInit {
 
   formPropertyType: FormGroup;
 
@@ -62,6 +62,10 @@ export class CreatepropertyTypesComponent implements OnInit {
      }
 
   ngOnInit(): void {
+  }
+
+  gotoPropertyType() {
+    this._router.navigateByUrl('propertyTypes');
   }
 
   get nameInvalid() {

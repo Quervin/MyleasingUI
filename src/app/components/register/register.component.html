@@ -41,7 +41,7 @@
                         <div class="form-group mb-3">
                             <label>Registrar como</label>
                             <div>
-                                <p-dropdown [options]="count_month" formControlName="roleId" placeholder="Seleccionar un Rol" [showClear]="true"></p-dropdown>
+                                <p-dropdown [options]="roles" formControlName="roleId" placeholder="Seleccionar un Rol" [showClear]="true"></p-dropdown>
                                 <small *ngIf="roleIdValido" class="form-text text-danger">El campo Resgistrar como es Obligatorio</small>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class DetailsmanagerComponent implements OnInit {
+export class DetailsManagerComponent implements OnInit {
 
   user : UserResponse = {
     id: "",
@@ -50,6 +50,10 @@ export class DetailsmanagerComponent implements OnInit {
     }
 
   ngOnInit(): void {
+  }
+
+  gotoManager() {
+    this._router.navigateByUrl('managers');
   }
 
   getDetailsManager() {

@@ -3,6 +3,7 @@
         <div>
             <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>{{titulo}}</span>
             </h2>
+            <a (click)="gotoManager()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
             <br/>
             <div>
                 <form autocomplete="off" [formGroup]="formManager" (ngSubmit)=" editMode == true ? edit() : create()">

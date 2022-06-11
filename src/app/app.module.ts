@@ -116,21 +116,23 @@ import { MenuitemComponent } from './components/shared/menuitem/menuitem.compone
 import { MenuService } from './services/app.menu.service';
 import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
 import { ManagersComponent } from './components/managers/managers.component';
+import { CreateManagersComponent } from './components/createManagers/createManagers.component';
+import { DetailsManagerComponent } from './components/detailsManagers/detailsManagers.component';
 import { OwnersComponent } from './components/owners/owners.component';
+import { CreateOwnersComponent } from './components/createOwners/createOwners.component';
+import { DetailsOwnersComponent } from './components/detailsOwners/detailsOwners.component';
 import { LesseesComponent } from './components/lessees/lessees.component';
+import { CreateLessesComponent } from './components/createLesses/createLesses.component';
+import { DetailsLessesComponent } from './components/detailsLesses/detailsLesses.component';
 import { PropertiesComponent } from './components/properties/properties.component';
 import { PropertyTypesComponent } from './components/propertytypes/propertytypes.component';
+import { CreatePropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
+import { DetailsPropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
 import { SeachPropertiesComponent } from './components/seachproperties/seachproperties.component';
 import { ContractsComponent } from './components/contracts/contracts.component';
+import { DetailsContractComponent } from './components/detailsContract/detailsContract.component';
+import { CreateContractComponent } from './components/createContract/createContract.component';
 import { UserComponent } from './components/shared/user/user.component';
-import { CreatepropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
-import { CreatemanagersComponent } from './components/createManagers/createManagers.component';
-import { DetailspropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
-import { CreatelessesComponent } from './components/createLesses/createLesses.component';
-import { DetailslessesComponent } from './components/detailsLesses/detailsLesses.component';
-import { DetailsmanagerComponent } from './components/detailsManagers/detailsManagers.component';
-import { CreateownersComponent } from './components/createOwners/createOwners.component';
-import { DetailsownersComponent } from './components/detailsOwners/detailsOwners.component';
 
 @NgModule({
   declarations: [
@@ -156,14 +158,16 @@ import { DetailsownersComponent } from './components/detailsOwners/detailsOwners
     SeachPropertiesComponent,
     ContractsComponent,
     UserComponent,
-    CreatepropertyTypesComponent,
-    CreatemanagersComponent,
-    DetailspropertytypesComponent,
-    CreatelessesComponent,
-    DetailslessesComponent,
-    DetailsmanagerComponent,
-    CreateownersComponent,
-    DetailsownersComponent
+    CreatePropertyTypesComponent,
+    CreateManagersComponent,
+    DetailsPropertytypesComponent,
+    CreateLessesComponent,
+    DetailsLessesComponent,
+    DetailsManagerComponent,
+    CreateOwnersComponent,
+    DetailsOwnersComponent,
+    DetailsContractComponent,
+    CreateContractComponent,
   ],
   imports: [
     BrowserModule,

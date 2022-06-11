@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="card table-responsive">
+        <h2>Detalle del Contrato: {{contractResponse.id}}</h2>
+        <a (click)="gotoDetailsLessee()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+        <br/>
+        <div>
+            <p><strong>Owner:</strong> {{contractResponse.owner.user.fullNameWithDocument}}</p>
+            <p><strong>Lessee:</strong> {{contractResponse.lessee.user.fullNameWithDocument}}</p>
+            <p><strong>Tipo de Propiedad:</strong> {{contractResponse.property.propertyType.name}}</p>
+            <p><strong>Vecindario:</strong> {{contractResponse.property.neighborhood}}</p>
+            <p><strong>Dirección:</strong> {{contractResponse.property.address}}</p>
+            <p><strong>Comentarios:</strong> {{contractResponse.remarks}}</p>
+            <p><strong>Precio:</strong> {{contractResponse.price}}</p>
+            <p><strong>Fecha Inicio:</strong> {{contractResponse.startDate}}</p>
+            <p><strong>Fecha Final:</strong> {{contractResponse.endDate}}</p>
+            <p><strong>Esta Activo:</strong> {{contractResponse.isActive == true ? 'Si' : 'No'}}</p>
+        </div>
+    </div>
+</div>

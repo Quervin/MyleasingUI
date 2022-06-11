@@ -1,6 +1,7 @@
 <div class="container">
-    <div class="card">
-        <h2>Detalles del Lessee: {{lesseeResponse.id}}</h2>
+    <div class="card table-responsive">
+        <h2>Detalle del Lessee: {{lesseeResponse.id}}</h2>
+        <a (click)="gotoLessee()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
         <br/>
         <div>
             <p><strong>Docuemnto:</strong> {{lesseeResponse.user.document}}</p>
@@ -11,7 +12,10 @@
         </div>
         <hr>
         <br>
-        <div class="col-12" *ngIf="lesseeResponse.contracts.length != 0">
+        <div *ngIf="lesseeResponse.contracts.length == 0">
+            <h5>No hay contratos agregados todavía.</h5>
+        </div>
+        <div *ngIf="lesseeResponse.contracts.length != 0">
             <h5><strong>Contratos:</strong></h5>
             <table class="table">
                 <thead>
@@ -36,15 +40,34 @@
                         <td>{{contract.endDate}}</td>
                         <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
                         <td>
-                            <a class="btn btn-warning mb-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-primary mb-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>
-                            <a class="btn btn-danger mb-1"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-success mb-1 mr-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-primary mb-1 mr-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>
+                            <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(contract.id)"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="text-center">
                 <pagination-controls (pageChange)="currentPage = $event" id="server"></pagination-controls>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalDelete" tabindex="-1" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteLabel">Mensaje de Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Realmente quiere eliminar este contrato?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Eliminar</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

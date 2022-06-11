@@ -29,9 +29,9 @@
                     <td>{{manager.user.email}}</td>
                     <td>{{manager.user.phone}}</td>
                     <td>
-                        <a class="btn btn-primary mb-1" (click)="gotoEditManager(manager.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-default mb-1" (click)="gotoDetailsManager(manager.id)"><i class="fas fa-list"></i></a>
-                        <a class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(manager.id)"><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-success mb-1 mr-1" (click)="gotoEditManager(manager.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-primary mb-1 mr-1" (click)="gotoDetailsManager(manager.id)"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(manager.id)"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>

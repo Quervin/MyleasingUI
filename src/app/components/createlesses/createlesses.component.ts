@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   styles: [
   ]
 })
-export class CreatelessesComponent implements OnInit {
+export class CreateLessesComponent implements OnInit {
 
   showPassword1: boolean;
   title1: string;
@@ -118,6 +118,10 @@ export class CreatelessesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  gotoLessee() {
+    this._router.navigateByUrl('lessees');
+  }
+  
   get emailInvalid() {
     return this.formLessee.get('email')?.invalid && this.formLessee.get('email')?.touched;
   }

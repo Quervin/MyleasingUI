@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="card">
+        <div>
+            <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>{{titulo}}</span>
+            </h2>
+            <a (click)="gotoDetailsLessee()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+            <br/>
+            <div>
+                <form autocomplete="off" [formGroup]="formContract" (ngSubmit)=" editMode == true ? edit() : create()">
+                    <div class="grid p-fluid">
+                        <div class="col-12 md:col-6">
+                            <div class="form-group mb-3" *ngIf="editMode == true">
+                                <label>Lessee</label>
+                                <p-dropdown [options]="lessees" formControlName="lesseeId" placeholder="Seleccionar un lessee" [showClear]="true"></p-dropdown>
+                                <small *ngIf="lesseeInvalid" class="form-text text-danger">El campo lessee es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Comentarios</label>
+                                <textarea formControlName="remarks" rows="6" placeholder="comentarios" class="p-inputtext"></textarea>
+                                <small *ngIf="remarksInvalid" class="form-text text-danger">El campo comentarios es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Precio</label>
+                                <input type="text" formControlName="price" placeholder="precio" class="p-inputtext" />
+                                <small *ngIf="priceInvalid" class="form-text text-danger">El campo precio es Obligatorio</small>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="form-group mb-3">
+                                <label>Fecha Inicio</label>
+                                <input type="date" formControlName="starDate" class="p-inputtext" />
+                                <small *ngIf="starDateInvalid" class="form-text text-danger">El campo fecha inicio es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Fecha Inicial</label>
+                                <input type="date" formControlName="endDate" placeholder="teléfono" class="p-inputtext" />
+                                <small *ngIf="endDateInvalid" class="form-text text-danger">El campo fecha final es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="field-checkbox mr-0">
+                                    <input type="checkbox" formControlName="isActive" class="p-checkbox" />
+                                    <label>Esta Activo</label>
+                                </div>
+                                <small *ngIf="isActiveInvalid" class="form-text text-danger">El campo esta activo es Obligatorio</small>
+                            </div>
+                        </div>
+                        <div class="form-group d-grid gap-2 offset-md-6 col-6">
+                            <button type="submit" class="btn btn-primary p-button-label w-full p-3 text-xl">{{button}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

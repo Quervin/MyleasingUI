@@ -24,8 +24,16 @@ export class RegisterComponent implements OnInit {
   type2: string;
   iconClass2: string;
   formRegister: FormGroup;
-  count_month: SelectItem[];
-  selectedCount_month= {} as SelectItem;
+  roles: SelectItem[];
+  // selectedRol: SelectItem = {
+  //   label: "",
+  //   disabled: false,
+  //   value: "",
+  //   icon: "",
+  //   styleClass: "",
+  //   title: ""
+  // }
+  // selectedCount_month= {} as SelectItem;
 
   userRequest : AddUserRequest = {
     Id: 0,
@@ -50,7 +58,7 @@ export class RegisterComponent implements OnInit {
       this.title2 = "Mostrar contraseña";
       this.type2 = "password";
       this.iconClass2 = "fa fa-eye-slash";
-      this.count_month = [
+      this.roles = [
         {label: 'Lessee', value: "1"},
         {label: 'Owner 2', value: "2"}
       ];

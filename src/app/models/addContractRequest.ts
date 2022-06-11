@@ -1,0 +1,22 @@
+export class AddContractRequest {
+    constructor(public Id : number,
+        public Price: number,
+        public Remarks: string,
+        public StartDate: string,
+        public EndDate: string,
+        public IsActive: boolean,
+        public PropertyTypeId: number,
+        public LesseeId: number,
+        public OwnerId: number,
+        ) {
+            this.Id = Id;
+            this.Price = Price;
+            this.Remarks = Remarks;
+            this.StartDate = StartDate;
+            this.EndDate = EndDate;
+            this.IsActive = IsActive;
+            this.PropertyTypeId = PropertyTypeId;
+            this.LesseeId = LesseeId;
+            this.OwnerId = OwnerId;
+        }
+}

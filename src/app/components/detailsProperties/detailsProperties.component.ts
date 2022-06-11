@@ -95,6 +95,10 @@ export class DetailsPropertyComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  gotoProperty() {
+    this._router.navigateByUrl('properties');
+  }
+  
   getProperty() {
     this._apiService.getLogin(`Properties/GetPropertyWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {

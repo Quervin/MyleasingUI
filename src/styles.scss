@@ -26,6 +26,22 @@
     cursor: pointer;
 }
 
+.go_back {
+    margin: 0;
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    text-align: right;
+}
+
+.pi_back {
+    font-size: 2rem;
+}
+
+textarea {
+    resize: none;
+}
+
 
 /* about */
 
