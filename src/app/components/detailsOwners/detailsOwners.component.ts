@@ -89,6 +89,10 @@ export class DetailsOwnersComponent implements OnInit {
 
   gotoEditProperty(id: number) {
     this._router.navigate([ 'owners/editProperty', id ]);
+ 
+  }
+  gotoCreateProperty() {
+    this._router.navigate([ 'owners/createProperty', this.id ]);
   }
 
   gotoDetailsProperty(id: number) {

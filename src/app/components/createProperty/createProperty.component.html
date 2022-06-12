@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="card">
+        <div>
+            <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>{{titulo}}</span>
+            </h2>
+            <a (click)="gotoDetailsOwner()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+            <br/>
+            <div>
+                <form autocomplete="off" [formGroup]="formProperty" (ngSubmit)=" editMode == true ? edit() : create()">
+                    <div class="grid p-fluid">
+                        <div class="col-12 md:col-6">
+                            <div class="form-group mb-3">
+                                <label>Tipo de Propiedad</label>
+                                <p-dropdown [options]="propertyTypes" formControlName="propertyTypeId" placeholder="Seleccionar un tipo de propiedad" [showClear]="true"></p-dropdown>
+                                <small *ngIf="propertyTypeInvalid" class="form-text text-danger">El campo tipo de propiedad es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Vecindario</label>
+                                <input type="text" formControlName="neighborhood" placeholder="vecindario" class="p-inputtext" />
+                                <small *ngIf="neighborhoodInvalid" class="form-text text-danger">El campo vecindario es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Precio</label>
+                                <input type="text" formControlName="price" placeholder="precio" class="p-inputtext" />
+                                <small *ngIf="priceInvalid" class="form-text text-danger">El campo precio es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Metros Cuadrados</label>
+                                <input type="text" formControlName="squareMeters" placeholder="metros cuadrados" class="p-inputtext" />
+                                <small *ngIf="squareMetersInvalid" class="form-text text-danger">El campo metros cuadrados es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Latitud</label>
+                                <input type="text" formControlName="latitude" placeholder="latitud" class="p-inputtext" />
+                                <small *ngIf="latitudeInvalid" class="form-text text-danger">El campo latitud es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="field-checkbox mr-0">
+                                    <input type="checkbox" formControlName="hasParkingLot" class="p-checkbox" />
+                                    <label>Tiene Parqueo</label>
+                                </div>
+                                <small *ngIf="hasParkingLotInvalid" class="form-text text-danger">El campo tiene parqueo es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Comentarios</label>
+                                <textarea formControlName="remarks" rows="6" placeholder="comentarios" class="p-inputtext"></textarea>
+                                <small *ngIf="remarksInvalid" class="form-text text-danger">El campo comentarios es Obligatorio</small>
+                            </div>
+                        </div>
+                        <div class="col-12 md:col-6">
+                            <div class="form-group mb-3">
+                                <label>Dirrección</label>
+                                <input type="text" formControlName="address" placeholder="dirrección" class="p-inputtext" />
+                                <small *ngIf="addressInvalid" class="form-text text-danger">El campo dirrección es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Cuartos</label>
+                                <input type="text" formControlName="rooms" placeholder="cuartos" class="p-inputtext" />
+                                <small *ngIf="roomsInvalid" class="form-text text-danger">El campo cuartos es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Estrato</label>
+                                <input type="text" formControlName="stratum" placeholder="estrado" class="p-inputtext" />
+                                <small *ngIf="stratumInvalid" class="form-text text-danger">El campo estrado es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label>Longitud</label>
+                                <input type="text" formControlName="longitude" placeholder="longitud" class="p-inputtext" />
+                                <small *ngIf="longitudeInvalid" class="form-text text-danger">El campo longitud es Obligatorio</small>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="field-checkbox mr-0">
+                                    <input type="checkbox" formControlName="isAvailable" class="p-checkbox" />
+                                    <label>Esta Disponible</label>
+                                </div>
+                                <small *ngIf="isAvailableInvalid" class="form-text text-danger">El campo esta disponible es Obligatorio</small>
+                            </div>
+                        </div>
+                        <div class="form-group d-grid gap-2 offset-md-6 col-6">
+                            <button type="submit" class="btn btn-primary p-button-label w-full p-3 text-xl">{{button}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,8 +31,8 @@
                     <td>{{owner.properties.length}}</td>
                     <td>{{owner.contracts.length}}</td>
                     <td>
-                        <a class="btn btn-success mb-1 mr-1" (click)="gotoEditOwner(owner.id)"><i class="fas fa-edit"></i></a>
-                        <a class="btn btn-primary mb-1 mr-1" (click)="gotoDetailsOwner(owner.id)"><i class="fas fa-list"></i></a>
+                        <a class="btn btn-primary mb-1 mr-1" (click)="gotoEditOwner(owner.id)"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-success mb-1 mr-1" (click)="gotoDetailsOwner(owner.id)"><i class="fas fa-list"></i></a>
                         <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(owner.id)"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>

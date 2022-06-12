@@ -125,6 +125,7 @@ import { LesseesComponent } from './components/lessees/lessees.component';
 import { CreateLessesComponent } from './components/createLesses/createLesses.component';
 import { DetailsLessesComponent } from './components/detailsLesses/detailsLesses.component';
 import { PropertiesComponent } from './components/properties/properties.component';
+import { CreatePropertyComponent } from './components/createProperty/createProperty.component';
 import { PropertyTypesComponent } from './components/propertytypes/propertytypes.component';
 import { CreatePropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
 import { DetailsPropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
@@ -168,6 +169,7 @@ import { UserComponent } from './components/shared/user/user.component';
     DetailsOwnersComponent,
     DetailsContractComponent,
     CreateContractComponent,
+    CreatePropertyComponent,
   ],
   imports: [
     BrowserModule,

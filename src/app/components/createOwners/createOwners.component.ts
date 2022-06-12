@@ -95,7 +95,7 @@ export class CreateOwnersComponent implements OnInit {
       }
       if (!this.editMode) {
         this.formOwner = this.fb.group({
-          email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
+          email: ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
           document: ['', [Validators.required] ],
           firstName: ['', [Validators.required] ],
           lastName: ['', [Validators.required] ],

@@ -20,6 +20,7 @@ import { ContractsComponent } from './components/contracts/contracts.component';
 import { CreateContractComponent } from './components/createContract/createContract.component';
 import { DetailsContractComponent } from './components/detailsContract/detailsContract.component';
 import { PropertiesComponent } from './components/properties/properties.component';
+import { CreatePropertyComponent } from './components/createProperty/createProperty.component';
 import { DetailsPropertyComponent } from './components/detailsProperties/detailsProperties.component';
 import { PropertyTypesComponent } from './components/propertytypes/propertytypes.component';
 import { CreatePropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
@@ -40,6 +41,8 @@ export const ROUTES: Routes = [
         { path: 'owners/createOwner', component: CreateOwnersComponent },
         { path: 'owners/editOwner/:id', component: CreateOwnersComponent },
         { path: 'owners/detailsOwner/:id', component: DetailsOwnersComponent },
+        { path: 'owners/createProperty/:ownerId', component: CreatePropertyComponent },
+        { path: 'owners/editProperty/:id', component: CreatePropertyComponent },
         { path: 'lessees', component: LesseesComponent },
         { path: 'lessees/createLessee', component: CreateLessesComponent },
         { path: 'lessees/editLessee/:id', component: CreateLessesComponent },

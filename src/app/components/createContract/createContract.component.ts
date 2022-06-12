@@ -87,8 +87,6 @@ export class CreateContractComponent implements OnInit {
     owner: this.owner,
     property: this.property
   }
-
-  lesseeResponse : LesseeResponse[];
   
   addContractRequest: AddContractRequest = {
     Id: 0,
@@ -103,6 +101,8 @@ export class CreateContractComponent implements OnInit {
   }
 
   lessees: SelectItem[];
+
+  lesseeResponse : LesseeResponse[];
 
   editMode: boolean;
   id: string;
@@ -128,10 +128,10 @@ export class CreateContractComponent implements OnInit {
         endDate: ['', [Validators.required] ],
         isActive: [false, [Validators.required] ],
       });
-      this.getLessees();
       if (this._myleasing.validateToken()) {
         this.logOut();
       } else {
+        this.getLessees();
         this._activated.params.subscribe( params => {
           this.id = params['id'] != null ? params['id'] : "";
           if (this.id != "") {

@@ -15,9 +15,15 @@
         <br>
         <div *ngIf="ownerResponse.properties.length == 0">
             <h5>No hay propiedades agregadas todavía.</h5>
+            <p>
+                <a (click)="gotoCreateProperty()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
+            </p>
         </div>
         <div *ngIf="ownerResponse.properties.length != 0">
             <h5><strong>Propiedades:</strong></h5>
+            <p>
+                <a (click)="gotoCreateProperty()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
+            </p>
             <table class="table">
                 <thead>
                     <tr class="text-center">
@@ -41,8 +47,8 @@
                         <td>{{property.rooms}}</td>
                         <td>{{property.isAvailable == true ? 'Si' : 'No'}}</td>
                         <td>
-                            <a class="btn btn-success mb-1 mr-1" (click)="gotoEditProperty(property.id)"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-primary mb-1 mr-1" (click)="gotoDetailsProperty(property.id)"><i class="fas fa-list"></i></a>
+                            <a class="btn btn-primary mb-1 mr-1" (click)="gotoEditProperty(property.id)"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-success mb-1 mr-1" (click)="gotoDetailsProperty(property.id)"><i class="fas fa-list"></i></a>
                             <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDelete" (click)="showModal(property.id)"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
@@ -62,7 +68,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>¿Realmente quiere eliminar este owner?</p>
+                        <p>¿Realmente quiere eliminar esta propiedad?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
