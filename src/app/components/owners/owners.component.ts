@@ -44,12 +44,11 @@ export class OwnersComponent implements OnInit {
   getOwners(){
     this._apiService.getQuery(`Owners/GetOwnersWeb/${this.index}/${this.pageItems}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
         this.listOwners = res.result;
         this.total = res.total;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
@@ -98,8 +97,8 @@ export class OwnersComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Owners/DeleteWeb/${this.ownerId}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
@@ -110,7 +109,6 @@ export class OwnersComponent implements OnInit {
         )
         this.getPage(1);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

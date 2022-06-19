@@ -43,12 +43,11 @@ export class ManagersComponent implements OnInit {
   getManagers(){
     this._apiService.getQuery(`Managers/GetManagersWeb/${this.index}/${this.pageItems}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
         this.listManagers = res.result;
         this.total = res.total;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
@@ -97,8 +96,8 @@ export class ManagersComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Managers/DeleteWeb/${this.managerId}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
@@ -109,7 +108,6 @@ export class ManagersComponent implements OnInit {
         )
         this.getPage(1);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

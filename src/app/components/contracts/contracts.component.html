@@ -1,1 +1,38 @@
-<p>contracts works!</p>
+<div class="container">
+    <div class="card table-responsive">
+        <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>Contratos</span>
+        </h2>
+        <br/>
+        <table class="table" *ngIf="listContracts.length != 0">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Lessee</th>
+                    <th scope="col">Comentarios</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Fecha Final</th>
+                    <th scope="col">Esta Activo</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor="let contract of listContracts | paginate: { id: 'server', itemsPerPage: pageItems, currentPage: page, totalItems: total }; index as i; ">
+                    <th>{{i + 1}}</th>
+                    <td>{{contract.lessee.user.fullNameWithDocument}}</td>
+                    <td>{{contract.remarks}}</td>
+                    <td>{{contract.price}}</td>
+                    <td>{{contract.startDate}}</td>
+                    <td>{{contract.endDate}}</td>
+                    <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
+                    <td>
+                        <a class="btn btn-success mb-1 mr-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" *ngIf="listContracts.length != 0">
+            <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+        </div>
+    </div>
+</div>

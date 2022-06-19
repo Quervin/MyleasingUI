@@ -44,12 +44,11 @@ export class PropertyTypesComponent implements OnInit {
   getPropertyTypes(){
     this._apiService.getQuery(`PropertyTypes/GetPropertiesTypeWeb/${this.index}/${this.pageItems}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
         this.listPropertyType = res.result;
         this.total = res.total;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
@@ -98,8 +97,8 @@ export class PropertyTypesComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`PropertyTypes/DeleteWeb/${this.propertyTypeId}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
@@ -110,7 +109,6 @@ export class PropertyTypesComponent implements OnInit {
         )
         this.getPage(1);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

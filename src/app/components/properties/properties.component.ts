@@ -41,12 +41,11 @@ export class PropertiesComponent implements OnInit {
   getProperties(){
     this._apiService.getQuery(`Properties/GetPropertiesWeb/${this.index}/${this.pageItems}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
         this.listProperties = res.result;
         this.total = res.total;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

@@ -70,8 +70,10 @@ export class DetailsPropertyComponent implements OnInit {
 
   showProperties: boolean;
   showPropertyDetails: boolean;
+  showSeachPropertyDetails: boolean;
   id: string = "";
   propertyId: string = "";
+  searchPropetyId: string = "";
   contractId: number;
   imageId: number;
   currentPage: number;
@@ -92,9 +94,11 @@ export class DetailsPropertyComponent implements OnInit {
       this.imageId = 0;
       this.showProperties = false;
       this.showPropertyDetails = false;
+      this.showSeachPropertyDetails = false;
       this._activated.params.subscribe( params => {
         this.id = params['id'] != null ? params['id'] : "";
         this.propertyId = params['propertyId'] != null ? params['propertyId'] : "";
+        this.searchPropetyId = params['searchPropetyId'] != null ? params['searchPropetyId'] : "";
       });
       if (localStorage.getItem('token') != null) {
         if (this._myleasing.validateToken()) {
@@ -103,13 +107,17 @@ export class DetailsPropertyComponent implements OnInit {
           this.showProperties = true;
           this._myleasing.setLoading(true);
           if (this.id != "") {
-            this.showPropertyDetails = false;
-            this.getPropertyDetails();
+            this.getPropertyDetails(this.id);
           }
 
           if (this.propertyId != "") {
             this.showPropertyDetails = true;
             this.getOwnwerPropertyDetails();
+          }
+
+          if (this.searchPropetyId != "") {
+            this.showSeachPropertyDetails = true;
+            this.getPropertyDetails(this.searchPropetyId);
           }
         }
       } else {
@@ -127,6 +135,10 @@ export class DetailsPropertyComponent implements OnInit {
 
   gotoProperty() {
     this._router.navigateByUrl('properties');
+  }
+
+  gotoSeachProperty() {
+    this._router.navigateByUrl('seachProperties');
   }
 
   gotoOwnerDetails() {
@@ -169,8 +181,8 @@ export class DetailsPropertyComponent implements OnInit {
     });
   }
 
-  getPropertyDetails() {
-    this._apiService.getQuery(`Properties/DetailsPropertyWeb/${this.id}`).
+  getPropertyDetails(id : string) {
+    this._apiService.getQuery(`Properties/DetailsPropertyWeb/${id}`).
     subscribe((res : ResponseRequest) => {
       if ( res.isSuccess == true) {
         this.property = res.result;

@@ -44,12 +44,11 @@ export class LesseesComponent implements OnInit {
   getLessees(){
     this._apiService.getQuery(`Lessees/GetLesseesWeb/${this.index}/${this.pageItems}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
         this.listLessees = res.result;
         this.total = res.total;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
@@ -98,8 +97,8 @@ export class LesseesComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Lessees/DeleteWeb/${this.lesseeId}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
@@ -110,7 +109,6 @@ export class LesseesComponent implements OnInit {
         )
         this.getPage(1);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

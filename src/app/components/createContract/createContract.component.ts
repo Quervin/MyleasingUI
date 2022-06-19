@@ -261,7 +261,6 @@ export class CreateContractComponent implements OnInit {
         //Editar Contrato desde Lessees
         if (this.id != "") {   
           this.editMode = true;         
-          this.ownerContract = false;   
           this.button = "Editar";    
           this.titulo = "Editar Contract";       
           this.getLesseeContract();

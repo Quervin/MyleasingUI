@@ -38,7 +38,7 @@
 <div class="container" *ngIf="showProperties == true">
     <div class="card table-responsive">
         <h2>Detalles de la Propiedad: {{property.id}}</h2>
-        <a (click)="showPropertyDetails == false ? gotoProperty() : gotoOwnerDetails()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+        <a (click)="showSeachPropertyDetails == true ? gotoSeachProperty() : showPropertyDetails == false ? gotoProperty() : gotoOwnerDetails()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
         <br/>
         <div class="grid p-fluid">
             <div class="col-12 md:col-6">

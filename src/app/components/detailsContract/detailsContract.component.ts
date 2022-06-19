@@ -98,7 +98,6 @@ export class DetailsContractComponent implements OnInit {
           this.id = params['id'] != null ? params['id'] : "";
           this.contractId = params['contractId'] != null ? params['contractId'] : "";
           if (this.id != "") {
-            this.detailContract = false;
             this.getLesseeDetailsContract();
           }
 
