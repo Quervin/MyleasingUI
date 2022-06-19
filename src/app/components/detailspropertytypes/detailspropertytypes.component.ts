@@ -21,13 +21,12 @@ export class DetailsPropertytypesComponent implements OnInit {
     properties: []
   };
 
-  id: string;
+  id: string = "";
 
   constructor(private _activated: ActivatedRoute,
     private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) {
-      this.id = "";
       if (this._myleasing.validateToken()) {
         this.logOut();
       } else {
@@ -49,11 +48,10 @@ export class DetailsPropertytypesComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`PropertyTypes/DetailsPropertiesTypeWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if (res.isSuccess == true) {
         this.propertyTypeResponse = res.result;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

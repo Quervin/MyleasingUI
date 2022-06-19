@@ -3,13 +3,13 @@
         <div>
             <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>{{titulo}}</span>
             </h2>
-            <a (click)="gotoDetailsLessee()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+            <a (click)=" ownerContract == false ? gotoDetailsLessee() : gotoDetailsOwner()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
             <br/>
             <div>
                 <form autocomplete="off" [formGroup]="formContract" (ngSubmit)=" editMode == true ? edit() : create()">
                     <div class="grid p-fluid">
                         <div class="col-12 md:col-6">
-                            <div class="form-group mb-3" *ngIf="editMode == true">
+                            <div class="form-group mb-3">
                                 <label>Lessee</label>
                                 <p-dropdown [options]="lessees" formControlName="lesseeId" placeholder="Seleccionar un lessee" [showClear]="true"></p-dropdown>
                                 <small *ngIf="lesseeInvalid" class="form-text text-danger">El campo lessee es Obligatorio</small>

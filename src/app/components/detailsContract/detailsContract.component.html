@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card table-responsive">
         <h2>Detalle del Contrato: {{contractResponse.id}}</h2>
-        <a (click)="gotoDetailsLessee()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+        <a (click)=" detailContract == false ? gotoDetailsLessee() : gotoDetailsOwner()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
         <br/>
         <div>
             <p><strong>Owner:</strong> {{contractResponse.owner.user.fullNameWithDocument}}</p>

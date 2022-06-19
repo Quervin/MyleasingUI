@@ -59,7 +59,7 @@ export class CreateOwnersComponent implements OnInit {
   }
 
   editMode: boolean;
-  id: string;
+  id: string = "";
   button: string;
   titulo: string;
 
@@ -69,7 +69,6 @@ export class CreateOwnersComponent implements OnInit {
     private _router: Router,
     private fb: FormBuilder) { 
       this.editMode = false;
-      this.id = "";
       this.button = "Crear";
       this.titulo = "Crear Owner";
       this.showPassword1 = false;

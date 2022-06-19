@@ -5,7 +5,7 @@ export class AddContractRequest {
         public StartDate: string,
         public EndDate: string,
         public IsActive: boolean,
-        public PropertyTypeId: number,
+        public PropertyId: number,
         public LesseeId: number,
         public OwnerId: number,
         ) {
@@ -15,7 +15,7 @@ export class AddContractRequest {
             this.StartDate = StartDate;
             this.EndDate = EndDate;
             this.IsActive = IsActive;
-            this.PropertyTypeId = PropertyTypeId;
+            this.PropertyId = PropertyId;
             this.LesseeId = LesseeId;
             this.OwnerId = OwnerId;
         }

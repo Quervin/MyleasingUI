@@ -97,7 +97,7 @@ export class CreateContractComponent implements OnInit {
     IsActive: false,
     LesseeId: 0,
     OwnerId: 0,
-    PropertyTypeId: 0
+    PropertyId: 0
   }
 
   lessees: SelectItem[];
@@ -105,7 +105,10 @@ export class CreateContractComponent implements OnInit {
   lesseeResponse : LesseeResponse[];
 
   editMode: boolean;
-  id: string;
+  ownerContract: boolean;
+  id: string = "";
+  contractId: string = "";
+  propertyId: string = "";
   button: string;
   titulo: string;
 
@@ -115,7 +118,7 @@ export class CreateContractComponent implements OnInit {
     private _router: Router,
     private fb: FormBuilder) { 
       this.editMode = false;
-      this.id = "";
+      this.ownerContract = false;
       this.button = "Crear";
       this.titulo = "Crear Contract";
       this.lessees = [];
@@ -131,15 +134,12 @@ export class CreateContractComponent implements OnInit {
       if (this._myleasing.validateToken()) {
         this.logOut();
       } else {
+        this._myleasing.setLoading(true);
         this.getLessees();
         this._activated.params.subscribe( params => {
           this.id = params['id'] != null ? params['id'] : "";
-          if (this.id != "") {
-            this.editMode = true;
-            this.button = "Editar";
-            this.titulo = "Editar Contract";
-            this.getContract();
-          }
+          this.propertyId = params['propertyId'] != null ? params['propertyId'] : "";
+          this.contractId = params['contractId'] != null ? params['contractId'] : "";
         });
       }
     }
@@ -149,6 +149,10 @@ export class CreateContractComponent implements OnInit {
 
   gotoDetailsLessee() {
     this._router.navigate([ 'lessees/detailsLessee', this.contractResponse.lessee.id ]);
+  }
+
+  gotoDetailsOwner() {
+    this._router.navigate([ 'owners/detailsProperty', this.editMode == true ? this.contractResponse.property.id : this.propertyId ]);
   }
   
   get lesseeInvalid() {
@@ -175,8 +179,7 @@ export class CreateContractComponent implements OnInit {
     return this.formContract.get('isActive')?.invalid && this.formContract.get('isActive')?.touched;
   }
 
-  getContract() {
-    this._myleasing.setLoading(true);
+  getLesseeContract() {
     this._apiService.getQuery(`Lessees/GetContractWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
@@ -200,6 +203,52 @@ export class CreateContractComponent implements OnInit {
     });
   }
 
+  getOwnerContract() {
+    this._apiService.getQuery(`Owners/GetContractWeb/${this.contractId}`).
+    subscribe((res : ResponseRequest) => {
+      if (res.isSuccess == true) {
+        this.contractResponse = res.result;
+        this.setDataFormContract();
+      } else {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: res.message
+        })
+      }
+    }, error => {
+      this._myleasing.setLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Ha ocurrido un error"
+      })
+    });
+  }
+
+  getProperty() {
+    this._apiService.getQuery(`Owners/GetPropertyWeb/${this.propertyId}`).
+    subscribe((res : ResponseRequest) => {
+      if (res.isSuccess == true) {
+        this.property = res.result;
+        this._myleasing.setLoading(false);
+      } else {
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: res.message
+        })
+      }
+    }, error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Ha ocurrido un error"
+      })
+    });
+  }
+
   getLessees() {
     this._apiService.getQuery('Lessees/GetLesseesWeb').
     subscribe((res : ResponseRequest) => {
@@ -208,6 +257,30 @@ export class CreateContractComponent implements OnInit {
         this.lesseeResponse.forEach(value => {
           this.lessees.push({label: value.user.fullNameWithDocument , value: value.id});
         });
+        
+        //Editar Contrato desde Lessees
+        if (this.id != "") {   
+          this.editMode = true;         
+          this.ownerContract = false;   
+          this.button = "Editar";    
+          this.titulo = "Editar Contract";       
+          this.getLesseeContract();
+        }
+          
+        //Crear Contrato desde Owner 
+        if (this.propertyId != "") {   
+          this.getProperty();
+          this.ownerContract = true;
+        }
+  
+        //Editar Contrato desde Owner     
+        if (this.contractId != "") {    
+          this.editMode = true;      
+          this.ownerContract = true;  
+          this.button = "Editar";  
+          this.titulo = "Editar Contract";    
+          this.getOwnerContract();    
+        }
       } else {
         Swal.fire({
           icon: 'info',
@@ -236,10 +309,6 @@ export class CreateContractComponent implements OnInit {
     this._myleasing.setLoading(false);
   }
 
-  onCheckboxChange(event: any) {
-
-  }
-
   create() {
     if ( this.formContract.invalid ) {
       
@@ -252,8 +321,8 @@ export class CreateContractComponent implements OnInit {
       });
     }
 
-    this.addContractRequest.OwnerId = this.contractResponse.owner.id;
-    this.addContractRequest.PropertyTypeId = this.contractResponse.property.propertyType.id;
+    this.addContractRequest.OwnerId = this.property.owner.id;
+    this.addContractRequest.PropertyId = Number.parseFloat(this.propertyId);
     this.addContractRequest.LesseeId = this.formContract.value.lesseeId;
     this.addContractRequest.Price = this.formContract.value.price;
     this.addContractRequest.Remarks = this.formContract.value.remarks;
@@ -314,7 +383,7 @@ export class CreateContractComponent implements OnInit {
 
     this.addContractRequest.Id = this.contractResponse.id;
     this.addContractRequest.OwnerId = this.contractResponse.owner.id;
-    this.addContractRequest.PropertyTypeId = this.contractResponse.property.propertyType.id;
+    this.addContractRequest.PropertyId = this.contractResponse.property.id;
     this.addContractRequest.LesseeId = this.formContract.value.lesseeId;
     this.addContractRequest.Price = this.formContract.value.price;
     this.addContractRequest.Remarks = this.formContract.value.remarks;
@@ -324,35 +393,65 @@ export class CreateContractComponent implements OnInit {
 
     this._myleasing.setLoading(true);
 
-    this._apiService.postQuery('Lessees/UpdateContractWeb' , this.addContractRequest).
-    subscribe((res : ResponseRequest) => {
-      this._myleasing.setLoading(false);
-      if ( res.isSuccess == true) {
-        this._router.navigate([ 'lessees/detailsLessee', this.contractResponse.lessee.id ]);
-        Swal.fire({
-          icon: 'success',
-          title: 'Resultado con Exitó',
-          showConfirmButton: false,
-          timer: 2000,
-          text: res.message
+    if (!this.ownerContract) {
+      this._apiService.postQuery('Lessees/UpdateContractWeb' , this.addContractRequest).
+      subscribe((res : ResponseRequest) => {
+        this._myleasing.setLoading(false);
+        if ( res.isSuccess == true) {
+          this._router.navigate([ 'lessees/detailsLessee', this.contractResponse.lessee.id ]);
+          Swal.fire({
+            icon: 'success',
+            title: 'Resultado con Exitó',
+            showConfirmButton: false,
+            timer: 2000,
+            text: res.message
+          }
+          )
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Oops...',
+            text: res.message
+          })
         }
-        )
-      } else {
+      }, error => {
+        this._myleasing.setLoading(false);
         Swal.fire({
-          icon: 'info',
+          icon: 'error',
           title: 'Oops...',
-          text: res.message
+          text: "Ha ocurrido un error"
         })
-      }
-    }, error => {
-      this._myleasing.setLoading(false);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: "Ha ocurrido un error"
-      })
-    });
-    
+      });
+    } else {
+      this._apiService.postQuery('Owners/UpdateContractWeb' , this.addContractRequest).
+      subscribe((res : ResponseRequest) => {
+        this._myleasing.setLoading(false);
+        if ( res.isSuccess == true) {
+          this._router.navigate([ 'owners/detailsProperty', this.contractResponse.property.id ]);
+          Swal.fire({
+            icon: 'success',
+            title: 'Resultado con Exitó',
+            showConfirmButton: false,
+            timer: 2000,
+            text: res.message
+          }
+          )
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Oops...',
+            text: res.message
+          })
+        }
+      }, error => {
+        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: "Ha ocurrido un error"
+        })
+      });
+    }
   }
 
   logOut() {

@@ -38,7 +38,7 @@
 <div class="container" *ngIf="showProperties == true">
     <div class="card table-responsive">
         <h2>Detalles de la Propiedad: {{property.id}}</h2>
-        <a (click)="gotoProperty()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+        <a (click)="showPropertyDetails == false ? gotoProperty() : gotoOwnerDetails()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
         <br/>
         <div class="grid p-fluid">
             <div class="col-12 md:col-6">
@@ -64,9 +64,15 @@
         <div class="grid p-fluid">
             <div class="col-12" *ngIf="property.contracts.length == 0">
                 <h5>No hay contratos agregados todavía.</h5>
+                <p *ngIf="showPropertyDetails == true">
+                    <a (click)="gotoCreateContract()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
+                </p>
             </div>
             <div class="col-12" *ngIf="property.contracts.length != 0">
                 <h5><strong>Contratos:</strong></h5>
+                <p *ngIf="showPropertyDetails == true">
+                    <a (click)="gotoCreateContract()" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Crear</a>
+                </p>
                 <table class="table">
                     <thead>
                         <tr class="text-center">
@@ -77,6 +83,7 @@
                             <th scope="col">Fecha Inicio</th>
                             <th scope="col">Fecha Final</th>
                             <th scope="col">Esta Activo</th>
+                            <th *ngIf="showPropertyDetails == true" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +95,11 @@
                             <td>{{contract.startDate}}</td>
                             <td>{{contract.endDate}}</td>
                             <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
+                            <td *ngIf="showPropertyDetails == true">
+                                <a class="btn btn-primary mb-1 mr-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-success mb-1 mr-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>
+                                <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDeleteContract" (click)="showModalContract(contract.id)"><i class="fas fa-trash"></i></a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -97,8 +109,11 @@
             </div>
             <div class="col-12" *ngIf="property.propertyImages.length == 0">
                 <h5>No hay imagenes agregadas todavía.</h5>
+                <p *ngIf="showPropertyDetails == true">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddImage"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
+                </p>
             </div>
-            <div class="col-6 offset-md-3" *ngIf="property.propertyImages.length != 0">
+            <div class="col-6 offset-md-3" *ngIf="property.propertyImages.length != 0 && showPropertyDetails == false">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item" [ngClass]="{ 'active': i == 0}" *ngFor="let imagen of property.propertyImages; index as i;">
@@ -115,6 +130,97 @@
                       </button>
                 </div>
             </div>
+            <div *ngIf="property.propertyImages.length != 0 && showPropertyDetails == true" class="col-6 offset-md-3">
+                <h5><strong>Imagenes:</strong></h5>
+                <p *ngIf="showPropertyDetails == true">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddImage"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">#</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" *ngFor="let imagen of property.propertyImages | paginate: { id: 'server', itemsPerPage: 5, currentPage: currentPageImage, totalItems: property.propertyImages.length }; index as i; ">
+                            <th>{{i + 1}}</th>
+                            <td><img [src]="imagen.imageUrl | imagen" class="d-block w-100" alt="..."></td>
+                            <td> <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDeleteImage" (click)="showModalImage(imagen.id)"><i class="fas fa-trash"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <pagination-controls (pageChange)="currentPage = $event" id="server"></pagination-controls>
+                </div>
+            </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modalDeleteContract" tabindex="-1" aria-labelledby="modalDeleteContractLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteContractLabel">Mensaje de Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Realmente quiere eliminar este contrato?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteContract()">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalDeleteImage" tabindex="-1" aria-labelledby="modalDeleteImageLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDeleteImageLabel">Mensaje de Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Realmente quiere eliminar esta imagen?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteImage()">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalAddImage" tabindex="-1" aria-labelledby="modalAddImageLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAddImageLabel">Mensaje de Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <form autocomplete="off" [formGroup]="formImage" (ngSubmit)="addImage()">
+                                <div class="form-group mb-3">
+                                    <label>Imagen</label>
+                                    <input type="file" formControlName="image" class="form-control" (change)="onFileChange($event)" />
+                                    <small *ngIf="imageInvalid" class="form-text text-danger">Debe de ingresar una imagen valida</small>
+                                </div>
+                                <div class="form-group d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>

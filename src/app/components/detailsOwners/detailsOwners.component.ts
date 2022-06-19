@@ -34,7 +34,7 @@ export class DetailsOwnersComponent implements OnInit {
     properties: []
   }
 
-  id: string;
+  id: string = "";
   currentPage: number;
   propertyId: number;
   
@@ -42,7 +42,6 @@ export class DetailsOwnersComponent implements OnInit {
     private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) {
-    this.id = "";
     this.currentPage = 1;
     this.propertyId = 1;
     if (this._myleasing.validateToken()) {
@@ -107,8 +106,8 @@ export class DetailsOwnersComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Owners/DeletePropertyWeb/${this.propertyId}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
@@ -117,9 +116,9 @@ export class DetailsOwnersComponent implements OnInit {
           text: res.message
         }
         )
+        this.currentPage = 1;
         this.getDetailsOwner();
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

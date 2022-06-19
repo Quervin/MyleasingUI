@@ -89,8 +89,8 @@ export class CreatePropertyComponent implements OnInit {
   propertyTypeResponse : PropertyTypeResponse[];
 
   editMode: boolean;
-  id: string;
-  ownerId: string;
+  propertyId: string = "";
+  ownerId: string = "";
   button: string;
   titulo: string;
 
@@ -100,8 +100,6 @@ export class CreatePropertyComponent implements OnInit {
     private _router: Router,
     private fb: FormBuilder) {
       this.editMode = false;
-      this.id = "";
-      this.ownerId = "";
       this.button = "Crear";
       this.titulo = "Crear Propiedad";
       this.propertyTypeResponse = [];
@@ -109,16 +107,11 @@ export class CreatePropertyComponent implements OnInit {
       if (this._myleasing.validateToken()) {
         this.logOut();
       } else {
+        this._myleasing.setLoading(true);
         this.getPropertyTypes();
         this._activated.params.subscribe( params => {
-          this.id = params['id'] != null ? params['id'] : "";
+          this.propertyId = params['propertyId'] != null ? params['propertyId'] : "";
           this.ownerId = params['ownerId'] != null ? params['ownerId'] : "";
-          if (this.id != "") {
-            this.editMode = true;
-            this.button = "Editar";
-            this.titulo = "Editar Property";
-            this.getProperty();
-          }
         });
       }
       this.formProperty = this.fb.group({
@@ -193,8 +186,7 @@ export class CreatePropertyComponent implements OnInit {
   }
 
   getProperty() {
-    this._myleasing.setLoading(true);
-    this._apiService.getQuery(`Owners/GetPropertyWeb/${this.id}`).
+    this._apiService.getQuery(`Owners/GetPropertyWeb/${this.propertyId}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
         this.propertyResponse = res.result;
@@ -225,6 +217,16 @@ export class CreatePropertyComponent implements OnInit {
         this.propertyTypeResponse.forEach(value => {
           this.propertyTypes.push({label: value.name , value: value.id});
         });
+        
+        //Editar Propiedad desde Owner
+        if (this.propertyId != "") {         
+          this.editMode = true; 
+          this.button = "Editar";  
+          this.titulo = "Editar Property";      
+          this.getProperty();
+        } else {
+          this._myleasing.setLoading(false);
+        }
       } else {
         Swal.fire({
           icon: 'info',

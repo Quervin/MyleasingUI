@@ -82,19 +82,30 @@ export class DetailsContractComponent implements OnInit {
     property: this.property
   }
 
-  id: string;
+  id: string = "";
+  contractId: string = "";
+  detailContract: boolean;
 
   constructor(private _activated: ActivatedRoute,
     private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) { 
-      this.id = "";
+      this.detailContract = false;
       if (this._myleasing.validateToken()) {
         this.logOut();
       } else {
         this._activated.params.subscribe( params => {
-          this.id = params['id'];
-          this.getDetailsContract();
+          this.id = params['id'] != null ? params['id'] : "";
+          this.contractId = params['contractId'] != null ? params['contractId'] : "";
+          if (this.id != "") {
+            this.detailContract = false;
+            this.getLesseeDetailsContract();
+          }
+
+          if (this.contractId != "") {
+            this.detailContract = true;
+            this.getOwnerDetailsContract();
+          }
         });
       }
     }
@@ -106,15 +117,42 @@ export class DetailsContractComponent implements OnInit {
     this._router.navigate([ 'lessees/detailsLessee', this.contractResponse.lessee.id ]);
   }
 
-  getDetailsContract() {
+  gotoDetailsOwner() {
+    this._router.navigate([ 'owners/detailsProperty', this.contractResponse.property.id ]);
+  }
+
+  getLesseeDetailsContract() {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Lessees/DetailsContractWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if (res.isSuccess == true) {
         this.contractResponse = res.result;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: res.message
+        })
+      }
+    }, error => {
+      this._myleasing.setLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Ha ocurrido un error"
+      })
+    });
+  }
+
+  getOwnerDetailsContract() {
+    this._myleasing.setLoading(true);
+    this._apiService.getQuery(`Owners/DetailsContractWeb/${this.contractId}`).
+    subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
+      if (res.isSuccess == true) {
+        this.contractResponse = res.result;
+      } else {
         Swal.fire({
           icon: 'info',
           title: 'Oops...',

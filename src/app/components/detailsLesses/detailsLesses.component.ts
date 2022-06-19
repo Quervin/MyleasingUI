@@ -33,7 +33,7 @@ export class DetailsLessesComponent implements OnInit {
     contracts: []
   }
   
-  id: string;
+  id: string = "";
   currentPage: number;
   contractId: number;
 
@@ -41,7 +41,6 @@ export class DetailsLessesComponent implements OnInit {
     private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) { 
-      this.id = "";
       this.currentPage = 1;
       this.contractId = 0;
       if (this._myleasing.validateToken()) {
@@ -65,11 +64,10 @@ export class DetailsLessesComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Lessees/DetailsLesseeWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if (res.isSuccess == true) {
         this.lesseeResponse = res.result;
-        this._myleasing.setLoading(false);
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
@@ -102,8 +100,8 @@ export class DetailsLessesComponent implements OnInit {
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Lessees/DeleteContractWeb/${this.contractId}`).
     subscribe((res : ResponseRequest) => {
+      this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
@@ -112,9 +110,9 @@ export class DetailsLessesComponent implements OnInit {
           text: res.message
         }
         )
+        this.currentPage = 1;
         this.getDetailsLessee();
       } else {
-        this._myleasing.setLoading(false);
         Swal.fire({
           icon: 'info',
           title: 'Oops...',
