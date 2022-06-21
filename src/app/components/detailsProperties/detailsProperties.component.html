@@ -8,7 +8,7 @@
                     <p><strong>Tipo de Propiedad:</strong> {{property.propertyType.name }}</p>
                     <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
                     <p><strong>Dirección:</strong> {{property.address}}</p>
-                    <p><strong>Precio:</strong> {{property.price}}</p>
+                    <p><strong>Precio:</strong> {{property.price | currency}}</p>
                     <p><strong>Metros Cuadrados:</strong> {{property.squareMeters}}</p>
                     <p><strong>Cuartos:</strong> {{property.rooms}}</p>
                     <p><strong>Tiene Parqueo:</strong> {{property.hasParkingLot == true ? 'Si' : 'No'}}</p>
@@ -38,7 +38,7 @@
 <div class="container" *ngIf="showProperties == true">
     <div class="card table-responsive">
         <h2>Detalles de la Propiedad: {{property.id}}</h2>
-        <a (click)="showSeachPropertyDetails == true ? gotoSeachProperty() : showPropertyDetails == false ? gotoProperty() : gotoOwnerDetails()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
+        <a (click)="myPropertyDetails == true ? gotoMyProperty() : showSeachPropertyDetails == true ? gotoSeachProperty() : showPropertyDetails == false ? gotoProperty() : gotoOwnerDetails()" class="go_back"><i class="pi pi_back pi-fw pi-arrow-circle-left"></i></a>
         <br/>
         <div class="grid p-fluid">
             <div class="col-12 md:col-6">
@@ -53,7 +53,7 @@
                 <h5><strong>Propiedad:</strong></h5>
                 <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
                 <p><strong>Dirección:</strong> {{property.address}}</p>
-                <p><strong>Precio:</strong> {{property.price}}</p>
+                <p><strong>Precio:</strong> {{property.price | currency}}</p>
                 <p><strong>Metros Cuadrados:</strong> {{property.squareMeters}}</p>
                 <p><strong>Cuartos:</strong> {{property.rooms}}</p>
                 <p><strong>Tiene Parqueo:</strong> {{property.hasParkingLot == true ? 'Si' : 'No'}}</p>
@@ -91,9 +91,9 @@
                             <th>{{i + 1}}</th>
                             <td>{{contract.lessee.user.fullNameWithDocument}}</td>
                             <td>{{contract.remarks}}</td>
-                            <td>{{contract.price}}</td>
-                            <td>{{contract.startDate}}</td>
-                            <td>{{contract.endDate}}</td>
+                            <td>{{contract.price | currency}}</td>
+                            <td>{{contract.startDate | date:'shortDate'}}</td>
+                            <td>{{contract.endDate | date:'shortDate'}}</td>
                             <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
                             <td *ngIf="showPropertyDetails == true">
                                 <a class="btn btn-primary mb-1 mr-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>
@@ -109,11 +109,11 @@
             </div>
             <div class="col-12" *ngIf="property.propertyImages.length == 0">
                 <h5>No hay imagenes agregadas todavía.</h5>
-                <p *ngIf="showPropertyDetails == true">
+                <p *ngIf="showPropertyDetails == true || myPropertyDetails == true">
                     <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddImage"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
                 </p>
             </div>
-            <div class="col-6 offset-md-3" *ngIf="property.propertyImages.length != 0 && showPropertyDetails == false">
+            <div class="col-6 offset-md-3" *ngIf="property.propertyImages.length != 0 && (showPropertyDetails == false && myPropertyDetails == false)">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item" [ngClass]="{ 'active': i == 0}" *ngFor="let imagen of property.propertyImages; index as i;">
@@ -130,9 +130,9 @@
                       </button>
                 </div>
             </div>
-            <div *ngIf="property.propertyImages.length != 0 && showPropertyDetails == true" class="col-6 offset-md-3">
+            <div *ngIf="property.propertyImages.length != 0 && (showPropertyDetails == true || myPropertyDetails == true)" class="col-6 offset-md-3">
                 <h5><strong>Imagenes:</strong></h5>
-                <p *ngIf="showPropertyDetails == true">
+                <p *ngIf="showPropertyDetails == true || myPropertyDetails == true">
                     <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddImage"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
                 </p>
                 <table class="table">

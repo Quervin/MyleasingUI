@@ -7,8 +7,11 @@
             <thead>
                 <tr class="text-center">
                     <th scope="col">#</th>
+                    <th scope="col">Owner</th>
                     <th scope="col">Lessee</th>
-                    <th scope="col">Comentarios</th>
+                    <th scope="col">Tipo de Propiedad</th>
+                    <th scope="col">Vencindario</th>
+                    <th scope="col">Dirección</th>
                     <th scope="col">Precio</th>
                     <th scope="col">Fecha Inicio</th>
                     <th scope="col">Fecha Final</th>
@@ -19,11 +22,14 @@
             <tbody>
                 <tr class="text-center" *ngFor="let contract of listContracts | paginate: { id: 'server', itemsPerPage: pageItems, currentPage: page, totalItems: total }; index as i; ">
                     <th>{{i + 1}}</th>
+                    <td>{{contract.owner.user.fullNameWithDocument}}</td>
                     <td>{{contract.lessee.user.fullNameWithDocument}}</td>
-                    <td>{{contract.remarks}}</td>
-                    <td>{{contract.price}}</td>
-                    <td>{{contract.startDate}}</td>
-                    <td>{{contract.endDate}}</td>
+                    <td>{{contract.property.propertyType.name}}</td>
+                    <td>{{contract.property.neighborhood}}</td>
+                    <td>{{contract.property.address}}</td>
+                    <td>{{contract.price | currency}}</td>
+                    <td>{{contract.startDate | date:'shortDate'}}</td>
+                    <td>{{contract.endDate | date:'shortDate'}}</td>
                     <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
                     <td>
                         <a class="btn btn-success mb-1 mr-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>

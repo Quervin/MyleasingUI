@@ -12,7 +12,7 @@
                     <p><strong>Id:</strong> {{property.id}}</p>
                     <p><strong>Vecindario:</strong> {{property.neighborhood}}</p>
                     <p><strong>Dirección:</strong> {{property.address}}</p>
-                    <p><strong>Precio:</strong> {{property.price}}</p>
+                    <p><strong>Precio:</strong> {{property.price | currency}}</p>
                     <p><strong>Metros Cuadrados:</strong> {{property.squareMeters}}</p>
                     <p><strong>Cuartos:</strong> {{property.rooms}}</p>
                     <p><strong>Tiene Parqueo:</strong> {{property.hasParkingLot == true ? 'Si' : 'No'}}</p>

@@ -130,10 +130,11 @@ import { PropertyTypesComponent } from './components/propertytypes/propertytypes
 import { CreatePropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
 import { DetailsPropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
 import { SeachPropertiesComponent } from './components/seachproperties/seachproperties.component';
-import { ContractsComponent } from './components/contracts/contracts.component';
+import { ContractsComponent } from './components/myContracts/myContracts.component';
 import { DetailsContractComponent } from './components/detailsContract/detailsContract.component';
 import { CreateContractComponent } from './components/createContract/createContract.component';
 import { UserComponent } from './components/shared/user/user.component';
+import { MyPropertiesComponent } from './components/myProperties/myProperties.component';
 
 @NgModule({
   declarations: [
@@ -170,6 +171,7 @@ import { UserComponent } from './components/shared/user/user.component';
     DetailsContractComponent,
     CreateContractComponent,
     CreatePropertyComponent,
+    MyPropertiesComponent,
   ],
   imports: [
     BrowserModule,

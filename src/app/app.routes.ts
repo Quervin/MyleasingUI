@@ -16,7 +16,7 @@ import { DetailsOwnersComponent } from './components/detailsOwners/detailsOwners
 import { LesseesComponent } from './components/lessees/lessees.component';
 import { CreateLessesComponent } from './components/createLesses/createLesses.component';
 import { DetailsLessesComponent } from './components/detailsLesses/detailsLesses.component';
-import { ContractsComponent } from './components/contracts/contracts.component';
+import { ContractsComponent } from './components/myContracts/myContracts.component';
 import { CreateContractComponent } from './components/createContract/createContract.component';
 import { DetailsContractComponent } from './components/detailsContract/detailsContract.component';
 import { PropertiesComponent } from './components/properties/properties.component';
@@ -26,6 +26,7 @@ import { PropertyTypesComponent } from './components/propertytypes/propertytypes
 import { CreatePropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
 import { DetailsPropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
 import { SeachPropertiesComponent } from './components/seachproperties/seachproperties.component';
+import { MyPropertiesComponent } from './components/myProperties/myProperties.component';
 
 
 export const ROUTES: Routes = [
@@ -61,8 +62,12 @@ export const ROUTES: Routes = [
         { path: 'propertyTypes/detailsPropertyTypes/:id', component: DetailsPropertytypesComponent },
         { path: 'seachProperties', component: SeachPropertiesComponent },
         { path: 'seachProperties/detailsProperty/:searchPropetyId', component: DetailsPropertyComponent },
-        { path: 'contracts', component: ContractsComponent },
-        { path: 'contracts/detailsContract/:contractId', component: DetailsContractComponent },
+        { path: 'myContracts', component: ContractsComponent },
+        { path: 'contracts/detailsContract/:myContractId', component: DetailsContractComponent },
+        { path: 'myProperties', component: MyPropertiesComponent },
+        { path: 'myProperties/createProperty/:myOwnerId', component: CreatePropertyComponent },
+        { path: 'myProperties/editProperty/:myPropertyId', component: CreatePropertyComponent },
+        { path: 'myProperties/detailsProperty/:myPropertyId', component: DetailsPropertyComponent },
     ], canActivate: [ AuthGuard ] },
     { path: 'index', component: IndexComponent},
     { path: 'login', component: LoginComponent },

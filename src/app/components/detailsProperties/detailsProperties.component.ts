@@ -71,8 +71,10 @@ export class DetailsPropertyComponent implements OnInit {
   showProperties: boolean;
   showPropertyDetails: boolean;
   showSeachPropertyDetails: boolean;
+  myPropertyDetails: boolean;
   id: string = "";
   propertyId: string = "";
+  myPropertyId: string = "";
   searchPropetyId: string = "";
   contractId: number;
   imageId: number;
@@ -95,9 +97,11 @@ export class DetailsPropertyComponent implements OnInit {
       this.showProperties = false;
       this.showPropertyDetails = false;
       this.showSeachPropertyDetails = false;
+      this.myPropertyDetails = false;
       this._activated.params.subscribe( params => {
         this.id = params['id'] != null ? params['id'] : "";
         this.propertyId = params['propertyId'] != null ? params['propertyId'] : "";
+        this.myPropertyId = params['myPropertyId'] != null ? params['myPropertyId'] : "";
         this.searchPropetyId = params['searchPropetyId'] != null ? params['searchPropetyId'] : "";
       });
       if (localStorage.getItem('token') != null) {
@@ -112,6 +116,11 @@ export class DetailsPropertyComponent implements OnInit {
 
           if (this.propertyId != "") {
             this.showPropertyDetails = true;
+            this.getOwnwerPropertyDetails();
+          }
+
+          if (this.myPropertyId != "") {
+            this.myPropertyDetails = true;
             this.getOwnwerPropertyDetails();
           }
 
@@ -139,6 +148,10 @@ export class DetailsPropertyComponent implements OnInit {
 
   gotoSeachProperty() {
     this._router.navigateByUrl('seachProperties');
+  }
+
+  gotoMyProperty() {
+    this._router.navigateByUrl('myProperties');
   }
 
   gotoOwnerDetails() {
@@ -206,7 +219,8 @@ export class DetailsPropertyComponent implements OnInit {
   }
 
   getOwnwerPropertyDetails() {
-    this._apiService.getQuery(`Owners/DetailsPropertyWeb/${this.propertyId}`).
+    let propertyId = this.myPropertyDetails == false ? this.propertyId : this.myPropertyId;
+    this._apiService.getQuery(`Owners/DetailsPropertyWeb/${propertyId}`).
     subscribe((res : ResponseRequest) => {
       if ( res.isSuccess == true) {
         this.property = res.result;
@@ -325,7 +339,7 @@ export class DetailsPropertyComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('ImageFile', this.formImage.value.imageSource);
-    formData.append('PropertyId', this.propertyId);
+    formData.append('PropertyId', this.myPropertyDetails == false ? this.propertyId : this.myPropertyId);
 
 
     this._myleasing.setLoading(true);

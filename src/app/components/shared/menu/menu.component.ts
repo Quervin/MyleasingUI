@@ -91,8 +91,8 @@ export class MenuComponent implements OnInit {
       this.items =  [
         {label: 'Dashboard',icon: 'pi pi_back pi-fw pi-home', routerLink: ['/dashboard']},
         {label: 'SeachProperties', icon: 'pi pi_back pi-fw pi-search', routerLink: ['/seachProperties']},
-        {label: 'MyProperties', icon: 'pi pi_back pi-fw pi-box', routerLink: ['/properties']},
-        {label: 'MyContracts', icon: 'pi pi_back pi-fw pi-building', routerLink: ['/contracts']},
+        {label: 'MyProperties', icon: 'pi pi_back pi-fw pi-box', routerLink: ['/myProperties']},
+        {label: 'MyContracts', icon: 'pi pi_back pi-fw pi-building', routerLink: ['/myContracts']},
       ]
     }
 
@@ -100,7 +100,7 @@ export class MenuComponent implements OnInit {
       this.items =  [
         {label: 'Dashboard',icon: 'pi pi_back pi-fw pi-home', routerLink: ['/dashboard']},
         {label: 'SeachProperties', icon: 'pi pi_back pi-fw pi-search', routerLink: ['/seachProperties']},
-        {label: 'MyContracts', icon: 'pi pi_back pi-fw pi-building', routerLink: ['/contracts']},
+        {label: 'MyContracts', icon: 'pi pi_back pi-fw pi-building', routerLink: ['/myContracts']},
       ]
     }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { OwnerResponse } from 'src/app/models/ownerResponse';
 import { ResponseRequest } from 'src/app/models/responseRequest';
 import { UserResponse } from 'src/app/models/userResponse';
@@ -8,12 +8,12 @@ import { MyleasingService } from 'src/app/services/app.myleasing.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-detailsowners',
-  templateUrl: './detailsOwners.component.html',
+  selector: 'app-my-properties',
+  templateUrl: './myProperties.component.html',
   styles: [
   ]
 })
-export class DetailsOwnersComponent implements OnInit {
+export class MyPropertiesComponent implements OnInit {
 
   user : UserResponse = {
     id: "",
@@ -34,36 +34,28 @@ export class DetailsOwnersComponent implements OnInit {
     properties: []
   }
 
-  id: string = "";
   currentPage: number;
   propertyId: number;
-  
-  constructor(private _activated: ActivatedRoute,
-    private _apiService: ApiService,
+
+  constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
-    private _router: Router) {
-    this.currentPage = 1;
-    this.propertyId = 0;
-    if (this._myleasing.validateToken()) {
-      this.logOut();
-    } else {
-      this._activated.params.subscribe( params => {
-        this.id = params['id'];
-        this.getDetailsOwner();
-      });
+    private _router: Router) { 
+      this.currentPage = 1;
+      this.propertyId = 0;
+      if (this._myleasing.validateToken()) {
+        this.logOut();
+      } else {
+        this.getMyProperties();
+      }
     }
-   }
 
   ngOnInit(): void {
   }
 
-  gotoOwner() {
-    this._router.navigateByUrl('owners');
-  }
-
-  getDetailsOwner() {
+  getMyProperties() {
     this._myleasing.setLoading(true);
-    this._apiService.getQuery(`Owners/DetailsOwnerWeb/${this.id}`).
+    let userId = localStorage.getItem("userId");
+    this._apiService.getQuery(`Owners/GetMyPropertiesWeb/${userId}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
         this.ownerResponse = res.result;
@@ -87,15 +79,15 @@ export class DetailsOwnersComponent implements OnInit {
   }
 
   gotoEditProperty(id: number) {
-    this._router.navigate([ 'owners/editProperty', id ]);
+    this._router.navigate([ 'myProperties/editProperty', id ]);
  
   }
   gotoCreateProperty() {
-    this._router.navigate([ 'owners/createProperty', this.id ]);
+    this._router.navigate([ 'myProperties/createProperty', this.ownerResponse.id ]);
   }
 
   gotoDetailsProperty(id: number) {
-    this._router.navigate([ 'owners/detailsProperty', id ]);
+    this._router.navigate([ 'myProperties/detailsProperty', id ]);
   }
 
   showModal(id: number) {
@@ -117,7 +109,7 @@ export class DetailsOwnersComponent implements OnInit {
         }
         )
         this.currentPage = 1;
-        this.getDetailsOwner();
+        this.getMyProperties();
       } else {
         Swal.fire({
           icon: 'info',

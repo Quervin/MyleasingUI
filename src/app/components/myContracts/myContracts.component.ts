@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contracts',
-  templateUrl: './contracts.component.html',
+  templateUrl: './myContracts.component.html',
   styles: [
   ]
 })
@@ -44,7 +44,8 @@ export class ContractsComponent implements OnInit {
   }
 
   getContracts() {
-    this._apiService.getQuery(`Account/GetContractsWeb/${this.index}/${this.pageItems}`).
+    let userId = localStorage.getItem("userId");
+    this._apiService.getQuery(`Account/GetContractsWeb/${this.index}/${this.pageItems}/${userId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {

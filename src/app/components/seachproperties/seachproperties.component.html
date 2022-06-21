@@ -24,11 +24,11 @@
                         <tbody>
                             <tr class="text-center" *ngFor="let property of listProperties | paginate: { id: 'server', itemsPerPage: pageItems, currentPage: page, totalItems: total }; index as i; ">
                                 <th>{{i + 1}}</th>
-                                <td><img [src]="property.firstImage | imagen" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" /></td>
+                                <td><img [src]="property.firstImage | imagen" alt="Image" class="d-block w-100" /></td>
                                 <td>{{property.propertyType.name}}</td>
                                 <td>{{property.neighborhood}}</td>
                                 <td>{{property.address}}</td>
-                                <td>{{property.price}}</td>
+                                <td>{{property.price | currency}}</td>
                                 <td>{{property.squareMeters}}</td>
                                 <td>{{property.rooms}}</td>
                                 <td>{{property.hasParkingLot == true ? 'Si' : 'No'}}</td>
@@ -70,11 +70,11 @@
             <tbody>
                 <tr class="text-center" *ngFor="let property of listProperties | paginate: { id: 'server', itemsPerPage: pageItems, currentPage: page, totalItems: total }; index as i; ">
                     <th>{{i + 1}}</th>
-                    <td><img [src]="property.firstImage | imagen" alt="Image" style="width:300px;height:300px;max-width: 100%; height: auto;" /></td>
+                    <td><img [src]="property.firstImage | imagen" alt="Image" class="d-block w-100" /></td>
                     <td>{{property.propertyType.name}}</td>
                     <td>{{property.neighborhood}}</td>
                     <td>{{property.address}}</td>
-                    <td>{{property.price}}</td>
+                    <td>{{property.price | currency}}</td>
                     <td>{{property.squareMeters}}</td>
                     <td>{{property.rooms}}</td>
                     <td>{{property.hasParkingLot == true ? 'Si' : 'No'}}</td>

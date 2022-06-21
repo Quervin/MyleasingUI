@@ -35,9 +35,9 @@
                         <th>{{i + 1}}</th>
                         <td>{{contract.lessee.user.fullNameWithDocument}}</td>
                         <td>{{contract.remarks}}</td>
-                        <td>{{contract.price}}</td>
-                        <td>{{contract.startDate}}</td>
-                        <td>{{contract.endDate}}</td>
+                        <td>{{contract.price | currency}}</td>
+                        <td>{{contract.startDate | date:'shortDate'}}</td>
+                        <td>{{contract.endDate | date:'shortDate'}}</td>
                         <td>{{contract.isActive == true ? 'Si' : 'No'}}</td>
                         <td>
                             <a class="btn btn-primary mb-1 mr-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>

@@ -89,8 +89,11 @@ export class CreatePropertyComponent implements OnInit {
   propertyTypeResponse : PropertyTypeResponse[];
 
   editMode: boolean;
+  myProperty: boolean;
   propertyId: string = "";
+  myPropertyId: string = "";
   ownerId: string = "";
+  myOwnerId: string = "";
   button: string;
   titulo: string;
 
@@ -100,6 +103,7 @@ export class CreatePropertyComponent implements OnInit {
     private _router: Router,
     private fb: FormBuilder) {
       this.editMode = false;
+      this.myProperty = false;
       this.button = "Crear";
       this.titulo = "Crear Propiedad";
       this.propertyTypeResponse = [];
@@ -111,7 +115,9 @@ export class CreatePropertyComponent implements OnInit {
         this.getPropertyTypes();
         this._activated.params.subscribe( params => {
           this.propertyId = params['propertyId'] != null ? params['propertyId'] : "";
+          this.myPropertyId = params['myPropertyId'] != null ? params['myPropertyId'] : "";
           this.ownerId = params['ownerId'] != null ? params['ownerId'] : "";
+          this.myOwnerId = params['myOwnerId'] != null ? params['myOwnerId'] : "";
         });
       }
       this.formProperty = this.fb.group({
@@ -135,6 +141,10 @@ export class CreatePropertyComponent implements OnInit {
 
   gotoDetailsOwner() {
     this._router.navigate([ 'owners/detailsOwner', this.editMode == true ? this.propertyResponse.owner.id : this.ownerId ]);
+  }
+
+  gotoMyProperties() {
+    this._router.navigateByUrl('/myProperties');
   }
 
   get propertyTypeInvalid() {
@@ -186,7 +196,7 @@ export class CreatePropertyComponent implements OnInit {
   }
 
   getProperty() {
-    this._apiService.getQuery(`Owners/GetPropertyWeb/${this.propertyId}`).
+    this._apiService.getQuery(`Owners/GetPropertyWeb/${this.myProperty == false ? this.propertyId : this.myPropertyId}`).
     subscribe((res : ResponseRequest) => {
       if (res.isSuccess == true) {
         this.propertyResponse = res.result;
@@ -218,15 +228,31 @@ export class CreatePropertyComponent implements OnInit {
           this.propertyTypes.push({label: value.name , value: value.id});
         });
         
+        //Editar desde Myproperties
+        if (this.myPropertyId) {
+          this.editMode = true; 
+          this.myProperty = true; 
+          this.button = "Editar";  
+          this.titulo = "Editar Property";      
+          this.getProperty();
+        }
         //Editar Propiedad desde Owner
         if (this.propertyId != "") {         
           this.editMode = true; 
           this.button = "Editar";  
           this.titulo = "Editar Property";      
           this.getProperty();
-        } else {
+        } 
+        //Crear desde Owner
+        if (this.ownerId != "") {
           this._myleasing.setLoading(false);
         }
+        //Crear desde Myproperties
+        if (this.myOwnerId != "") {
+          this.myProperty = true;
+          this._myleasing.setLoading(false);
+        }
+
       } else {
         Swal.fire({
           icon: 'info',
@@ -273,7 +299,7 @@ export class CreatePropertyComponent implements OnInit {
       });
     }
 
-    this.addPropertyRequest.OwnerId = Number.parseFloat(this.ownerId);
+    this.addPropertyRequest.OwnerId = Number.parseFloat(this.myProperty == false ? this.ownerId : this.myOwnerId);
     this.addPropertyRequest.PropertyTypeId = this.formProperty.value.propertyTypeId;
     this.addPropertyRequest.Neighborhood = this.formProperty.value.neighborhood;
     this.addPropertyRequest.Address = this.formProperty.value.address;
@@ -366,7 +392,11 @@ export class CreatePropertyComponent implements OnInit {
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
       if ( res.isSuccess == true) {
-        this._router.navigate([ 'owners/detailsOwner', this.propertyResponse.owner.id ]);
+        if (this.myProperty == false) {
+          this._router.navigate([ 'owners/detailsOwner', this.propertyResponse.owner.id ]);
+        } else {
+          this._router.navigateByUrl('/myProperties');
+        }
         Swal.fire({
           icon: 'success',
           title: 'Resultado con Exitó',
