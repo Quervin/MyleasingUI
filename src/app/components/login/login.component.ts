@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
     Email: ''
   }
 
+  recoverPaswordShow: boolean = true;
+
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router,
@@ -80,6 +82,14 @@ export class LoginComponent implements OnInit {
       this.type = "password";
       this.iconClass = "fa fa-eye-slash";
     }
+  }
+
+  showRecoverPasword() {
+    this.recoverPaswordShow = false;
+  }
+
+  closeRecoverPasword() {
+    this.recoverPaswordShow = true;
   }
 
   login() {
@@ -146,6 +156,7 @@ export class LoginComponent implements OnInit {
     this._apiService.postLogin('Account/RecoverPasswordWeb' , this.emailRequest).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeRecoverPasword();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

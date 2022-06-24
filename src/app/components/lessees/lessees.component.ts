@@ -20,6 +20,7 @@ export class LesseesComponent implements OnInit {
   total: number;
   page: number;
   lesseeId: number;
+  deleteLesseeShow: boolean = true;
 
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
@@ -89,8 +90,13 @@ export class LesseesComponent implements OnInit {
     this.getLessees();
   }
 
-  showModal(id: number) {
+  showDeleteLessee(id: number) {
     this.lesseeId = id;
+    this.deleteLesseeShow = false;
+  }
+
+  closeDeleteLeessee() {
+    this.deleteLesseeShow = true;
   }
 
   delete() {
@@ -98,6 +104,7 @@ export class LesseesComponent implements OnInit {
     this._apiService.getQuery(`Lessees/DeleteWeb/${this.lesseeId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteLeessee();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

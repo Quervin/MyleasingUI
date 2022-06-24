@@ -34,6 +34,7 @@ export class DetailsLessesComponent implements OnInit {
   }
   
   id: string = "";
+  deleteContractShow: boolean = true;
   currentPage: number;
   contractId: number;
 
@@ -92,8 +93,13 @@ export class DetailsLessesComponent implements OnInit {
     this._router.navigate([ 'lessees/detailsContract', id ]);
   }
 
-  showModal(id: number) {
+  showDeleteContract(id: number) {
     this.contractId = id;
+    this.deleteContractShow = false;
+  }
+
+  closeDeleteContract() {
+    this.deleteContractShow = true;
   }
 
   delete() {
@@ -101,6 +107,7 @@ export class DetailsLessesComponent implements OnInit {
     this._apiService.getQuery(`Lessees/DeleteContractWeb/${this.contractId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteContract();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

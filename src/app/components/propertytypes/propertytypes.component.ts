@@ -20,6 +20,7 @@ export class PropertyTypesComponent implements OnInit {
   total: number;
   page: number;
   propertyTypeId: number;
+  deletePropertyShow: boolean = true;
 
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
@@ -89,8 +90,13 @@ export class PropertyTypesComponent implements OnInit {
     this.getPropertyTypes();
   }
 
-  showModal(id: number) {
+  showDeleteProperty(id: number) {
     this.propertyTypeId = id;
+    this.deletePropertyShow = false;
+  }
+
+  closeDeleteProperty() {
+    this.deletePropertyShow = true;
   }
 
   delete() {
@@ -98,6 +104,7 @@ export class PropertyTypesComponent implements OnInit {
     this._apiService.getQuery(`PropertyTypes/DeleteWeb/${this.propertyTypeId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteProperty();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

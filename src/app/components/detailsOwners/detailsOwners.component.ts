@@ -35,6 +35,7 @@ export class DetailsOwnersComponent implements OnInit {
   }
 
   id: string = "";
+  deletePropertyShow: boolean = true;
   currentPage: number;
   propertyId: number;
   
@@ -98,8 +99,13 @@ export class DetailsOwnersComponent implements OnInit {
     this._router.navigate([ 'owners/detailsProperty', id ]);
   }
 
-  showModal(id: number) {
+  showDeleteProperty(id: number) {
     this.propertyId = id;
+    this.deletePropertyShow = false;
+  }
+
+  closeDeleteProperty() {
+    this.deletePropertyShow = true;
   }
 
   delete() {
@@ -107,6 +113,7 @@ export class DetailsOwnersComponent implements OnInit {
     this._apiService.getQuery(`Owners/DeletePropertyWeb/${this.propertyId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteProperty();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

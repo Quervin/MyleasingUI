@@ -98,7 +98,7 @@
                             <td *ngIf="showPropertyDetails == true">
                                 <a class="btn btn-primary mb-1 mr-1" (click)="gotoEditContract(contract.id)"><i class="fas fa-edit"></i></a>
                                 <a class="btn btn-success mb-1 mr-1" (click)="gotoDetailsContract(contract.id)"><i class="fas fa-list"></i></a>
-                                <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDeleteContract" (click)="showModalContract(contract.id)"><i class="fas fa-trash"></i></a>
+                                <a class="btn btn-danger mb-1 mr-1" (click)="showContract(contract.id)"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -110,7 +110,7 @@
             <div class="col-12" *ngIf="property.propertyImages.length == 0">
                 <h5>No hay imagenes agregadas todavía.</h5>
                 <p *ngIf="showPropertyDetails == true || myPropertyDetails == true">
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddImage"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
+                    <a class="btn btn-primary" (click)="showAddImage()"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
                 </p>
             </div>
             <div class="col-6 offset-md-3" *ngIf="property.propertyImages.length != 0 && (showPropertyDetails == false && myPropertyDetails == false)">
@@ -133,7 +133,7 @@
             <div *ngIf="property.propertyImages.length != 0 && (showPropertyDetails == true || myPropertyDetails == true)" class="col-6 offset-md-3">
                 <h5><strong>Imagenes:</strong></h5>
                 <p *ngIf="showPropertyDetails == true || myPropertyDetails == true">
-                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddImage"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
+                    <a class="btn btn-primary" (click)="showAddImage()"><i class="fas fa-plus-circle"></i> Agregar Imagen</a>
                 </p>
                 <table class="table">
                     <thead>
@@ -147,7 +147,7 @@
                         <tr class="text-center" *ngFor="let imagen of property.propertyImages | paginate: { id: 'server', itemsPerPage: 5, currentPage: currentPageImage, totalItems: property.propertyImages.length }; index as i; ">
                             <th>{{i + 1}}</th>
                             <td><img [src]="imagen.imageUrl | imagen" class="d-block w-100" alt="..."></td>
-                            <td> <a class="btn btn-danger mb-1 mr-1" data-bs-toggle="modal" data-bs-target="#modalDeleteImage" (click)="showModalImage(imagen.id)"><i class="fas fa-trash"></i></a></td>
+                            <td> <a class="btn btn-danger mb-1 mr-1" (click)="showDeleteImage(imagen.id)"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -158,67 +158,68 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalDeleteContract" tabindex="-1" aria-labelledby="modalDeleteContractLabel" aria-hidden="true">
+        <div class="modal" [hidden]="deleteContractShow">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalDeleteContractLabel">Mensaje de Confirmación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="closeContract()"></button>
                     </div>
                     <div class="modal-body">
                         <p>¿Realmente quiere eliminar este contrato?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteContract()">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeContract()">Cerrar</button>
+                        <button class="btn btn-danger" (click)="deleteContract()">Eliminar</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalDeleteImage" tabindex="-1" aria-labelledby="modalDeleteImageLabel" aria-hidden="true">
+        <div class="modal" [hidden]="deleteImageShow">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalDeleteImageLabel">Mensaje de Confirmación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="closeDeleteImage()"></button>
                     </div>
                     <div class="modal-body">
                         <p>¿Realmente quiere eliminar esta imagen?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteImage()">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeDeleteImage()">Cerrar</button>
+                        <button class="btn btn-danger" (click)="deleteImage()">Eliminar</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="modalAddImage" tabindex="-1" aria-labelledby="modalAddImageLabel" aria-hidden="true">
+        <div class="modal" [hidden]="addImageShow">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalAddImageLabel">Mensaje de Confirmación</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="closeAddImage()"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <form autocomplete="off" [formGroup]="formImage" (ngSubmit)="addImage()">
                                 <div class="form-group mb-3">
                                     <label>Imagen</label>
-                                    <input type="file" formControlName="image" class="form-control" (change)="onFileChange($event)" />
+                                    <input type="file" formControlName="file" class="form-control" (change)="onFileChange($event)" />
+                                    <input type="hidden" formControlName="image" />
                                     <small *ngIf="imageInvalid" class="form-text text-danger">Debe de ingresar una imagen valida</small>
                                 </div>
                                 <div class="form-group d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Agregar</button>
+                                    <button type="submit" class="btn btn-primary">Agregar</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" (click)="closeAddImage()">Cerrar</button>
                     </div>
                 </div>
             </div>

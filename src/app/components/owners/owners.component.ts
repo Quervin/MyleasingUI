@@ -20,6 +20,7 @@ export class OwnersComponent implements OnInit {
   total: number;
   page: number;
   ownerId: number;
+  deleteOwnerShow:boolean = true;
 
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
@@ -89,8 +90,13 @@ export class OwnersComponent implements OnInit {
     this.getOwners();
   }
 
-  showModal(id: number) {
+  showDeleteOwner(id: number) {
     this.ownerId = id;
+    this.deleteOwnerShow = false;
+  }
+
+  closeDeleteOwner() {
+    this.deleteOwnerShow = false;
   }
 
   delete() {
@@ -98,6 +104,7 @@ export class OwnersComponent implements OnInit {
     this._apiService.getQuery(`Owners/DeleteWeb/${this.ownerId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteOwner();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

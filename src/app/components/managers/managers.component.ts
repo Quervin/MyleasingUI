@@ -20,6 +20,8 @@ export class ManagersComponent implements OnInit {
   total: number;
   page: number;
   managerId: number;
+  deleteManagerShow:boolean = true;
+
   constructor(private _apiService: ApiService,
     private _myleasing: MyleasingService,
     private _router: Router) { 
@@ -88,8 +90,13 @@ export class ManagersComponent implements OnInit {
     this.getManagers();
   }
 
-  showModal(id: number) {
+  showDeleteManager(id: number) {
     this.managerId = id;
+    this.deleteManagerShow = false;
+  }
+
+  closeDeleteManager() {
+    this.deleteManagerShow = true;
   }
 
   delete() {
@@ -97,6 +104,7 @@ export class ManagersComponent implements OnInit {
     this._apiService.getQuery(`Managers/DeleteWeb/${this.managerId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteManager();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

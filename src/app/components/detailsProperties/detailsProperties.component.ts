@@ -72,6 +72,9 @@ export class DetailsPropertyComponent implements OnInit {
   showPropertyDetails: boolean;
   showSeachPropertyDetails: boolean;
   myPropertyDetails: boolean;
+  addImageShow: boolean = true;
+  deleteImageShow: boolean = true;
+  deleteContractShow: boolean = true;
   id: string = "";
   propertyId: string = "";
   myPropertyId: string = "";
@@ -88,6 +91,7 @@ export class DetailsPropertyComponent implements OnInit {
     private fb: FormBuilder) { 
       this.formImage = this.fb.group({
         image  : ['', [ Validators.required] ],
+        file  : [''],
         imageSource: ['', [ Validators.required] ],
       });
       this.currentPage = 1;
@@ -243,12 +247,35 @@ export class DetailsPropertyComponent implements OnInit {
     });
   }
 
-  showModalContract(id: number) {
+  showContract(id: number) {
     this.contractId = id;
+    this.deleteContractShow = false;
   }
 
-  showModalImage(id: number) {
+  closeContract() {
+    this.deleteContractShow = true;
+  }
+
+  showDeleteImage(id: number) {
     this.imageId = id;
+    this.deleteImageShow = false;
+  }
+
+  closeDeleteImage() {
+    this.deleteImageShow = true;
+  }
+
+  showAddImage() {
+    this.addImageShow = false;
+  }
+
+  closeAddImage() {
+    this.formImage.reset({
+      image: '',
+      file: '',
+      imageSource: ''
+    });
+    this.addImageShow = true;
   }
 
   deleteContract() {
@@ -256,6 +283,7 @@ export class DetailsPropertyComponent implements OnInit {
     this._apiService.getQuery(`Owners/DeleteContracWeb/${this.contractId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeContract();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',
@@ -288,6 +316,7 @@ export class DetailsPropertyComponent implements OnInit {
     this._apiService.getQuery(`Owners/DeleteImageWeb/${this.imageId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeDeleteImage();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',
@@ -320,6 +349,7 @@ export class DetailsPropertyComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.formImage.patchValue({
+        image: file ? file.name : '',
         imageSource: file
       });
     }
@@ -347,6 +377,7 @@ export class DetailsPropertyComponent implements OnInit {
     this._apiService.postQuery('Owners/AddImageWeb', formData).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
+      this.closeAddImage();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',
