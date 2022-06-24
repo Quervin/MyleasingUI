@@ -3,6 +3,9 @@
         <h2 class="title-icon title-icon-2"><span class="icon icon-default mercury-icon-touch"></span><span>Contratos</span>
         </h2>
         <br/>
+        <div class="col-12" *ngIf="listContracts.length == 0">
+            <h5>No hay contratos todavía.</h5>
+        </div>
         <table class="table" *ngIf="listContracts.length != 0">
             <thead>
                 <tr class="text-center">
