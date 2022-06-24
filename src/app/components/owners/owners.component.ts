@@ -100,11 +100,11 @@ export class OwnersComponent implements OnInit {
   }
 
   delete() {
+    this.closeDeleteOwner();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Owners/DeleteWeb/${this.ownerId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeDeleteOwner();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

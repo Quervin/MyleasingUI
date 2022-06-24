@@ -103,11 +103,11 @@ export class DetailsLessesComponent implements OnInit {
   }
 
   delete() {
+    this.closeDeleteContract();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Lessees/DeleteContractWeb/${this.contractId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeDeleteContract();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

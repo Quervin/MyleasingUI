@@ -100,11 +100,11 @@ export class ManagersComponent implements OnInit {
   }
 
   delete() {
+    this.closeDeleteManager();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Managers/DeleteWeb/${this.managerId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeDeleteManager();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

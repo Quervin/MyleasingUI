@@ -100,11 +100,11 @@ export class LesseesComponent implements OnInit {
   }
 
   delete() {
+    this.closeDeleteLeessee();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Lessees/DeleteWeb/${this.lesseeId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeDeleteLeessee();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

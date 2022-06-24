@@ -279,11 +279,11 @@ export class DetailsPropertyComponent implements OnInit {
   }
 
   deleteContract() {
+    this.closeContract();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Owners/DeleteContracWeb/${this.contractId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeContract();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',
@@ -312,11 +312,11 @@ export class DetailsPropertyComponent implements OnInit {
   }
 
   deleteImage() {
+    this.closeDeleteImage();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`Owners/DeleteImageWeb/${this.imageId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeDeleteImage();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',
@@ -371,13 +371,12 @@ export class DetailsPropertyComponent implements OnInit {
     formData.append('ImageFile', this.formImage.value.imageSource);
     formData.append('PropertyId', this.myPropertyDetails == false ? this.propertyId : this.myPropertyId);
 
-
+    this.closeAddImage();
     this._myleasing.setLoading(true);
 
     this._apiService.postQuery('Owners/AddImageWeb', formData).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeAddImage();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

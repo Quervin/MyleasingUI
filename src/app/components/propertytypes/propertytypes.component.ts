@@ -100,11 +100,11 @@ export class PropertyTypesComponent implements OnInit {
   }
 
   delete() {
+    this.closeDeleteProperty();
     this._myleasing.setLoading(true);
     this._apiService.getQuery(`PropertyTypes/DeleteWeb/${this.propertyTypeId}`).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeDeleteProperty();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',

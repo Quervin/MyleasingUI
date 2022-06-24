@@ -151,12 +151,12 @@ export class LoginComponent implements OnInit {
     
     this.emailRequest.Email = this.formPassword.value.email;
 
+    this.closeRecoverPasword();
     this._myleasing.setLoading(true);
 
     this._apiService.postLogin('Account/RecoverPasswordWeb' , this.emailRequest).
     subscribe((res : ResponseRequest) => {
       this._myleasing.setLoading(false);
-      this.closeRecoverPasword();
       if ( res.isSuccess == true) {
         Swal.fire({
           icon: 'success',
