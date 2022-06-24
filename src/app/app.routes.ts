@@ -67,9 +67,7 @@ export const ROUTES: Routes = [
         { path: 'myProperties', component: MyPropertiesComponent },
         { path: 'myProperties/createProperty/:myOwnerId', component: CreatePropertyComponent },
         { path: 'myProperties/editProperty/:myPropertyId', component: CreatePropertyComponent },
-        { path: 'myProperties/detailsProperty/:myPropertyId', component: DetailsPropertyComponent },
-        { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-        { path: '**', pathMatch: 'full', redirectTo: 'dashboard' }
+        { path: 'myProperties/detailsProperty/:myPropertyId', component: DetailsPropertyComponent }
     ], canActivate: [ AuthGuard ] },
     { path: 'index', component: IndexComponent},
     { path: 'login', component: LoginComponent },
