@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
       this.iconClass2 = "fa fa-eye-slash";
       this.roles = [
         {label: 'Lessee', value: "1"},
-        {label: 'Owner 2', value: "2"}
+        {label: 'Owner', value: "2"}
       ];
 
       this.formRegister = this.fb.group({
@@ -113,6 +113,19 @@ export class RegisterComponent implements OnInit {
   
   get confirmpasswordInvalid() {
     return this.formRegister.get('confirmpassword')?.invalid && this.formRegister.get('confirmpassword')?.touched;
+  }
+
+  
+  // Only Integer Numbers
+  keyPressNumbers(event: any) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
   }
 
   mostrarPassword ( id : number ) {

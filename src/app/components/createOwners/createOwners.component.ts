@@ -153,6 +153,18 @@ export class CreateOwnersComponent implements OnInit {
     return this.formOwner.get('confirmpassword')?.invalid && this.formOwner.get('confirmpassword')?.touched;
   }
 
+  // Only Integer Numbers
+  keyPressNumbers(event: any) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   mostrarPassword ( id : number ) {
     if(id == 1) {
       if (this.showPassword1 == false) {

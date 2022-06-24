@@ -7,7 +7,7 @@
         <div class="grid p-fluid">
             <form autocomplete="off" [formGroup]="formPropertyType" (ngSubmit)=" editMode == true ? edit() : create()">
                 <div class="form-group mb-3">
-                    <label>Nombre TIpo de Propiedad</label>
+                    <label>Nombre Tipo de Propiedad</label>
                     <input type="text" formControlName="name" placeholder="nombre tipo de propiedad" class="p-inputtext" />
                     <small *ngIf="nameInvalid" class="form-text text-danger">El campo nombre TIpo de Propiedad es Obligatorio</small>
                 </div>

@@ -179,6 +179,18 @@ export class CreateContractComponent implements OnInit {
     return this.formContract.get('isActive')?.invalid && this.formContract.get('isActive')?.touched;
   }
 
+  // Only Integer Numbers
+  keyPressNumbers(event: any) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   getLesseeContract() {
     this._apiService.getQuery(`Lessees/GetContractWeb/${this.id}`).
     subscribe((res : ResponseRequest) => {

@@ -21,12 +21,12 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label>Precio</label>
-                                <input type="text" formControlName="price" placeholder="precio" class="p-inputtext" />
+                                <input type="text" formControlName="price" placeholder="precio" class="p-inputtext" (keypress)="keyPressNumbers($event)" />
                                 <small *ngIf="priceInvalid" class="form-text text-danger">El campo precio es Obligatorio</small>
                             </div>
                             <div class="form-group mb-3">
                                 <label>Metros Cuadrados</label>
-                                <input type="text" formControlName="squareMeters" placeholder="metros cuadrados" class="p-inputtext" />
+                                <input type="text" formControlName="squareMeters" placeholder="metros cuadrados" class="p-inputtext" (keypress)="keyPressNumbers($event)" />
                                 <small *ngIf="squareMetersInvalid" class="form-text text-danger">El campo metros cuadrados es Obligatorio</small>
                             </div>
                             <div class="form-group mb-3">
@@ -55,12 +55,12 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label>Cuartos</label>
-                                <input type="text" formControlName="rooms" placeholder="cuartos" class="p-inputtext" />
+                                <input type="text" formControlName="rooms" placeholder="cuartos" class="p-inputtext" (keypress)="keyPressNumbers($event)" />
                                 <small *ngIf="roomsInvalid" class="form-text text-danger">El campo cuartos es Obligatorio</small>
                             </div>
                             <div class="form-group mb-3">
                                 <label>Estrato</label>
-                                <input type="text" formControlName="stratum" placeholder="estrado" class="p-inputtext" />
+                                <input type="text" formControlName="stratum" placeholder="estrado" class="p-inputtext" (keypress)="keyPressNumbers($event)" />
                                 <small *ngIf="stratumInvalid" class="form-text text-danger">El campo estrado es Obligatorio</small>
                             </div>
                             <div class="form-group mb-3">

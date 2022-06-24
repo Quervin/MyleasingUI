@@ -195,6 +195,18 @@ export class CreatePropertyComponent implements OnInit {
     return this.formProperty.get('remarks')?.invalid && this.formProperty.get('remarks')?.touched;
   }
 
+  // Only Integer Numbers
+  keyPressNumbers(event: any) {
+    let charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   getProperty() {
     this._apiService.getQuery(`Owners/GetPropertyWeb/${this.myProperty == false ? this.propertyId : this.myPropertyId}`).
     subscribe((res : ResponseRequest) => {
