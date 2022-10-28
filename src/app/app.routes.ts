@@ -1,32 +1,47 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './components/login/login.component';
-import { IndexComponent } from './components/index/index.component';
-import { RegisterComponent } from './components/register/register.component';
-import { AboutComponent } from './components/about/about.component';
-import { DashboardComponent } from './components/shared/dashboard/dashboard.component';
-import { ManagersComponent } from './components/managers/managers.component';
-import { CreateManagersComponent } from './components/createManagers/createManagers.component';
-import { DetailsManagerComponent } from './components/detailsManagers/detailsManagers.component';
-import { UserComponent } from './components/shared/user/user.component';
-import { OwnersComponent } from './components/owners/owners.component';
-import { CreateOwnersComponent } from './components/createOwners/createOwners.component';
-import { DetailsOwnersComponent } from './components/detailsOwners/detailsOwners.component';
-import { LesseesComponent } from './components/lessees/lessees.component';
-import { CreateLessesComponent } from './components/createLesses/createLesses.component';
-import { DetailsLessesComponent } from './components/detailsLesses/detailsLesses.component';
-import { ContractsComponent } from './components/myContracts/myContracts.component';
-import { CreateContractComponent } from './components/createContract/createContract.component';
-import { DetailsContractComponent } from './components/detailsContract/detailsContract.component';
-import { PropertiesComponent } from './components/properties/properties.component';
-import { CreatePropertyComponent } from './components/createProperty/createProperty.component';
-import { DetailsPropertyComponent } from './components/detailsProperties/detailsProperties.component';
-import { PropertyTypesComponent } from './components/propertytypes/propertytypes.component';
-import { CreatePropertyTypesComponent } from './components/createPropertytypes/createPropertytypes.component';
-import { DetailsPropertytypesComponent } from './components/detailsPropertytypes/detailsPropertytypes.component';
-import { SeachPropertiesComponent } from './components/seachproperties/seachproperties.component';
-import { MyPropertiesComponent } from './components/myProperties/myProperties.component';
+
+///Components
+//shared
+import { HomeComponent } from './myleasing/shared/home/home.component';
+import { DashboardComponent } from './myleasing/shared/dashboard/dashboard.component';
+import { UserComponent } from './myleasing/shared/user/user.component';
+import { IndexComponent } from './myleasing/shared/index/index.component';
+import { LoginComponent } from './myleasing/shared/login/login.component';
+import { RegisterComponent } from './myleasing/shared/register/register.component';
+import { AboutComponent } from './myleasing/shared/about/about.component';
+
+//managers
+import { ListManagersComponent } from './myleasing/managers/listManagers/listManagers.component';
+import { CreateManagersComponent } from './myleasing/managers/createManagers/createManagers.component';
+import { DetailsManagerComponent } from './myleasing/managers/detailsManagers/detailsManagers.component';
+
+//owners
+import { ListOwnersComponent } from './myleasing/owners/listOwners/listOwners.component';
+import { CreateOwnersComponent } from './myleasing/owners/createOwners/createOwners.component';
+import { DetailsOwnersComponent } from './myleasing/owners/detailsOwners/detailsOwners.component';
+
+//contracts
+import { CreateContractComponent } from './myleasing/contracts/createContract/createContract.component';
+import { DetailsContractComponent } from './myleasing/contracts/detailsContract/detailsContract.component';
+import { MyContractsComponent } from './myleasing/contracts/myContracts/myContracts.component';
+
+//lesses
+import { ListLesseesComponent } from './myleasing/lessees/listLessees/listLessees.component';
+import { CreateLessesComponent } from './myleasing/lessees/createLesses/createLesses.component';
+import { DetailsLessesComponent } from './myleasing/lessees/detailsLesses/detailsLesses.component';
+
+//properties
+import { ListPropertiesComponent } from './myleasing/properties/listProperties/listProperties.component';
+import { CreatePropertyComponent } from './myleasing/properties/createProperty/createProperty.component';
+import { DetailsPropertyComponent } from './myleasing/properties/detailsProperties/detailsProperties.component';
+import { SeachPropertiesComponent } from './myleasing/properties/seachproperties/seachproperties.component';
+import { MyPropertiesComponent } from './myleasing/properties/myProperties/myProperties.component';
+
+//propertytypes
+import { ListPropertyTypesComponent } from './myleasing/propertytypes/listPropertyTypes/listPropertyTypes.component';
+import { CreatePropertyTypesComponent } from './myleasing/propertytypes/createPropertytypes/createPropertytypes.component';
+import { DetailsPropertytypesComponent } from './myleasing/propertytypes/detailsPropertytypes/detailsPropertytypes.component';
 
 
 export const ROUTES: Routes = [
@@ -34,11 +49,11 @@ export const ROUTES: Routes = [
     children: [
         { path: 'dashboard', component: DashboardComponent },
         { path: 'user', component: UserComponent },
-        { path: 'managers', component: ManagersComponent, },
+        { path: 'managers', component: ListManagersComponent, },
         { path: 'managers/createManager', component: CreateManagersComponent },
         { path: 'managers/editManager/:id', component: CreateManagersComponent },
         { path: 'managers/detailsManager/:id', component: DetailsManagerComponent },
-        { path: 'owners', component: OwnersComponent },
+        { path: 'owners', component: ListOwnersComponent },
         { path: 'owners/createOwner', component: CreateOwnersComponent },
         { path: 'owners/editOwner/:id', component: CreateOwnersComponent },
         { path: 'owners/detailsOwner/:id', component: DetailsOwnersComponent },
@@ -48,21 +63,21 @@ export const ROUTES: Routes = [
         { path: 'owners/createContract/:propertyId', component: CreateContractComponent },
         { path: 'owners/editContract/:contractId', component: CreateContractComponent },
         { path: 'owners/detailsContract/:contractId', component: DetailsContractComponent },
-        { path: 'lessees', component: LesseesComponent },
+        { path: 'lessees', component: ListLesseesComponent },
         { path: 'lessees/createLessee', component: CreateLessesComponent },
         { path: 'lessees/editLessee/:id', component: CreateLessesComponent },
         { path: 'lessees/detailsLessee/:id', component: DetailsLessesComponent },
         { path: 'lessees/editContract/:id', component: CreateContractComponent },
         { path: 'lessees/detailsContract/:id', component: DetailsContractComponent },
-        { path: 'properties', component: PropertiesComponent },
+        { path: 'properties', component: ListPropertiesComponent },
         { path: 'properties/detailsProperty/:id', component: DetailsPropertyComponent },
-        { path: 'propertyTypes', component: PropertyTypesComponent },
+        { path: 'propertyTypes', component: ListPropertyTypesComponent },
         { path: 'propertyTypes/createPropertyTypes', component: CreatePropertyTypesComponent },
         { path: 'propertyTypes/editPropertyTypes/:id', component: CreatePropertyTypesComponent },
         { path: 'propertyTypes/detailsPropertyTypes/:id', component: DetailsPropertytypesComponent },
         { path: 'seachProperties', component: SeachPropertiesComponent },
         { path: 'seachProperties/detailsProperty/:searchPropetyId', component: DetailsPropertyComponent },
-        { path: 'myContracts', component: ContractsComponent },
+        { path: 'myContracts', component: MyContractsComponent },
         { path: 'contracts/detailsContract/:myContractId', component: DetailsContractComponent },
         { path: 'myProperties', component: MyPropertiesComponent },
         { path: 'myProperties/createProperty/:myOwnerId', component: CreatePropertyComponent },
